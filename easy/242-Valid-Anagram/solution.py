@@ -1,17 +1,16 @@
-def isAnagram(s: str, t: str) -> bool:
-    dict_1 = {}
-    dict_2 = {}
+from collections import defaultdict
 
+
+def isAnagram(self, s: str, t: str) -> bool:
+    dict_1 = defaultdict(int)
     for letter in s:
-        if letter in dict_1:
-            dict_1[letter] += 1
-        else:
-            dict_1[letter] = 0
+        dict_1[letter] += 1
 
     for letter in t:
-        if letter in dict_2:
-            dict_2[letter] += 1
-        else:
-            dict_2[letter] = 0
+        dict_1[letter] -= 1
 
-    return dict_1 == dict_2
+    for count in dict_1.values():
+        if count != 0:
+            return False
+
+    return True
