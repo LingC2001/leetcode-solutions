@@ -1,4 +1,4 @@
-# LeetCode [Question Number]. [Question Title]
+# LeetCode [[Question Number]. [Question Title]](link)
 
 ---
 
@@ -35,6 +35,31 @@ Input: ...
 Output: ...
 
 ```
+
+---
+
+<details>
+<summary><strong>Additional Test Cases (click to expand)</strong></summary>
+
+**Test Case 1:**
+```
+
+Input: ...
+Output: ...
+Explanation: *(Optional, why this case is important)*
+
+```
+
+**Test Case 2:**
+```
+
+Input: ...
+Output: ...
+Explanation: *(Optional)*
+
+```
+
+</details>
 
 ---
 
