@@ -1,6 +1,5 @@
 def isPalindrome(s: str) -> bool:
     stripped_str = "".join([c for c in s.lower() if c.isalnum()])
-    res = []
 
     forward_index = 0
     backward_index = len(stripped_str) - 1
@@ -11,5 +10,5 @@ def isPalindrome(s: str) -> bool:
             backward_index -= 1
         else:
             return False
-    
+
     return True
