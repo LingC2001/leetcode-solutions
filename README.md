@@ -85,3 +85,10 @@ We use [ruff](https://github.com/astral-sh/ruff) for linting Python code. The co
 ## License
 
 This project is licensed under the MIT License.
+
+## Contributors
+
+- [LingC2001](https://github.com/LingC2001)
+- [bkdham](https://github.com/bkdham)
+
+<!-- Add your GitHub username above to be listed as a contributor! -->
