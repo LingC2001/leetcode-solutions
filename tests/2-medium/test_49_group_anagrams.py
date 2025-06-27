@@ -8,9 +8,10 @@ mod = importlib.util.module_from_spec(spec)
 sys.modules['group_anagrams_solution'] = mod
 spec.loader.exec_module(mod)
 
+
 def test_group_anagrams():
-    result = mod.groupAnagrams(["eat","tea","tan","ate","nat","bat"])
-    expected = [["eat","tea","ate"],["tan","nat"],["bat"]]
+    result = mod.groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
+    expected = [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]]
     # Convert to sets of frozensets for comparison
     assert set(frozenset(group) for group in result) == set(frozenset(group) for group in expected)
     assert mod.groupAnagrams([""]) == [[""]]
