@@ -8,10 +8,15 @@ A collection of LeetCode solutions with documentation and analysis, organized by
   - `1-easy/`
   - `2-medium/`
   - `3-hard/`
-- Each problem folder is named as `<number>-<Problem-Name>` (e.g., `217-Contains-Duplicate`), and contains:
-  - `README.md` — Problem description and analysis
-  - `solution.py` — Python solution
-  - `solution.cpp` — C++ solution
+    - `<number>-<Problem-Name>/`
+      - `README.md` — Problem description and analysis
+      - `solution.py` — Python solution
+      - `solution.cpp` — C++ solution
+- `tests/` — Contains all test cases, organized by difficulty to mirror the problems directory:
+  - `1-easy/`
+  - `2-medium/`
+  - `3-hard/`
+    - `test_<problem_name>.py` — Pytest test file for the corresponding problem
 
 ## Setup (with uv)
 
@@ -68,6 +73,16 @@ We use [ruff](https://github.com/astral-sh/ruff) for linting Python code. The co
   ```sh
   uv run ruff check --fix
   ```
+
+## Tests
+
+All Python solutions are tested using [pytest](https://docs.pytest.org/). Test cases are organized in the `tests/` directory, mirroring the problem folder structure (e.g., `tests/1-easy/test_1_two_sum.py`).
+
+To run all tests:
+
+```sh
+uv run pytest
+```
 
 ## Naming Convention
 
