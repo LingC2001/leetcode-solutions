@@ -16,11 +16,9 @@ vector<vector<int>> threeSum(vector<int>& nums) {
             if (sum > target) {
                 // decrement k skipping dupes
                 k--;
-                while ( (j < k) && (nums[k] == nums[k+1])) k--;
             } else if (sum < target) {
                 // increment j skipping dupes
                 j++;
-                while ((j < k) && (nums[j] == nums[j-1])) j++;
             } else {
                 //store solution
                 res.push_back({nums[i], nums[j], nums[k]});
@@ -37,3 +35,4 @@ vector<vector<int>> threeSum(vector<int>& nums) {
     }
     return res;
 }
+
