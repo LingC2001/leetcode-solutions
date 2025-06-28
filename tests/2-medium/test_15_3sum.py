@@ -1,6 +1,7 @@
 import importlib.util
 import sys
 from pathlib import Path
+
 import pytest
 
 solution_path = Path(__file__).parent.parent.parent / 'problems/2-medium/15-3Sum/solution.py'
@@ -21,6 +22,7 @@ TEST_CASES = [
     ([-1, 0, 1, 0], [[-1, 0, 1]]),
     ([-4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6], [[-4, -2, 6], [-4, 0, 4], [-4, 1, 3], [-4, 2, 2], [-2, -2, 4], [-2, 0, 2]]),
 ]
+
 
 @pytest.mark.parametrize("nums, expected", TEST_CASES)
 def test_three_sum(nums, expected):
