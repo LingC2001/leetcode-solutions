@@ -1,4 +1,4 @@
-from collections import List
+from typing import List
 
 
 def maxArea(self, height: List[int]) -> int:
