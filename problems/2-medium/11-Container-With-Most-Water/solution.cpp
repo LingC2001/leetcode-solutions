@@ -8,7 +8,9 @@ int maxArea(vector<int>& height) {
     while (l < r) {
         // calculate water
         int water = min(height[l], height[r])*(r-l);
-        max_water = max(max_water, water);
+        if (water > max_water) {
+            max_water = water;
+        }
 
         // always move the shorter line to search for more water
         if (height[l] <= height[r]) {
