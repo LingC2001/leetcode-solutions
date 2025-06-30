@@ -23,16 +23,16 @@ Given an array of strings `strs`, group the anagrams together. Anagrams are stri
 **Example 1:**
 ```
 
-Input: strs = \["eat","tea","tan","ate","nat","bat"]
-Output: \[\["eat","tea","ate"],\["tan","nat"],\["bat"]]
+Input: strs = ["eat","tea","tan","ate","nat","bat"]
+Output: [["eat","tea","ate"],["tan","nat"],["bat"]]
 
 ```
 
 **Example 2:**
 ```
 
-Input: strs = \[""]
-Output: \[\[""]]
+Input: strs = [""]
+Output: [[""]]
 
 ```
 
@@ -44,8 +44,8 @@ Output: \[\[""]]
 **Test Case 1:**
 ```
 
-Input: strs = \["abc","bca","cab","xyz","zyx","yxz"]
-Output: \[\["abc","bca","cab"],\["xyz","zyx","yxz"]]
+Input: strs = ["abc","bca","cab","xyz","zyx","yxz"]
+Output: [["abc","bca","cab"],["xyz","zyx","yxz"]]
 Explanation: Strings grouped by identical character counts.
 
 ```
@@ -53,8 +53,8 @@ Explanation: Strings grouped by identical character counts.
 **Test Case 2:**
 ```
 
-Input: strs = \["a"]
-Output: \[\["a"]]
+Input: strs = ["a"]
+Output: [["a"]]
 Explanation: Single string forms one group.
 
 ```

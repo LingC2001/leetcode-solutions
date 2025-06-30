@@ -23,7 +23,7 @@ Given an integer array `nums`, determine if any value appears at least twice in 
 **Example 1:**
 ```
 
-Input: nums = \[1,2,3,1]
+Input: nums = [1,2,3,1]
 Output: True
 
 ```
@@ -31,7 +31,7 @@ Output: True
 **Example 2:**
 ```
 
-Input: nums = \[1,2,3,4]
+Input: nums = [1,2,3,4]
 Output: False
 
 ```
@@ -44,7 +44,7 @@ Output: False
 **Test Case 1:**
 ```
 
-Input: nums = \[1,1,1,3,3,4,3,2,4,2]
+Input: nums = [1,1,1,3,3,4,3,2,4,2]
 Output: True
 Explanation: Multiple duplicates exist.
 
@@ -53,7 +53,7 @@ Explanation: Multiple duplicates exist.
 **Test Case 2:**
 ```
 
-Input: nums = \[]
+Input: nums = []
 Output: False
 Explanation: Empty list contains no duplicates.
 

@@ -25,16 +25,16 @@ The solution set must not contain duplicate triplets.
 **Example 1:**
 ```
 
-Input: nums = \[-1,0,1,2,-1,-4]
-Output: \[\[-1, -1, 2], \[-1, 0, 1]]
+Input: nums = [-1,0,1,2,-1,-4]
+Output: [[-1, -1, 2], [-1, 0, 1]]
 
 ```
 
 **Example 2:**
 ```
 
-Input: nums = \[0,1,1]
-Output: \[]
+Input: nums = [0,1,1]
+Output: []
 
 ```
 
@@ -46,8 +46,8 @@ Output: \[]
 **Test Case 1:**
 ```
 
-Input: nums = \[0,0,0]
-Output: \[\[0,0,0]]
+Input: nums = [0,0,0]
+Output: [[0,0,0]]
 Explanation: Only one unique triplet exists.
 
 ```
@@ -55,8 +55,8 @@ Explanation: Only one unique triplet exists.
 **Test Case 2:**
 ```
 
-Input: nums = \[-2,0,0,2,2]
-Output: \[\[-2,0,2]]
+Input: nums = [-2,0,0,2,2]
+Output: [[-2,0,2]]
 Explanation: Duplicate handling ensures each triplet is returned only once.
 
 ```

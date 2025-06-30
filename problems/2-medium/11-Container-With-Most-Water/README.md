@@ -27,7 +27,7 @@ Return the maximum amount of water a container can store.
 **Example 1:**
 ```
 
-Input: height = \[1,8,6,2,5,4,8,3,7]
+Input: height = [1,8,6,2,5,4,8,3,7]
 Output: 49
 
 ```
@@ -35,7 +35,7 @@ Output: 49
 **Example 2:**
 ```
 
-Input: height = \[1,1]
+Input: height = [1,1]
 Output: 1
 
 ```
@@ -48,18 +48,18 @@ Output: 1
 **Test Case 1:**
 ```
 
-Input: height = \[4,3,2,1,4]
+Input: height = [4,3,2,1,4]
 Output: 16
-Explanation: Container is formed between lines at index 0 and 4 (4 \* distance 4).
+Explanation: Container is formed between lines at index 0 and 4 (4 * distance 4).
 
 ```
 
 **Test Case 2:**
 ```
 
-Input: height = \[1,2,1]
+Input: height = [1,2,1]
 Output: 2
-Explanation: Container is formed between lines at index 0 and 2 (1 \* distance 2).
+Explanation: Container is formed between lines at index 0 and 2 (1 * distance 2).
 
 ```
 

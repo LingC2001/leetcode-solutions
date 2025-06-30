@@ -24,8 +24,8 @@ Given a 1-indexed array of integers `numbers` that is already sorted in non-decr
 **Example 1:**
 ```
 
-Input: numbers = \[2,7,11,15], target = 9
-Output: \[1,2]
+Input: numbers = [2,7,11,15], target = 9
+Output: [1,2]
 Explanation: The sum of 2 and 7 is 9. Return indices 1 and 2.
 
 ```
@@ -33,8 +33,8 @@ Explanation: The sum of 2 and 7 is 9. Return indices 1 and 2.
 **Example 2:**
 ```
 
-Input: numbers = \[2,3,4], target = 6
-Output: \[1,3]
+Input: numbers = [2,3,4], target = 6
+Output: [1,3]
 
 ```
 
@@ -46,8 +46,8 @@ Output: \[1,3]
 **Test Case 1:**
 ```
 
-Input: numbers = \[-1,0], target = -1
-Output: \[1,2]
+Input: numbers = [-1,0], target = -1
+Output: [1,2]
 Explanation: -1 + 0 = -1
 
 ```
@@ -55,8 +55,8 @@ Explanation: -1 + 0 = -1
 **Test Case 2:**
 ```
 
-Input: numbers = \[1,2,3,4,4,9,56,90], target = 8
-Output: \[4,5]
+Input: numbers = [1,2,3,4,4,9,56,90], target = 8
+Output: [4,5]
 Explanation: 4 + 4 = 8
 
 ```

@@ -25,16 +25,16 @@ You must solve it **without using division** and in O(n) time.
 **Example 1:**
 ```
 
-Input: nums = \[1,2,3,4]
-Output: \[24,12,8,6]
+Input: nums = [1,2,3,4]
+Output: [24,12,8,6]
 
 ```
 
 **Example 2:**
 ```
 
-Input: nums = \[-1,1,0,-3,3]
-Output: \[0,0,9,0,0]
+Input: nums = [-1,1,0,-3,3]
+Output: [0,0,9,0,0]
 
 ```
 
@@ -46,16 +46,16 @@ Output: \[0,0,9,0,0]
 **Test Case 1:**
 ```
 
-Input: nums = \[2,3,4,5]
-Output: \[60,40,30,24]
+Input: nums = [2,3,4,5]
+Output: [60,40,30,24]
 
 ```
 
 **Test Case 2:**
 ```
 
-Input: nums = \[0,0]
-Output: \[0,0]
+Input: nums = [0,0]
+Output: [0,0]
 Explanation: Multiple zeros cause all products except self to be zero.
 
 ```
