@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+
 def characterReplacement(s: str, k: int) -> int:
     sub_letters = defaultdict(int)
     left = 0
@@ -9,7 +10,7 @@ def characterReplacement(s: str, k: int) -> int:
 
     while right < len(s):
         sub_letters[s[right]] += 1
-        max_letter_count = max(max_letter_count,sub_letters[s[right]])
+        max_letter_count = max(max_letter_count, sub_letters[s[right]])
         right += 1
 
         while (right - left) - max_letter_count > k:
@@ -20,4 +21,3 @@ def characterReplacement(s: str, k: int) -> int:
             res = right - left
 
     return res
-                
