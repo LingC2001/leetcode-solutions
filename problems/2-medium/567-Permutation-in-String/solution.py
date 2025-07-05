@@ -19,7 +19,7 @@ class Solution:
 
         # check if the setup already is the solution
         if s1_dict == s2_dict:
-                return True
+            return True
 
         while right < len(s2):
 
