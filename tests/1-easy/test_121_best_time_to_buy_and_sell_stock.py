@@ -4,10 +4,10 @@ from pathlib import Path
 
 import pytest
 
-solution_path = Path(__file__).parent.parent.parent / 'problems/1-easy/121-Best-Time-To-Buy-And-Sell-Stock/solution.py'
-spec = importlib.util.spec_from_file_location('best_time_to_buy_and_sell_stock_solution', solution_path)
+solution_path = Path(__file__).parent.parent.parent / "problems/1-easy/121-Best-Time-To-Buy-And-Sell-Stock/solution.py"
+spec = importlib.util.spec_from_file_location("best_time_to_buy_and_sell_stock_solution", solution_path)
 mod = importlib.util.module_from_spec(spec)
-sys.modules['best_time_to_buy_and_sell_stock_solution'] = mod
+sys.modules["best_time_to_buy_and_sell_stock_solution"] = mod
 spec.loader.exec_module(mod)
 
 TEST_CASES = [

@@ -2,10 +2,10 @@ import importlib.util
 import sys
 from pathlib import Path
 
-solution_path = Path(__file__).parent.parent.parent / 'problems/2-medium/238-Product-Of-Array-Except-Self/solution.py'
-spec = importlib.util.spec_from_file_location('product_of_array_except_self_solution', solution_path)
+solution_path = Path(__file__).parent.parent.parent / "problems/2-medium/238-Product-Of-Array-Except-Self/solution.py"
+spec = importlib.util.spec_from_file_location("product_of_array_except_self_solution", solution_path)
 mod = importlib.util.module_from_spec(spec)
-sys.modules['product_of_array_except_self_solution'] = mod
+sys.modules["product_of_array_except_self_solution"] = mod
 spec.loader.exec_module(mod)
 
 

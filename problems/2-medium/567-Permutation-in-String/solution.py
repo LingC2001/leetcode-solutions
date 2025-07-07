@@ -22,7 +22,6 @@ class Solution:
             return True
 
         while right < len(s2):
-
             # add the next letter to the right to s2
             s2_dict[s2[right]] += 1
             # remove the next letter from the left from s2

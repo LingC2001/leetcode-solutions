@@ -2,10 +2,10 @@ import importlib.util
 import sys
 from pathlib import Path
 
-solution_path = Path(__file__).parent.parent.parent / 'problems/2-medium/128-Longest-Consecutive-Sequence/solution.py'
-spec = importlib.util.spec_from_file_location('longest_consecutive_sequence_solution', solution_path)
+solution_path = Path(__file__).parent.parent.parent / "problems/2-medium/128-Longest-Consecutive-Sequence/solution.py"
+spec = importlib.util.spec_from_file_location("longest_consecutive_sequence_solution", solution_path)
 mod = importlib.util.module_from_spec(spec)
-sys.modules['longest_consecutive_sequence_solution'] = mod
+sys.modules["longest_consecutive_sequence_solution"] = mod
 spec.loader.exec_module(mod)
 
 

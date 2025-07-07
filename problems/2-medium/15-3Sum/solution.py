@@ -17,7 +17,6 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
         while lo < hi:
             curr_sum = nums[lo] + nums[hi]
             if target == curr_sum:
-
                 sols.append([nums[lo], nums[hi], nums[i]])
                 hi -= 1
                 while lo < hi and nums[hi + 1] == nums[hi]:

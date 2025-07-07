@@ -4,10 +4,10 @@ from pathlib import Path
 
 import pytest
 
-solution_path = Path(__file__).parent.parent.parent / 'problems/3-hard/239-Sliding-Window-Maximum/solution.py'
-spec = importlib.util.spec_from_file_location('sliding_window_maximum_solution', solution_path)
+solution_path = Path(__file__).parent.parent.parent / "problems/3-hard/239-Sliding-Window-Maximum/solution.py"
+spec = importlib.util.spec_from_file_location("sliding_window_maximum_solution", solution_path)
 mod = importlib.util.module_from_spec(spec)
-sys.modules['sliding_window_maximum_solution'] = mod
+sys.modules["sliding_window_maximum_solution"] = mod
 spec.loader.exec_module(mod)
 
 TEST_CASES = [

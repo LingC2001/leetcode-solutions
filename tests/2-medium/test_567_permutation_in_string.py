@@ -4,10 +4,10 @@ from pathlib import Path
 
 import pytest
 
-solution_path = Path(__file__).parent.parent.parent / 'problems/2-medium/567-Permutation-in-String/solution.py'
-spec = importlib.util.spec_from_file_location('permutation_in_string_solution', solution_path)
+solution_path = Path(__file__).parent.parent.parent / "problems/2-medium/567-Permutation-in-String/solution.py"
+spec = importlib.util.spec_from_file_location("permutation_in_string_solution", solution_path)
 mod = importlib.util.module_from_spec(spec)
-sys.modules['permutation_in_string_solution'] = mod
+sys.modules["permutation_in_string_solution"] = mod
 spec.loader.exec_module(mod)
 
 TEST_CASES = [

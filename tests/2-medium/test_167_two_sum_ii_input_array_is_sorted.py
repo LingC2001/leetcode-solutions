@@ -2,10 +2,12 @@ import importlib.util
 import sys
 from pathlib import Path
 
-solution_path = Path(__file__).parent.parent.parent / 'problems/2-medium/167-Two-Sum-II-Input-Array-Is-Sorted/solution.py'
-spec = importlib.util.spec_from_file_location('two_sum_ii_solution', solution_path)
+solution_path = (
+    Path(__file__).parent.parent.parent / "problems/2-medium/167-Two-Sum-II-Input-Array-Is-Sorted/solution.py"
+)
+spec = importlib.util.spec_from_file_location("two_sum_ii_solution", solution_path)
 mod = importlib.util.module_from_spec(spec)
-sys.modules['two_sum_ii_solution'] = mod
+sys.modules["two_sum_ii_solution"] = mod
 spec.loader.exec_module(mod)
 
 

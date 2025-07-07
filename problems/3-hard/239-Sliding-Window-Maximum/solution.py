@@ -3,7 +3,6 @@ from typing import List
 
 
 def maxSlidingWindow(nums: List[int], k: int) -> List[int]:
-
     max_deque = deque()
     res = []
 
@@ -19,7 +18,6 @@ def maxSlidingWindow(nums: List[int], k: int) -> List[int]:
     res.append(max_deque[0])
 
     while right < len(nums):
-
         if max_deque[0] == nums[left]:
             max_deque.popleft()
 
