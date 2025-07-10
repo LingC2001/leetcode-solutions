@@ -19,8 +19,20 @@ jobs:
         run: curl -Ls https://astral.sh/uv/install.sh | sh
       - name: Install dependencies
         run: uv sync
-      - name: Run Ruff
-        run: uv run ruff check
+      - name: Run Ruff (check and fix)
+        run: uv run ruff check --fix
+      - name: Run Ruff (format)
+        run: uv run ruff format
+      - name: Check for changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Files were modified by ruff. Please commit these changes:"
+            git status --porcelain
+            git diff
+            exit 1
+          else
+            echo "No files were modified by ruff."
+          fi
   test:
     runs-on: ubuntu-latest
     steps:
