@@ -28,7 +28,7 @@ jobs:
       - name: Run Ruff (format)
         run: uv run ruff format
       - name: Auto-commit ruff changes
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           # Configure git
           git config --local user.email "action@github.com"
