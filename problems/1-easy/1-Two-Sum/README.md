@@ -24,16 +24,16 @@ Given an array of integers `nums` and an integer `target`, return the indices of
 **Example 1:**
 ```
 
-Input: nums = \[2,7,11,15], target = 9
-Output: \[1,0]
+Input: nums = [2,7,11,15], target = 9
+Output: [1,0]
 
 ```
 
 **Example 2:**
 ```
 
-Input: nums = \[3,2,4], target = 6
-Output: \[2,1]
+Input: nums = [3,2,4], target = 6
+Output: [2,1]
 
 ```
 
@@ -45,8 +45,8 @@ Output: \[2,1]
 **Test Case 1:**
 ```
 
-Input: nums = \[3,3], target = 6
-Output: \[1,0]
+Input: nums = [3,3], target = 6
+Output: [1,0]
 Explanation: The two elements 3 and 3 sum to 6.
 
 ```
@@ -54,8 +54,8 @@ Explanation: The two elements 3 and 3 sum to 6.
 **Test Case 2:**
 ```
 
-Input: nums = \[1,2,3,4,5], target = 9
-Output: \[4,3]
+Input: nums = [1,2,3,4,5], target = 9
+Output: [4,3]
 Explanation: The elements at indices 4 and 3 (5 + 4) sum to 9.
 
 ```
