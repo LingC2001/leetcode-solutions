@@ -79,7 +79,7 @@ jobs:
             echo "✅ No files were modified by ruff."
           fi
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_LINGC2001 }}
       - name: Auto-commit ruff changes (dev branches)
         if: github.event_name == 'push' && github.ref != 'refs/heads/main'
         run: |
@@ -108,7 +108,7 @@ jobs:
             echo "✅ No files were modified by ruff."
           fi
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_LINGC2001 }}
       - name: Check for uncommitted changes (PR only)
         if: github.event_name == 'pull_request'
         run: |
