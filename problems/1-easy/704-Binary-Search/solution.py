@@ -1,5 +1,6 @@
 from typing import List
 
+
 def search(nums: List[int], target: int) -> int:
     right = len(nums) - 1
     left = 0
@@ -13,5 +14,5 @@ def search(nums: List[int], target: int) -> int:
             left = index + 1
         else:
             return index
-    
+
     return -1
