@@ -506,8 +506,32 @@ def generate_status_donut_svg(status_counts):
     
     return svg
 
+def get_git_activity():
+    """Get actual git commit activity for the last 52 weeks"""
+    import subprocess
+    from collections import defaultdict
+    
+    try:
+        # Get commits from last year
+        result = subprocess.run([
+            'git', 'log', '--since=52 weeks ago', '--format=%ad', '--date=short'
+        ], capture_output=True, text=True, cwd='.')
+        
+        if result.returncode != 0:
+            return defaultdict(int)
+        
+        # Parse commit dates and count commits per date
+        activity = defaultdict(int)
+        for line in result.stdout.strip().split('\n'):
+            if line:
+                activity[line] += 1
+        
+        return activity
+    except:
+        return defaultdict(int)
+
 def generate_activity_heatmap_svg():
-    """Generate simple activity heatmap for last 52 weeks"""
+    """Generate activity heatmap based on actual git commits"""
     
     weeks = 52
     days_per_week = 7
@@ -517,13 +541,16 @@ def generate_activity_heatmap_svg():
     chart_width = weeks * (cell_size + cell_spacing) + 100
     chart_height = days_per_week * (cell_size + cell_spacing) + 60
     
+    # Get actual git activity
+    git_activity = get_git_activity()
+    
     svg = f'''<svg width="{chart_width}" height="{chart_height}" viewBox="0 0 {chart_width} {chart_height}" xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
   <rect width="{chart_width}" height="{chart_height}" fill="#f9fafb" rx="8"/>
   
   <!-- Title -->
   <text x="20" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#374151">
-    Activity (Last 52 Weeks)
+    Git Activity (Last 52 Weeks)
   </text>
   
   <!-- Day labels -->
@@ -532,22 +559,48 @@ def generate_activity_heatmap_svg():
   <text x="15" y="107" font-family="Arial, sans-serif" font-size="9" fill="#6b7280">F</text>
 '''
     
-    # Generate random-ish activity pattern based on current date
-    import random
-    random.seed(42)  # Consistent pattern
+    # Calculate date range for the last 52 weeks
+    from datetime import datetime, timedelta
     
-    for week in range(weeks):
+    end_date = datetime.now().date()
+    start_date = end_date - timedelta(weeks=52)
+    
+    # Generate heatmap based on actual git activity
+    current_date = start_date
+    week = 0
+    
+    while current_date <= end_date and week < weeks:
         for day in range(days_per_week):
+            if current_date > end_date:
+                break
+                
             x = 30 + week * (cell_size + cell_spacing)
             y = 40 + day * (cell_size + cell_spacing)
             
-            # Simulate activity level (0-4)
-            activity_level = random.choice([0, 0, 0, 1, 1, 2, 3, 4])
+            # Get activity level for this date
+            date_str = current_date.strftime('%Y-%m-%d')
+            commits = git_activity.get(date_str, 0)
+            
+            # Map commits to activity level (0-4)
+            if commits == 0:
+                activity_level = 0
+            elif commits == 1:
+                activity_level = 1
+            elif commits <= 3:
+                activity_level = 2
+            elif commits <= 6:
+                activity_level = 3
+            else:
+                activity_level = 4
             
             colors = ["#ebedf0", "#c6e48b", "#7bc96f", "#239a3b", "#196127"]
-            color = colors[min(activity_level, 4)]
+            color = colors[activity_level]
             
             svg += f'  <rect x="{x}" y="{y}" width="{cell_size}" height="{cell_size}" fill="{color}" rx="2"/>\n'
+            
+            current_date += timedelta(days=1)
+            
+        week += 1
     
     # Legend
     legend_x = chart_width - 120
@@ -610,25 +663,7 @@ def main():
         f.write(combined_ring_svg)
     print("✅ Generated dashboard/assets/difficulty_progress.svg")
     
-    # Generate topic mastery chart
-    topic_svg = generate_topic_mastery_svg(topic_counts, topic_totals)
-    with open(assets_dir / "topic_mastery.svg", "w") as f:
-        f.write(topic_svg)
-    print("✅ Generated dashboard/assets/topic_mastery.svg")
-    
-    # Generate language coverage chart
-    language_svg = generate_language_coverage_svg(language_counts, total_problems)
-    with open(assets_dir / "language_coverage.svg", "w") as f:
-        f.write(language_svg)
-    print("✅ Generated dashboard/assets/language_coverage.svg")
-    
-    # Generate status breakdown donut
-    status_svg = generate_status_donut_svg(status_counts)
-    with open(assets_dir / "status_breakdown.svg", "w") as f:
-        f.write(status_svg)
-    print("✅ Generated dashboard/assets/status_breakdown.svg")
-    
-    # Generate activity heatmap
+    # Generate activity heatmap (based on real git commits)
     activity_svg = generate_activity_heatmap_svg()
     with open(assets_dir / "activity_heatmap.svg", "w") as f:
         f.write(activity_svg)

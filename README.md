@@ -9,27 +9,12 @@ A collection of LeetCode solutions with documentation and analysis, organized by
 ### 🎯 **Progress Summary**
 <img src="dashboard/assets/difficulty_progress.svg" alt="Difficulty Progress Ring" />
 
-### 📈 **Analytics & Insights**
-<table>
-  <tr>
-    <td align="center">
-      <img src="dashboard/assets/topic_mastery.svg" alt="Topic Mastery" />
-    </td>
-    <td align="center">
-      <img src="dashboard/assets/language_coverage.svg" alt="Language Coverage" />
-    </td>
-    <td align="center">
-      <img src="dashboard/assets/status_breakdown.svg" alt="Status Breakdown" />
-    </td>
-  </tr>
-</table>
-
-### 🔥 **Activity Heatmap**
-<img src="dashboard/assets/activity_heatmap.svg" alt="Activity Heatmap" />
+### 🔥 **Git Activity**
+<img src="dashboard/assets/activity_heatmap.svg" alt="Git Activity Heatmap" />
 
 </div>
 
-**📊 Total Progress: 20 problems solved** • **🎯 8 topics covered** • **💻 3 languages** • [📚 View detailed breakdown](problems/)
+**📊 Total Progress: 20 problems solved** • [📚 View detailed breakdown](problems/)
 
 ---
 
