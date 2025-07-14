@@ -2,43 +2,12 @@
 
 A collection of LeetCode solutions with documentation and analysis, organized by difficulty and problem number. Each solution includes implementations in multiple programming languages.
 
-## Directory Structure
-
-- `problems/` — Contains all problem solutions, organized by difficulty:
-  - `1-easy/`
-  - `2-medium/`
-  - `3-hard/`
-    - `<number>-<Problem-Name>/`
-      - `README.md` — Problem description and analysis
-      - `solution.py` — Python solution
-      - `solution.cpp` — C++ solution
-- `tests/` — Contains all test cases, organized by difficulty to mirror the problems directory:
-  - `1-easy/`
-  - `2-medium/`
-  - `3-hard/`
-    - `test_<problem_name>.py` — Pytest test file for the corresponding problem
-- `dashboard/` — Visual analytics and progress tracking:
-  - `scripts/generate_progress.py` — Dashboard generation script
-  - `assets/` — Generated SVG charts and analytics data
-
 ## 📊 Dashboard Overview
 
 <div align="center">
 
-### 🎯 **Difficulty Progress**
-<table>
-  <tr>
-    <td align="center">
-      <img src="dashboard/assets/progress_easy.svg" alt="Easy Progress" />
-    </td>
-    <td align="center">
-      <img src="dashboard/assets/progress_medium.svg" alt="Medium Progress" />
-    </td>
-    <td align="center">
-      <img src="dashboard/assets/progress_hard.svg" alt="Hard Progress" />
-    </td>
-  </tr>
-</table>
+### 🎯 **Progress Summary**
+<img src="dashboard/assets/difficulty_progress.svg" alt="Difficulty Progress Ring" />
 
 ### 📈 **Analytics & Insights**
 <table>
@@ -63,6 +32,25 @@ A collection of LeetCode solutions with documentation and analysis, organized by
 **📊 Total Progress: 20 problems solved** • **🎯 8 topics covered** • **💻 3 languages** • [📚 View detailed breakdown](problems/)
 
 ---
+
+## Directory Structure
+
+- `problems/` — Contains all problem solutions, organized by difficulty:
+  - `1-easy/`
+  - `2-medium/`
+  - `3-hard/`
+    - `<number>-<Problem-Name>/`
+      - `README.md` — Problem description and analysis
+      - `solution.py` — Python solution
+      - `solution.cpp` — C++ solution
+- `tests/` — Contains all test cases, organized by difficulty to mirror the problems directory:
+  - `1-easy/`
+  - `2-medium/`
+  - `3-hard/`
+    - `test_<problem_name>.py` — Pytest test file for the corresponding problem
+- `dashboard/` — Visual analytics and progress tracking:
+  - `scripts/generate_progress.py` — Dashboard generation script
+  - `assets/` — Generated SVG charts and analytics data
 
 ## Setup (with uv)
 

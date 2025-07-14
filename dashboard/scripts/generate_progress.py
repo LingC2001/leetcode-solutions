@@ -230,6 +230,111 @@ def generate_progress_svg(solved, total, color, label):
     
     return svg
 
+def generate_combined_difficulty_ring_svg(counts):
+    """Generate combined difficulty ring chart (donut chart)"""
+    
+    total_solved = sum(counts.values())
+    
+    if total_solved == 0:
+        # Empty state
+        svg = '''<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#e5e7eb" stroke-width="16"/>
+  <text x="100" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#374151">0</text>
+  <text x="100" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#6b7280">Problems</text>
+</svg>'''
+        return svg
+    
+    # Colors for each difficulty
+    colors = {
+        "easy": "#22c55e",     # Green
+        "medium": "#f59e0b",   # Orange  
+        "hard": "#ef4444"      # Red
+    }
+    
+    # Calculate angles for each segment
+    center_x, center_y = 100, 100
+    outer_radius = 80
+    inner_radius = 50
+    
+    # Start angle (top of circle)
+    current_angle = -90
+    
+    svg = '''<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background ring -->
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#f3f4f6" stroke-width="30"/>
+'''
+    
+    # Generate segments for each difficulty
+    import math
+    
+    for difficulty in ["easy", "medium", "hard"]:
+        count = counts.get(difficulty, 0)
+        if count == 0:
+            continue
+            
+        # Calculate angle for this segment
+        segment_angle = (count / total_solved) * 360
+        end_angle = current_angle + segment_angle
+        
+        # Calculate arc coordinates
+        start_rad = math.radians(current_angle)
+        end_rad = math.radians(end_angle)
+        
+        # Outer arc points
+        x1_outer = center_x + outer_radius * math.cos(start_rad)
+        y1_outer = center_y + outer_radius * math.sin(start_rad)
+        x2_outer = center_x + outer_radius * math.cos(end_rad)
+        y2_outer = center_y + outer_radius * math.sin(end_rad)
+        
+        # Inner arc points
+        x1_inner = center_x + inner_radius * math.cos(end_rad)
+        y1_inner = center_y + inner_radius * math.sin(end_rad)
+        x2_inner = center_x + inner_radius * math.cos(start_rad)
+        y2_inner = center_y + inner_radius * math.sin(start_rad)
+        
+        # Large arc flag
+        large_arc = 1 if segment_angle > 180 else 0
+        
+        # Create path for the segment
+        path = f"M {x1_outer:.2f} {y1_outer:.2f} "
+        path += f"A {outer_radius} {outer_radius} 0 {large_arc} 1 {x2_outer:.2f} {y2_outer:.2f} "
+        path += f"L {x1_inner:.2f} {y1_inner:.2f} "
+        path += f"A {inner_radius} {inner_radius} 0 {large_arc} 0 {x2_inner:.2f} {y2_inner:.2f} Z"
+        
+        color = colors[difficulty]
+        svg += f'  <path d="{path}" fill="{color}"/>\n'
+        
+        current_angle = end_angle
+    
+    # Center text
+    svg += f'''
+  <!-- Center text -->
+  <text x="100" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#374151">
+    {total_solved}
+  </text>
+  <text x="100" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#6b7280">
+    Problems Solved
+  </text>
+  
+  <!-- Legend -->
+  <g transform="translate(20, 160)">
+    <circle cx="0" cy="0" r="6" fill="{colors['easy']}"/>
+    <text x="12" y="4" font-family="Arial, sans-serif" font-size="12" fill="#374151">Easy ({counts.get('easy', 0)})</text>
+  </g>
+  
+  <g transform="translate(80, 160)">
+    <circle cx="0" cy="0" r="6" fill="{colors['medium']}"/>
+    <text x="12" y="4" font-family="Arial, sans-serif" font-size="12" fill="#374151">Medium ({counts.get('medium', 0)})</text>
+  </g>
+  
+  <g transform="translate(20, 180)">
+    <circle cx="0" cy="0" r="6" fill="{colors['hard']}"/>
+    <text x="12" y="4" font-family="Arial, sans-serif" font-size="12" fill="#374151">Hard ({counts.get('hard', 0)})</text>
+  </g>
+</svg>'''
+    
+    return svg
+
 def generate_topic_mastery_svg(topic_counts, topic_totals):
     """Generate horizontal bar chart for topic mastery"""
     
@@ -499,21 +604,11 @@ def main():
     
     print("📊 Generating dashboard charts...")
     
-    # Generate difficulty progress circles
-    for difficulty in ["easy", "medium", "hard"]:
-        solved = counts[difficulty]
-        total = totals[difficulty] 
-        color = colors[difficulty]
-        label = labels[difficulty]
-        
-        svg_content = generate_progress_svg(solved, total, color, label)
-        
-        # Save SVG file
-        svg_path = assets_dir / f"progress_{difficulty}.svg"
-        with open(svg_path, "w") as f:
-            f.write(svg_content)
-        
-        print(f"✅ Generated {svg_path}")
+    # Generate combined difficulty ring chart
+    combined_ring_svg = generate_combined_difficulty_ring_svg(counts)
+    with open(assets_dir / "difficulty_progress.svg", "w") as f:
+        f.write(combined_ring_svg)
+    print("✅ Generated dashboard/assets/difficulty_progress.svg")
     
     # Generate topic mastery chart
     topic_svg = generate_topic_mastery_svg(topic_counts, topic_totals)

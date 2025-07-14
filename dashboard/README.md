@@ -9,9 +9,7 @@ dashboard/
 ├── scripts/
 │   └── generate_progress.py    # Dashboard generation script
 ├── assets/
-│   ├── progress_easy.svg       # Easy difficulty progress circle
-│   ├── progress_medium.svg     # Medium difficulty progress circle  
-│   ├── progress_hard.svg       # Hard difficulty progress circle
+│   ├── difficulty_progress.svg # Combined difficulty progress ring chart
 │   ├── topic_mastery.svg       # Topic mastery horizontal bars
 │   ├── language_coverage.svg   # Language coverage chart
 │   ├── status_breakdown.svg    # Status breakdown donut chart
@@ -33,10 +31,11 @@ The dashboard automatically updates when you add new problems via the GitHub Act
 
 ## 📊 Generated Charts
 
-### 1. **Difficulty Progress Circles** 🟢🟡🔴
-- Circular progress indicators for Easy/Medium/Hard
-- Shows solved count, total count, and percentage
-- Color-coded: Green (Easy), Orange (Medium), Red (Hard)
+### 1. **Combined Difficulty Progress Ring** 🟢🟡🔴
+- Ring chart showing all difficulties in one view
+- Center displays total problems solved
+- Each segment represents a difficulty: Green (Easy), Orange (Medium), Red (Hard)
+- Legend shows breakdown by count for each difficulty
 
 ### 2. **Topic Mastery Chart** 📈
 - Horizontal bar chart showing algorithm pattern coverage
