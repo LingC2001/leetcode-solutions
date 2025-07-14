@@ -1,0 +1,21 @@
+<svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="80" cy="80" r="65" fill="#f9fafb"/>
+  
+  <path d="M 80.0 20.0 A 60 60 0 1 1 31.45898033750315 44.73288486245162 L 51.68440519687684 59.42751616976344 A 35 35 0 1 0 80.0 45.0 Z" fill="#22c55e"/>
+  <path d="M 31.45898033750315 44.73288486245162 A 60 60 0 0 1 79.99999999999999 20.0 L 80.0 45.0 A 35 35 0 0 0 51.68440519687684 59.42751616976344 Z" fill="#f59e0b"/>
+
+  <!-- Center text -->
+  <text x="80" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#374151">
+    20
+  </text>
+  <text x="80" y="92" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6b7280">
+    Problems
+  </text>
+  
+  <!-- Legend -->
+  <circle cx="20" cy="140" r="4" fill="#22c55e"/>
+  <text x="30" y="144" font-family="Arial, sans-serif" font-size="10" fill="#374151">Complete (17)</text>
+  <circle cx="20" cy="155" r="4" fill="#f59e0b"/>
+  <text x="30" y="159" font-family="Arial, sans-serif" font-size="10" fill="#374151">Solutions Only (3)</text>
+</svg>

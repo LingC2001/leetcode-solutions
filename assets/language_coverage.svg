@@ -1,0 +1,39 @@
+<svg width="300" height="180" viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="300" height="180" fill="#f9fafb" rx="8"/>
+  
+  <!-- Title -->
+  <text x="20" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#374151">
+    Language Coverage
+  </text>
+
+  <!-- Python -->
+  <text x="20" y="66" font-family="Arial, sans-serif" font-size="12" fill="#374151">
+    Python
+  </text>
+  <rect x="80" y="50" width="180" height="20" fill="#e5e7eb" rx="10"/>
+  <rect x="80" y="50" width="180.0" height="20" fill="#3776ab" rx="10"/>
+  <text x="270" y="64" font-family="Arial, sans-serif" font-size="10" fill="#6b7280">
+    20/20 (100%)
+  </text>
+
+  <!-- C++ -->
+  <text x="20" y="96" font-family="Arial, sans-serif" font-size="12" fill="#374151">
+    C++
+  </text>
+  <rect x="80" y="80" width="180" height="20" fill="#e5e7eb" rx="10"/>
+  <rect x="80" y="80" width="180.0" height="20" fill="#00599c" rx="10"/>
+  <text x="270" y="94" font-family="Arial, sans-serif" font-size="10" fill="#6b7280">
+    20/20 (100%)
+  </text>
+
+  <!-- Java -->
+  <text x="20" y="126" font-family="Arial, sans-serif" font-size="12" fill="#374151">
+    Java
+  </text>
+  <rect x="80" y="110" width="180" height="20" fill="#e5e7eb" rx="10"/>
+  <rect x="80" y="110" width="171.0" height="20" fill="#ed8b00" rx="10"/>
+  <text x="270" y="124" font-family="Arial, sans-serif" font-size="10" fill="#6b7280">
+    19/20 (95%)
+  </text>
+</svg>

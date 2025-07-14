@@ -1,0 +1,50 @@
+{
+  "counts": {
+    "easy": 7,
+    "medium": 12,
+    "hard": 1
+  },
+  "totals": {
+    "easy": 600,
+    "medium": 1300,
+    "hard": 500
+  },
+  "topic_counts": {
+    "Array": 17,
+    "Hash Table": 4,
+    "String": 10,
+    "Two Pointers": 7,
+    "Binary Search": 2,
+    "Stack": 2,
+    "Sliding Window": 4,
+    "Dynamic Programming": 1
+  },
+  "topic_totals": {
+    "Array": 400,
+    "Hash Table": 200,
+    "String": 250,
+    "Two Pointers": 80,
+    "Sliding Window": 60,
+    "Stack": 100,
+    "Binary Search": 90,
+    "Dynamic Programming": 300,
+    "Tree": 200,
+    "Graph": 150,
+    "Linked List": 80,
+    "Math": 150,
+    "Backtracking": 80,
+    "Greedy": 120,
+    "Heap": 60
+  },
+  "language_counts": {
+    "Python": 20,
+    "C++": 20,
+    "Java": 19
+  },
+  "status_counts": {
+    "Complete": 17,
+    "Solutions Only": 3
+  },
+  "total_problems": 20,
+  "last_updated": "2025-07-14 21:36:40"
+}

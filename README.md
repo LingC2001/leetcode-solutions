@@ -18,25 +18,46 @@ A collection of LeetCode solutions with documentation and analysis, organized by
   - `3-hard/`
     - `test_<problem_name>.py` — Pytest test file for the corresponding problem
 
-## 📊 Progress Overview
+## 📊 Dashboard Overview
 
 <div align="center">
-  <table>
-    <tr>
-      <td align="center">
-        <img src="assets/progress_easy.svg" alt="Easy Progress" />
-      </td>
-      <td align="center">
-        <img src="assets/progress_medium.svg" alt="Medium Progress" />
-      </td>
-      <td align="center">
-        <img src="assets/progress_hard.svg" alt="Hard Progress" />
-      </td>
-    </tr>
-  </table>
+
+### 🎯 **Difficulty Progress**
+<table>
+  <tr>
+    <td align="center">
+      <img src="assets/progress_easy.svg" alt="Easy Progress" />
+    </td>
+    <td align="center">
+      <img src="assets/progress_medium.svg" alt="Medium Progress" />
+    </td>
+    <td align="center">
+      <img src="assets/progress_hard.svg" alt="Hard Progress" />
+    </td>
+  </tr>
+</table>
+
+### 📈 **Analytics & Insights**
+<table>
+  <tr>
+    <td align="center">
+      <img src="assets/topic_mastery.svg" alt="Topic Mastery" />
+    </td>
+    <td align="center">
+      <img src="assets/language_coverage.svg" alt="Language Coverage" />
+    </td>
+    <td align="center">
+      <img src="assets/status_breakdown.svg" alt="Status Breakdown" />
+    </td>
+  </tr>
+</table>
+
+### 🔥 **Activity Heatmap**
+<img src="assets/activity_heatmap.svg" alt="Activity Heatmap" />
+
 </div>
 
-**Total Progress: 20 problems solved** • [View detailed breakdown](problems/)
+**📊 Total Progress: 20 problems solved** • **🎯 8 topics covered** • **💻 3 languages** • [📚 View detailed breakdown](problems/)
 
 ---
 
