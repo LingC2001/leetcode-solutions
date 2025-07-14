@@ -493,8 +493,8 @@ def main():
         "hard": "Hard"
     }
     
-    # Create assets directory
-    assets_dir = Path("assets")
+    # Create dashboard assets directory
+    assets_dir = Path("dashboard/assets")
     assets_dir.mkdir(exist_ok=True)
     
     print("📊 Generating dashboard charts...")
@@ -519,25 +519,25 @@ def main():
     topic_svg = generate_topic_mastery_svg(topic_counts, topic_totals)
     with open(assets_dir / "topic_mastery.svg", "w") as f:
         f.write(topic_svg)
-    print("✅ Generated assets/topic_mastery.svg")
+    print("✅ Generated dashboard/assets/topic_mastery.svg")
     
     # Generate language coverage chart
     language_svg = generate_language_coverage_svg(language_counts, total_problems)
     with open(assets_dir / "language_coverage.svg", "w") as f:
         f.write(language_svg)
-    print("✅ Generated assets/language_coverage.svg")
+    print("✅ Generated dashboard/assets/language_coverage.svg")
     
     # Generate status breakdown donut
     status_svg = generate_status_donut_svg(status_counts)
     with open(assets_dir / "status_breakdown.svg", "w") as f:
         f.write(status_svg)
-    print("✅ Generated assets/status_breakdown.svg")
+    print("✅ Generated dashboard/assets/status_breakdown.svg")
     
     # Generate activity heatmap
     activity_svg = generate_activity_heatmap_svg()
     with open(assets_dir / "activity_heatmap.svg", "w") as f:
         f.write(activity_svg)
-    print("✅ Generated assets/activity_heatmap.svg")
+    print("✅ Generated dashboard/assets/activity_heatmap.svg")
     
     # Generate comprehensive stats file
     stats = {

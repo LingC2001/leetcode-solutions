@@ -19,7 +19,7 @@ Create a comprehensive dashboard with multiple chart types that automatically up
 
 ### **Step 1: Python Script to Generate Progress Bars**
 
-Create `scripts/generate_progress.py`:
+Create `dashboard/scripts/generate_progress.py`:
 
 ```python
 #!/usr/bin/env python3
@@ -119,9 +119,9 @@ def main():
         "hard": "Hard"
     }
     
-    # Create assets directory
-    assets_dir = Path("assets")
-    assets_dir.mkdir(exist_ok=True)
+         # Create dashboard assets directory
+     assets_dir = Path("dashboard/assets")
+     assets_dir.mkdir(exist_ok=True)
     
     # Generate SVGs
     for difficulty in ["easy", "medium", "hard"]:
@@ -165,15 +165,15 @@ Add this section to the main `README.md` after the directory structure:
 <div align="center">
   <table>
     <tr>
-      <td align="center">
-        <img src="assets/progress_easy.svg" alt="Easy Progress" />
-      </td>
-      <td align="center">
-        <img src="assets/progress_medium.svg" alt="Medium Progress" />
-      </td>
-      <td align="center">
-        <img src="assets/progress_hard.svg" alt="Hard Progress" />
-      </td>
+           <td align="center">
+       <img src="dashboard/assets/progress_easy.svg" alt="Easy Progress" />
+     </td>
+     <td align="center">
+       <img src="dashboard/assets/progress_medium.svg" alt="Medium Progress" />
+     </td>
+     <td align="center">
+       <img src="dashboard/assets/progress_hard.svg" alt="Hard Progress" />
+     </td>
     </tr>
   </table>
 </div>
@@ -208,17 +208,17 @@ jobs:
         with:
           python-version: '3.11'
       
-      - name: Generate progress bars
-        run: python scripts/generate_progress.py
+             - name: Generate progress bars
+         run: python dashboard/scripts/generate_progress.py
       
       - name: Commit progress bar updates
         run: |
           git config --local user.email "action@github.com" 
           git config --local user.name "GitHub Action"
           
-          if [ -n "$(git status --porcelain)" ]; then
-            git add assets/
-            git commit -m "📊 Update progress bars [skip ci]"
+                     if [ -n "$(git status --porcelain)" ]; then
+             git add dashboard/assets/
+             git commit -m "📊 Update progress bars [skip ci]"
             git push
           else
             echo "No changes to commit"
@@ -233,14 +233,14 @@ jobs:
 
 ### **1. Create the script** (2 minutes)
 ```bash
-mkdir -p scripts
-# Copy the Python script above to scripts/generate_progress.py
-chmod +x scripts/generate_progress.py
+mkdir -p dashboard/scripts
+# Copy the Python script above to dashboard/scripts/generate_progress.py
+chmod +x dashboard/scripts/generate_progress.py
 ```
 
 ### **2. Generate initial progress bars** (1 minute)
 ```bash
-python scripts/generate_progress.py
+python dashboard/scripts/generate_progress.py
 ```
 
 ### **3. Update README** (2 minutes)

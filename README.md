@@ -17,6 +17,9 @@ A collection of LeetCode solutions with documentation and analysis, organized by
   - `2-medium/`
   - `3-hard/`
     - `test_<problem_name>.py` — Pytest test file for the corresponding problem
+- `dashboard/` — Visual analytics and progress tracking:
+  - `scripts/generate_progress.py` — Dashboard generation script
+  - `assets/` — Generated SVG charts and analytics data
 
 ## 📊 Dashboard Overview
 
@@ -26,13 +29,13 @@ A collection of LeetCode solutions with documentation and analysis, organized by
 <table>
   <tr>
     <td align="center">
-      <img src="assets/progress_easy.svg" alt="Easy Progress" />
+      <img src="dashboard/assets/progress_easy.svg" alt="Easy Progress" />
     </td>
     <td align="center">
-      <img src="assets/progress_medium.svg" alt="Medium Progress" />
+      <img src="dashboard/assets/progress_medium.svg" alt="Medium Progress" />
     </td>
     <td align="center">
-      <img src="assets/progress_hard.svg" alt="Hard Progress" />
+      <img src="dashboard/assets/progress_hard.svg" alt="Hard Progress" />
     </td>
   </tr>
 </table>
@@ -41,19 +44,19 @@ A collection of LeetCode solutions with documentation and analysis, organized by
 <table>
   <tr>
     <td align="center">
-      <img src="assets/topic_mastery.svg" alt="Topic Mastery" />
+      <img src="dashboard/assets/topic_mastery.svg" alt="Topic Mastery" />
     </td>
     <td align="center">
-      <img src="assets/language_coverage.svg" alt="Language Coverage" />
+      <img src="dashboard/assets/language_coverage.svg" alt="Language Coverage" />
     </td>
     <td align="center">
-      <img src="assets/status_breakdown.svg" alt="Status Breakdown" />
+      <img src="dashboard/assets/status_breakdown.svg" alt="Status Breakdown" />
     </td>
   </tr>
 </table>
 
 ### 🔥 **Activity Heatmap**
-<img src="assets/activity_heatmap.svg" alt="Activity Heatmap" />
+<img src="dashboard/assets/activity_heatmap.svg" alt="Activity Heatmap" />
 
 </div>
 

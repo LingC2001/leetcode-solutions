@@ -19,7 +19,7 @@ jobs:
           python-version: '3.11'
       
       - name: Generate dashboard charts
-        run: python3 scripts/generate_progress.py
+        run: python3 dashboard/scripts/generate_progress.py
       
       - name: Commit dashboard updates
         run: |
@@ -27,7 +27,7 @@ jobs:
           git config --local user.name "GitHub Action"
           
           if [ -n "$(git status --porcelain)" ]; then
-            git add assets/
+            git add dashboard/assets/
             git commit -m "📊 Update dashboard charts [skip ci]"
             git push
           else

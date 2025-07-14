@@ -81,18 +81,18 @@ I've created a comprehensive, auto-updating dashboard with **5 different chart t
 
 ### **File Structure:**
 ```
-scripts/
-└── generate_progress.py    # Enhanced dashboard generator
-
-assets/
-├── progress_easy.svg       # Easy difficulty progress
-├── progress_medium.svg     # Medium difficulty progress
-├── progress_hard.svg       # Hard difficulty progress
-├── topic_mastery.svg       # Topic mastery chart
-├── language_coverage.svg   # Language coverage chart
-├── status_breakdown.svg    # Status breakdown donut
-├── activity_heatmap.svg    # Activity heatmap
-└── dashboard_stats.json    # Comprehensive analytics data
+dashboard/
+├── scripts/
+│   └── generate_progress.py    # Enhanced dashboard generator
+└── assets/
+    ├── progress_easy.svg       # Easy difficulty progress
+    ├── progress_medium.svg     # Medium difficulty progress
+    ├── progress_hard.svg       # Hard difficulty progress
+    ├── topic_mastery.svg       # Topic mastery chart
+    ├── language_coverage.svg   # Language coverage chart
+    ├── status_breakdown.svg    # Status breakdown donut
+    ├── activity_heatmap.svg    # Activity heatmap
+    └── dashboard_stats.json    # Comprehensive analytics data
 
 .github/workflows/
 └── update-progress.yml     # Auto-update GitHub Action
