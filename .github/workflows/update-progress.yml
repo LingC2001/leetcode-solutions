@@ -1,0 +1,37 @@
+name: Update Progress Bars
+
+on:
+  push:
+    branches: [main]
+    paths: ['problems/**']
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-progress:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Generate progress bars
+        run: python3 scripts/generate_progress.py
+      
+      - name: Commit progress bar updates
+        run: |
+          git config --local user.email "action@github.com" 
+          git config --local user.name "GitHub Action"
+          
+          if [ -n "$(git status --porcelain)" ]; then
+            git add assets/
+            git commit -m "📊 Update progress bars [skip ci]"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_LINGC2001 }}

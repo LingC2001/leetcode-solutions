@@ -18,6 +18,28 @@ A collection of LeetCode solutions with documentation and analysis, organized by
   - `3-hard/`
     - `test_<problem_name>.py` — Pytest test file for the corresponding problem
 
+## 📊 Progress Overview
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="assets/progress_easy.svg" alt="Easy Progress" />
+      </td>
+      <td align="center">
+        <img src="assets/progress_medium.svg" alt="Medium Progress" />
+      </td>
+      <td align="center">
+        <img src="assets/progress_hard.svg" alt="Hard Progress" />
+      </td>
+    </tr>
+  </table>
+</div>
+
+**Total Progress: 20 problems solved** • [View detailed breakdown](problems/)
+
+---
+
 ## Setup (with uv)
 
 This project uses [uv](https://github.com/astral-sh/uv) for fast Python environment management and dependency installation.

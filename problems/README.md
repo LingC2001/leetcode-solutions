@@ -23,42 +23,42 @@
 
 ## 🟢 Easy Problems (7)
 
-| # | Problem | Topic | Status | Solutions |
-|---|---------|-------|--------|-----------|
-| 1 | [Two Sum](1-easy/1-Two-Sum/) | Hash Table, Array | ✅ Complete | [Python](1-easy/1-Two-Sum/solution.py), [C++](1-easy/1-Two-Sum/solution.cpp), [Java](1-easy/1-Two-Sum/solution.java) |
-| 20 | [Valid Parentheses](1-easy/20-Valid-Parentheses/) | Stack, String | 🔧 Solutions Only | [Python](1-easy/20-Valid-Parentheses/solution.py), [C++](1-easy/20-Valid-Parentheses/solution.cpp), [Java](1-easy/20-Valid-Parentheses/solution.java) |
-| 121 | [Best Time to Buy and Sell Stock](1-easy/121-Best-Time-To-Buy-And-Sell-Stock/) | Array, Dynamic Programming | 🔧 Solutions Only | [Python](1-easy/121-Best-Time-To-Buy-And-Sell-Stock/solution.py), [C++](1-easy/121-Best-Time-To-Buy-And-Sell-Stock/solution.cpp), [Java](1-easy/121-Best-Time-To-Buy-And-Sell-Stock/solution.java) |
-| 125 | [Valid Palindrome](1-easy/125-Valid-Palindrome/) | Two Pointers, String | 🔧 Solutions Only | [Python](1-easy/125-Valid-Palindrome/solution.py), [C++](1-easy/125-Valid-Palindrome/solution.cpp), [Java](1-easy/125-Valid-Palindrome/solution.java) |
-| 217 | [Contains Duplicate](1-easy/217-Contains-Duplicate/) | Hash Table, Array | 🔧 Solutions Only | [Python](1-easy/217-Contains-Duplicate/solution.py), [C++](1-easy/217-Contains-Duplicate/solution.cpp), [Java](1-easy/217-Contains-Duplicate/solution.java) |
-| 242 | [Valid Anagram](1-easy/242-Valid-Anagram/) | Hash Table, String | 🔧 Solutions Only | [Python](1-easy/242-Valid-Anagram/solution.py), [C++](1-easy/242-Valid-Anagram/solution.cpp), [Java](1-easy/242-Valid-Anagram/solution.java) |
-| 704 | [Binary Search](1-easy/704-Binary-Search/) | Binary Search, Array | 🔧 Solutions Only | [Python](1-easy/704-Binary-Search/solution.py), [C++](1-easy/704-Binary-Search/solution.cpp), [Java](1-easy/704-Binary-Search/solution.java) |
+| # | Problem | Topic | Status |
+|---|---------|-------|--------|
+| 1 | [Two Sum](1-easy/1-Two-Sum/) | Hash Table, Array | ✅ Complete |
+| 20 | [Valid Parentheses](1-easy/20-Valid-Parentheses/) | Stack, String | 🔧 Solutions Only |
+| 121 | [Best Time to Buy and Sell Stock](1-easy/121-Best-Time-To-Buy-And-Sell-Stock/) | Array, Dynamic Programming | 🔧 Solutions Only |
+| 125 | [Valid Palindrome](1-easy/125-Valid-Palindrome/) | Two Pointers, String | 🔧 Solutions Only |
+| 217 | [Contains Duplicate](1-easy/217-Contains-Duplicate/) | Hash Table, Array | 🔧 Solutions Only |
+| 242 | [Valid Anagram](1-easy/242-Valid-Anagram/) | Hash Table, String | 🔧 Solutions Only |
+| 704 | [Binary Search](1-easy/704-Binary-Search/) | Binary Search, Array | 🔧 Solutions Only |
 
 ---
 
 ## 🟡 Medium Problems (12)
 
-| # | Problem | Topic | Status | Solutions |
-|---|---------|-------|--------|-----------|
-| 3 | [Longest Substring Without Repeating Characters](2-medium/3-Longest-Substring-Without-Repeating-Characters/) | Hash Table, Sliding Window | 🔧 Solutions Only | [Python](2-medium/3-Longest-Substring-Without-Repeating-Characters/solution.py), [C++](2-medium/3-Longest-Substring-Without-Repeating-Characters/solution.cpp), [Java](2-medium/3-Longest-Substring-Without-Repeating-Characters/solution.java) |
-| 11 | [Container With Most Water](2-medium/11-Container-With-Most-Water/) | Two Pointers, Array | 🔧 Solutions Only | [Python](2-medium/11-Container-With-Most-Water/solution.py), [C++](2-medium/11-Container-With-Most-Water/solution.cpp), [Java](2-medium/11-Container-With-Most-Water/solution.java) |
-| 15 | [3Sum](2-medium/15-3Sum/) | Two Pointers, Array | ✅ Complete | [Python](2-medium/15-3Sum/solution.py), [C++](2-medium/15-3Sum/solution.cpp), [Java](2-medium/15-3Sum/solution.java) |
-| 49 | [Group Anagrams](2-medium/49-Group-Anagrams/) | Hash Table, String | 🔧 Solutions Only | [Python](2-medium/49-Group-Anagrams/solution.py), [C++](2-medium/49-Group-Anagrams/solution.cpp), [Java](2-medium/49-Group-Anagrams/solution.java) |
-| 128 | [Longest Consecutive Sequence](2-medium/128-Longest-Consecutive-Sequence/) | Hash Table, Array | 🔧 Solutions Only | [Python](2-medium/128-Longest-Consecutive-Sequence/solution.py), [C++](2-medium/128-Longest-Consecutive-Sequence/solution.cpp), [Java](2-medium/128-Longest-Consecutive-Sequence/solution.java) |
-| 150 | [Evaluate Reverse Polish Notation](2-medium/150-Evaluate-Reverse-Polish-Notation/) | Stack, Math | 🔧 Solutions Only | [Python](2-medium/150-Evaluate-Reverse-Polish-Notation/solution.py), [C++](2-medium/150-Evaluate-Reverse-Polish-Notation/solution.cpp), [Java](2-medium/150-Evaluate-Reverse-Polish-Notation/solution.java) |
-| 167 | [Two Sum II - Input Array Is Sorted](2-medium/167-Two-Sum-II-Input-Array-Is-Sorted/) | Two Pointers, Array | 🔧 Solutions Only | [Python](2-medium/167-Two-Sum-II-Input-Array-Is-Sorted/solution.py), [C++](2-medium/167-Two-Sum-II-Input-Array-Is-Sorted/solution.cpp), [Java](2-medium/167-Two-Sum-II-Input-Array-Is-Sorted/solution.java) |
-| 238 | [Product of Array Except Self](2-medium/238-Product-Of-Array-Except-Self/) | Array, Prefix Sum | 🔧 Solutions Only | [Python](2-medium/238-Product-Of-Array-Except-Self/solution.py), [C++](2-medium/238-Product-Of-Array-Except-Self/solution.cpp), [Java](2-medium/238-Product-Of-Array-Except-Self/solution.java) |
-| 424 | [Longest Repeating Character Replacement](2-medium/424-Longest-Repeating-Character-Replacement/) | Sliding Window, Hash Table | 🔧 Solutions Only | [Python](2-medium/424-Longest-Repeating-Character-Replacement/solution.py), [C++](2-medium/424-Longest-Repeating-Character-Replacement/solution.cpp), [Java](2-medium/424-Longest-Repeating-Character-Replacement/solution.java) |
-| 567 | [Permutation in String](2-medium/567-Permutation-in-String/) | Hash Table, Sliding Window | 🔧 Solutions Only | [Python](2-medium/567-Permutation-in-String/solution.py), [C++](2-medium/567-Permutation-in-String/solution.cpp), [Java](2-medium/567-Permutation-in-String/solution.java) |
-| 739 | [Daily Temperatures](2-medium/739-Daily-Temperatures/) | Stack, Array | 🔧 Solutions Only | [Python](2-medium/739-Daily-Temperatures/solution.py), [C++](2-medium/739-Daily-Temperatures/solution.cpp), [Java](2-medium/739-Daily-Temperatures/solution.java) |
-| 853 | [Car Fleet](2-medium/853-Car-Fleet/) | Stack, Array | 🔧 Solutions Only | [Python](2-medium/853-Car-Fleet/solution.py), [C++](2-medium/853-Car-Fleet/solution.cpp), [Java](2-medium/853-Car-Fleet/solution.java) |
+| # | Problem | Topic | Status |
+|---|---------|-------|--------|
+| 3 | [Longest Substring Without Repeating Characters](2-medium/3-Longest-Substring-Without-Repeating-Characters/) | Hash Table, Sliding Window | 🔧 Solutions Only |
+| 11 | [Container With Most Water](2-medium/11-Container-With-Most-Water/) | Two Pointers, Array | 🔧 Solutions Only |
+| 15 | [3Sum](2-medium/15-3Sum/) | Two Pointers, Array | ✅ Complete |
+| 49 | [Group Anagrams](2-medium/49-Group-Anagrams/) | Hash Table, String | 🔧 Solutions Only |
+| 128 | [Longest Consecutive Sequence](2-medium/128-Longest-Consecutive-Sequence/) | Hash Table, Array | 🔧 Solutions Only |
+| 150 | [Evaluate Reverse Polish Notation](2-medium/150-Evaluate-Reverse-Polish-Notation/) | Stack, Math | 🔧 Solutions Only |
+| 167 | [Two Sum II - Input Array Is Sorted](2-medium/167-Two-Sum-II-Input-Array-Is-Sorted/) | Two Pointers, Array | 🔧 Solutions Only |
+| 238 | [Product of Array Except Self](2-medium/238-Product-Of-Array-Except-Self/) | Array, Prefix Sum | 🔧 Solutions Only |
+| 424 | [Longest Repeating Character Replacement](2-medium/424-Longest-Repeating-Character-Replacement/) | Sliding Window, Hash Table | 🔧 Solutions Only |
+| 567 | [Permutation in String](2-medium/567-Permutation-in-String/) | Hash Table, Sliding Window | 🔧 Solutions Only |
+| 739 | [Daily Temperatures](2-medium/739-Daily-Temperatures/) | Stack, Array | 🔧 Solutions Only |
+| 853 | [Car Fleet](2-medium/853-Car-Fleet/) | Stack, Array | 🔧 Solutions Only |
 
 ---
 
 ## 🔴 Hard Problems (1)
 
-| # | Problem | Topic | Status | Solutions |
-|---|---------|-------|--------|-----------|
-| 239 | [Sliding Window Maximum](3-hard/239-Sliding-Window-Maximum/) | Sliding Window, Deque | ✅ Complete | [Python](3-hard/239-Sliding-Window-Maximum/solution.py), [C++](3-hard/239-Sliding-Window-Maximum/solution.cpp), [Java](3-hard/239-Sliding-Window-Maximum/solution.java) |
+| # | Problem | Topic | Status |
+|---|---------|-------|--------|
+| 239 | [Sliding Window Maximum](3-hard/239-Sliding-Window-Maximum/) | Sliding Window, Deque | ✅ Complete |
 
 ---
 
