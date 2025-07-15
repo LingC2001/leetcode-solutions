@@ -1,22 +1,70 @@
+
 name: Write-Me Readme
 
 on:
-  workflow_dispatch:
-    inputs:
-      problem_id:
-        description: 'Problem ID'
-        required: true
-        type: string
-
   push:
     paths:
       - 'problems/**'
+  workflow_dispatch:
+    inputs:
+      problem_id:
+        description: 'Problem ID (optional, if not provided will auto-detect)'
+        required: false
+        type: string
 
 jobs:
+  detect-problem:
+    runs-on: ubuntu-latest
+    outputs:
+      problem_id: ${{ steps.setid.outputs.problem_id }}
+      problem_dir: ${{ steps.setid.outputs.problem_dir }}
+      readme_exists: ${{ steps.setid.outputs.readme_exists }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: setid
+        run: |
+          # If problem_id is provided via workflow_dispatch, use it directly
+          if [ "${{ github.event.inputs.problem_id }}" != "" ]; then
+            # Try to find the folder for the given problem_id
+            folder=$(find problems -type d -regextype posix-extended -regex 'problems/[0-9]-[^/]+/[0-9]+-[^/]+' | grep "/${{ github.event.inputs.problem_id }}-" | head -n1)
+            if [ -z "$folder" ]; then
+              echo "problem_id=${{ github.event.inputs.problem_id }}" >> $GITHUB_OUTPUT
+              echo "problem_dir=" >> $GITHUB_OUTPUT
+              echo "readme_exists=true" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+            if [ -f "$folder/README.md" ]; then
+              echo "readme_exists=true" >> $GITHUB_OUTPUT
+            else
+              echo "readme_exists=false" >> $GITHUB_OUTPUT
+            fi
+            echo "problem_id=${{ github.event.inputs.problem_id }}" >> $GITHUB_OUTPUT
+            echo "problem_dir=$folder" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          # Otherwise, auto-detect as before
+          folder=$(git diff --name-only ${{ github.sha }} ${{ github.event.before }} | grep '^problems/[0-9]-[^/]\+/[0-9]\+-[^/]\+/' | head -n1 | awk -F'/' '{print $1"/"$2"/"$3}')
+          if [ -z "$folder" ]; then
+            echo "problem_id=" >> $GITHUB_OUTPUT
+            echo "problem_dir=" >> $GITHUB_OUTPUT
+            echo "readme_exists=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          problem_id=$(echo "$folder" | awk -F'/' '{print $3}' | awk -F'-' '{print $1}')
+          if [ -f "$folder/README.md" ]; then
+            echo "readme_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "readme_exists=false" >> $GITHUB_OUTPUT
+          fi
+          echo "problem_id=$problem_id" >> $GITHUB_OUTPUT
+          echo "problem_dir=$folder" >> $GITHUB_OUTPUT
+
   write-me-readme:
+    needs: detect-problem
+    if: needs.detect-problem.outputs.readme_exists == 'false' && needs.detect-problem.outputs.problem_id != ''
     uses: zzl0626/repo-goalie/.github/workflows/write-me.yml@main
     with:
-      problem_id: ${{ github.event.inputs.problem_id }}
+      problem_id: ${{ needs.detect-problem.outputs.problem_id }}
     secrets:
       PAT_GITHUB: ${{ secrets.PAT_LINGC2001 }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
