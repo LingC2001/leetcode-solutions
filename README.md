@@ -2,6 +2,22 @@
 
 A collection of LeetCode solutions with documentation and analysis, organized by difficulty and problem number. Each solution includes implementations in multiple programming languages.
 
+## 📊 Dashboard Overview
+
+<div align="center">
+
+### 🎯 **Progress Summary**
+<img src="dashboard/assets/difficulty_progress.svg" alt="Difficulty Progress Ring" />
+
+### 🔥 **Git Activity**
+<img src="dashboard/assets/activity_heatmap.svg" alt="Git Activity Heatmap" />
+
+</div>
+
+**📊 Total Progress: 20 problems solved** • [📚 View detailed breakdown](problems/)
+
+---
+
 ## Directory Structure
 
 - `problems/` — Contains all problem solutions, organized by difficulty:
@@ -17,6 +33,9 @@ A collection of LeetCode solutions with documentation and analysis, organized by
   - `2-medium/`
   - `3-hard/`
     - `test_<problem_name>.py` — Pytest test file for the corresponding problem
+- `dashboard/` — Visual analytics and progress tracking:
+  - `scripts/generate_progress.py` — Dashboard generation script
+  - `assets/` — Generated SVG charts and analytics data
 
 ## Setup (with uv)
 
