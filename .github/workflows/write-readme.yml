@@ -23,19 +23,25 @@ jobs:
       - uses: actions/checkout@v4
       - id: setid
         run: |
+          echo "[DEBUG] workflow_dispatch problem_id input: '${{ github.event.inputs.problem_id }}'"
           # If problem_id is provided via workflow_dispatch, use it directly
           if [ "${{ github.event.inputs.problem_id }}" != "" ]; then
+            echo "[DEBUG] Using provided problem_id: '${{ github.event.inputs.problem_id }}'"
             # Try to find the folder for the given problem_id
             folder=$(find problems -type d -regextype posix-extended -regex 'problems/[0-9]-[^/]+/[0-9]+-[^/]+' | grep "/${{ github.event.inputs.problem_id }}-" | head -n1)
+            echo "[DEBUG] Matched folder for problem_id: '$folder'"
             if [ -z "$folder" ]; then
+              echo "[DEBUG] No folder found for problem_id, skipping."
               echo "problem_id=${{ github.event.inputs.problem_id }}" >> $GITHUB_OUTPUT
               echo "problem_dir=" >> $GITHUB_OUTPUT
               echo "readme_exists=true" >> $GITHUB_OUTPUT
               exit 0
             fi
             if [ -f "$folder/README.md" ]; then
+              echo "[DEBUG] README.md exists in $folder, skipping generation."
               echo "readme_exists=true" >> $GITHUB_OUTPUT
             else
+              echo "[DEBUG] README.md does not exist in $folder, will generate."
               echo "readme_exists=false" >> $GITHUB_OUTPUT
             fi
             echo "problem_id=${{ github.event.inputs.problem_id }}" >> $GITHUB_OUTPUT
@@ -43,17 +49,30 @@ jobs:
             exit 0
           fi
           # Otherwise, auto-detect as before
-          folder=$(git diff --name-only ${{ github.sha }} ${{ github.event.before }} | grep '^problems/[0-9]-[^/]\+/[0-9]\+-[^/]\+/' | head -n1 | awk -F'/' '{print $1"/"$2"/"$3}')
+          echo "[DEBUG] No problem_id provided, auto-detecting from git diff."
+          # Check if github.event.before is set, fallback to HEAD~1 if not
+          if [ -n "${{ github.event.before }}" ]; then
+            DIFF_RANGE="${{ github.event.before }} ${{ github.sha }}"
+          else
+            echo "[DEBUG] github.event.before is empty, using HEAD~1 as fallback."
+            DIFF_RANGE="HEAD~1 HEAD"
+          fi
+          folder=$(git diff --name-only $DIFF_RANGE | grep '^problems/[0-9]-[^/]\+/[0-9]\+-[^/]\+/' | head -n1 | awk -F'/' '{print $1"/"$2"/"$3}')
+          echo "[DEBUG] Auto-detected folder: '$folder'"
           if [ -z "$folder" ]; then
+            echo "[DEBUG] No changed problem folder found, skipping."
             echo "problem_id=" >> $GITHUB_OUTPUT
             echo "problem_dir=" >> $GITHUB_OUTPUT
             echo "readme_exists=true" >> $GITHUB_OUTPUT
             exit 0
           fi
           problem_id=$(echo "$folder" | awk -F'/' '{print $3}' | awk -F'-' '{print $1}')
+          echo "[DEBUG] Extracted problem_id: '$problem_id' from folder: '$folder'"
           if [ -f "$folder/README.md" ]; then
+            echo "[DEBUG] README.md exists in $folder, skipping generation."
             echo "readme_exists=true" >> $GITHUB_OUTPUT
           else
+            echo "[DEBUG] README.md does not exist in $folder, will generate."
             echo "readme_exists=false" >> $GITHUB_OUTPUT
           fi
           echo "problem_id=$problem_id" >> $GITHUB_OUTPUT
