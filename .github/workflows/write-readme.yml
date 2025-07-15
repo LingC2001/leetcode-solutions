@@ -16,7 +16,7 @@ jobs:
   write-me-readme:
     uses: zzl0626/repo-goalie/.github/workflows/write-me.yml@main
     with:
-      problem_id: ${{ github.event.inputs.problem_id || github.event.head_commit.modified[0].split('/')[0] }}
+      problem_id: ${{ github.event.inputs.problem_id }}
     secrets:
       PAT_GITHUB: ${{ secrets.PAT_LINGC2001 }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
