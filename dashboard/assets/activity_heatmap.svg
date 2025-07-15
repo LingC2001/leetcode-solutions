@@ -8,7 +8,7 @@
     .activity-2 { fill: #7bc96f; }
     .activity-3 { fill: #239a3b; }
     .activity-4 { fill: #196127; }
-    
+
     @media (prefers-color-scheme: dark) {
       .bg-panel { fill: #1f2937; }
       .text-primary { fill: #f9fafb; }
@@ -22,12 +22,12 @@
   </style>
   <!-- Background -->
   <rect width="776" height="151" class="bg-panel" rx="8"/>
-  
+
   <!-- Title -->
   <text x="20" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" class="text-primary">
     Git Activity (Last 52 Weeks)
   </text>
-  
+
   <!-- Day labels -->
   <text x="15" y="55" font-family="Arial, sans-serif" font-size="9" class="text-secondary">M</text>
   <text x="15" y="81" font-family="Arial, sans-serif" font-size="9" class="text-secondary">W</text>
@@ -373,27 +373,27 @@
   <rect x="654" y="66" width="11" height="11" class="activity-0" rx="2"/>
   <rect x="654" y="79" width="11" height="11" class="activity-0" rx="2"/>
   <rect x="654" y="92" width="11" height="11" class="activity-0" rx="2"/>
-  <rect x="654" y="105" width="11" height="11" class="activity-4" rx="2"/>
-  <rect x="654" y="118" width="11" height="11" class="activity-3" rx="2"/>
-  <rect x="667" y="40" width="11" height="11" class="activity-3" rx="2"/>
-  <rect x="667" y="53" width="11" height="11" class="activity-1" rx="2"/>
+  <rect x="654" y="105" width="11" height="11" class="activity-0" rx="2"/>
+  <rect x="654" y="118" width="11" height="11" class="activity-0" rx="2"/>
+  <rect x="667" y="40" width="11" height="11" class="activity-0" rx="2"/>
+  <rect x="667" y="53" width="11" height="11" class="activity-0" rx="2"/>
   <rect x="667" y="66" width="11" height="11" class="activity-0" rx="2"/>
-  <rect x="667" y="79" width="11" height="11" class="activity-4" rx="2"/>
-  <rect x="667" y="92" width="11" height="11" class="activity-2" rx="2"/>
-  <rect x="667" y="105" width="11" height="11" class="activity-4" rx="2"/>
-  <rect x="667" y="118" width="11" height="11" class="activity-2" rx="2"/>
-  <rect x="680" y="40" width="11" height="11" class="activity-2" rx="2"/>
+  <rect x="667" y="79" width="11" height="11" class="activity-0" rx="2"/>
+  <rect x="667" y="92" width="11" height="11" class="activity-0" rx="2"/>
+  <rect x="667" y="105" width="11" height="11" class="activity-0" rx="2"/>
+  <rect x="667" y="118" width="11" height="11" class="activity-0" rx="2"/>
+  <rect x="680" y="40" width="11" height="11" class="activity-0" rx="2"/>
   <rect x="680" y="53" width="11" height="11" class="activity-0" rx="2"/>
   <rect x="680" y="66" width="11" height="11" class="activity-0" rx="2"/>
   <rect x="680" y="79" width="11" height="11" class="activity-0" rx="2"/>
-  <rect x="680" y="92" width="11" height="11" class="activity-4" rx="2"/>
-  <rect x="680" y="105" width="11" height="11" class="activity-3" rx="2"/>
-  <rect x="680" y="118" width="11" height="11" class="activity-2" rx="2"/>
-  <rect x="693" y="40" width="11" height="11" class="activity-3" rx="2"/>
+  <rect x="680" y="92" width="11" height="11" class="activity-0" rx="2"/>
+  <rect x="680" y="105" width="11" height="11" class="activity-0" rx="2"/>
+  <rect x="680" y="118" width="11" height="11" class="activity-0" rx="2"/>
+  <rect x="693" y="40" width="11" height="11" class="activity-0" rx="2"/>
   <rect x="693" y="53" width="11" height="11" class="activity-0" rx="2"/>
-  <rect x="693" y="66" width="11" height="11" class="activity-2" rx="2"/>
-  <rect x="693" y="79" width="11" height="11" class="activity-4" rx="2"/>
-  <rect x="693" y="92" width="11" height="11" class="activity-4" rx="2"/>
+  <rect x="693" y="66" width="11" height="11" class="activity-0" rx="2"/>
+  <rect x="693" y="79" width="11" height="11" class="activity-0" rx="2"/>
+  <rect x="693" y="92" width="11" height="11" class="activity-0" rx="2"/>
   <rect x="693" y="105" width="11" height="11" class="activity-0" rx="2"/>
   <rect x="693" y="118" width="11" height="11" class="activity-0" rx="2"/>
 

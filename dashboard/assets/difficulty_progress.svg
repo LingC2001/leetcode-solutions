@@ -3,7 +3,7 @@
     .bg-ring { stroke: #f3f4f6; }
     .text-primary { fill: #374151; }
     .text-secondary { fill: #6b7280; }
-    
+
     @media (prefers-color-scheme: dark) {
       .bg-ring { stroke: #374151; }
       .text-primary { fill: #f9fafb; }
@@ -12,13 +12,13 @@
   </style>
   <!-- Background ring -->
   <circle cx="80" cy="90" r="65" fill="none" class="bg-ring" stroke-width="22"/>
-  <path d="M 80.00 25.00 A 65 65 0 0 1 132.59 128.21 L 112.36 113.51 A 40 40 0 0 0 80.00 50.00 Z" fill="#22c55e"/>
-  <path d="M 132.59 128.21 A 65 65 0 1 1 59.91 28.18 L 67.64 51.96 A 40 40 0 1 0 112.36 113.51 Z" fill="#f59e0b"/>
-  <path d="M 59.91 28.18 A 65 65 0 0 1 80.00 25.00 L 80.00 50.00 A 40 40 0 0 0 67.64 51.96 Z" fill="#ef4444"/>
+  <path d="M 80.00 25.00 A 65 65 0 0 1 136.29 122.50 L 114.64 110.00 A 40 40 0 0 0 80.00 50.00 Z" fill="#22c55e"/>
+  <path d="M 136.29 122.50 A 65 65 0 1 1 60.84 27.89 L 68.21 51.78 A 40 40 0 1 0 114.64 110.00 Z" fill="#f59e0b"/>
+  <path d="M 60.84 27.89 A 65 65 0 0 1 80.00 25.00 L 80.00 50.00 A 40 40 0 0 0 68.21 51.78 Z" fill="#ef4444"/>
 
   <!-- Center text -->
   <text x="80" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" class="text-primary">
-    20
+    21
   </text>
   <text x="80" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" class="text-secondary">
     Problems Solved
@@ -30,7 +30,7 @@
   </g>
   <g transform="translate(170, 80)">
     <circle cx="0" cy="0" r="6" fill="#f59e0b"/>
-    <text x="14" y="4" font-family="Arial, sans-serif" font-size="12" class="text-primary">Medium (12)</text>
+    <text x="14" y="4" font-family="Arial, sans-serif" font-size="12" class="text-primary">Medium (13)</text>
   </g>
   <g transform="translate(170, 110)">
     <circle cx="0" cy="0" r="6" fill="#ef4444"/>
