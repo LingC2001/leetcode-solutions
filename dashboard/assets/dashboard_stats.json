@@ -38,7 +38,7 @@
   },
   "language_counts": {
     "Python": 21,
-    "C++": 20,
+    "C++": 21,
     "Java": 19
   },
   "status_counts": {
@@ -46,5 +46,5 @@
     "Solutions Only": 4
   },
   "total_problems": 21,
-  "last_updated": "2025-07-15 12:18:17"
+  "last_updated": "2025-07-15 12:34:37"
 }
