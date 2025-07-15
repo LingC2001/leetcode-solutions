@@ -46,7 +46,7 @@ jobs:
             
             # Add and commit changes directly to current branch
             git add .
-            git commit -m "Auto-fix: Apply ruff check --fix and ruff format" \
+            git commit -m "fix(lint): ruff lint and format" \
                        -m "This commit contains automatic fixes applied by:" \
                        -m "- uv run ruff check --fix" \
                        -m "- uv run ruff format" \
