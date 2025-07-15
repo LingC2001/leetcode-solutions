@@ -11,6 +11,34 @@ permissions:
   pull-requests: write
 
 jobs:
+  update-progress:
+    runs-on: ubuntu-latest
+    needs: [test]
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      (contains(join(github.event.commits.*.added, '\n'), 'problems/') || contains(join(github.event.commits.*.modified, '\n'), 'problems/') || contains(join(github.event.commits.*.removed, '\n'), 'problems/'))
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Generate dashboard charts
+        run: python3 dashboard/scripts/generate_progress.py
+      - name: Commit dashboard updates
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add dashboard/assets/
+            git commit -m "docs(dashboard): update dashboard charts"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_LINGC2001 }}
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -81,3 +109,34 @@ jobs:
 
       - name: Run tests
         run: uv run pytest
+
+  write-me-readme:
+    runs-on: ubuntu-latest
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      (
+        contains(join(github.event.commits.*.added, '\n'), 'problems/') ||
+        contains(join(github.event.commits.*.modified, '\n'), 'problems/') ||
+        contains(join(github.event.commits.*.removed, '\n'), 'problems/')
+      )
+    steps:
+      - name: Find first problem directory needing README
+        id: find_dir
+        run: |
+          set -e
+          dirs=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^problems/' | awk -F'/' '{print $1"/"$2"/"$3}' | sort | uniq)
+          for d in $dirs; do
+            if [ ! -f "$d/README.md" ]; then
+              echo "dir=$d" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+          done
+      - name: Call Write-Me Readme reusable workflow
+        if: steps.find_dir.outputs.dir != ''
+        uses: zzl0626/repo-goalie/.github/workflows/write-me.yml@main
+        with:
+          problem_id: ${{ steps.find_dir.outputs.dir }}
+        secrets:
+          PAT_GITHUB: ${{ secrets.PAT_LINGC2001 }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}

@@ -1,0 +1,22 @@
+name: Write-Me Readme
+
+on:
+  workflow_dispatch:
+    inputs:
+      problem_id:
+        description: 'Problem ID'
+        required: true
+        type: string
+
+  push:
+    paths:
+      - 'problems/**'
+
+jobs:
+  write-me-readme:
+    uses: zzl0626/repo-goalie/.github/workflows/write-me.yml@main
+    with:
+      problem_id: ${{ github.event.inputs.problem_id || github.event.head_commit.modified[0].split('/')[0] }}
+    secrets:
+      PAT_GITHUB: ${{ secrets.PAT_LINGC2001 }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
