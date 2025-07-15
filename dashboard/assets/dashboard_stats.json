@@ -15,8 +15,8 @@
     "String": 10,
     "Two Pointers": 7,
     "Binary Search": 2,
-    "Stack": 2,
     "Sliding Window": 4,
+    "Stack": 2,
     "Dynamic Programming": 1
   },
   "topic_totals": {
@@ -46,5 +46,5 @@
     "Solutions Only": 3
   },
   "total_problems": 20,
-  "last_updated": "2025-07-15 11:25:01"
+  "last_updated": "2025-07-15 22:05:23"
 }

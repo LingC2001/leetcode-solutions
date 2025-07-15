@@ -294,7 +294,7 @@ def generate_combined_difficulty_ring_svg(counts):
         
         return f"M {x1:.2f} {y1:.2f} A {outer_radius} {outer_radius} 0 {large_arc} 1 {x2:.2f} {y2:.2f} L {x3:.2f} {y3:.2f} A {inner_radius} {inner_radius} 0 {large_arc} 0 {x4:.2f} {y4:.2f} Z"
     
-    svg = '''<svg width="200" height="240" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+    svg = '''<svg width="380" height="240" viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">
   <style>
     .bg-ring { stroke: #f3f4f6; }
     .text-primary { fill: #374151; }
@@ -331,21 +331,18 @@ def generate_combined_difficulty_ring_svg(counts):
   <text x="100" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" class="text-secondary">
     Problems Solved
   </text>
-  
-  <!-- Legend -->
-  <g transform="translate(30, 200)">
-    <circle cx="0" cy="0" r="5" fill="{colors['easy']}"/>
-    <text x="10" y="3" font-family="Arial, sans-serif" font-size="11" class="text-primary">Easy ({counts.get('easy', 0)})</text>
+  <!-- Legend (to the right) -->
+  <g transform="translate(220, 70)">
+    <circle cx="0" cy="0" r="7" fill="{colors['easy']}"/>
+    <text x="18" y="5" font-family="Arial, sans-serif" font-size="15" class="text-primary">Easy ({counts.get('easy', 0)})</text>
   </g>
-  
-  <g transform="translate(90, 200)">
-    <circle cx="0" cy="0" r="5" fill="{colors['medium']}"/>
-    <text x="10" y="3" font-family="Arial, sans-serif" font-size="11" class="text-primary">Medium ({counts.get('medium', 0)})</text>
+  <g transform="translate(220, 110)">
+    <circle cx="0" cy="0" r="7" fill="{colors['medium']}"/>
+    <text x="18" y="5" font-family="Arial, sans-serif" font-size="15" class="text-primary">Medium ({counts.get('medium', 0)})</text>
   </g>
-  
-  <g transform="translate(30, 220)">
-    <circle cx="0" cy="0" r="5" fill="{colors['hard']}"/>
-    <text x="10" y="3" font-family="Arial, sans-serif" font-size="11" class="text-primary">Hard ({counts.get('hard', 0)})</text>
+  <g transform="translate(220, 150)">
+    <circle cx="0" cy="0" r="7" fill="{colors['hard']}"/>
+    <text x="18" y="5" font-family="Arial, sans-serif" font-size="15" class="text-primary">Hard ({counts.get('hard', 0)})</text>
   </g>
 </svg>'''
     
@@ -769,8 +766,8 @@ def generate_streak_counter_svg():
         streak_color = "#8b5cf6"
         status_text = "Legendary!"
     
-    width = 180
-    height = 120
+    width = 380  # Match the width of the pie chart for visual alignment
+    height = 240  # Match the height of the pie chart
     
     svg = f'''<svg width="{width}" height="{height}" viewBox="0 0 {width} {height}" xmlns="http://www.w3.org/2000/svg">
   <style>
@@ -779,7 +776,6 @@ def generate_streak_counter_svg():
     .text-secondary {{ fill: #64748b; }}
     .text-accent {{ fill: {streak_color}; }}
     .text-muted {{ fill: #94a3b8; }}
-    
     @media (prefers-color-scheme: dark) {{
       .bg-panel {{ fill: #0f172a; stroke: #334155; }}
       .text-primary {{ fill: #f1f5f9; }}
@@ -788,34 +784,33 @@ def generate_streak_counter_svg():
       .text-muted {{ fill: #64748b; }}
     }}
   </style>
-  
+
   <!-- Background -->
   <rect width="{width}" height="{height}" class="bg-panel" rx="8"/>
-  
+
   <!-- Streak emoji -->
-  <text x="{width//2}" y="25" text-anchor="middle" font-size="20">{emoji}</text>
-  
+  <text x="{width//2}" y="70" text-anchor="middle" font-size="40">{emoji}</text>
+
   <!-- Current streak number -->
-  <text x="{width//2}" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" class="text-accent">
+  <text x="{width//2}" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" class="text-accent">
     {current_streak}
   </text>
-  
+
   <!-- "Day streak" text -->
-  <text x="{width//2}" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" class="text-primary">
-    Day{"s" if current_streak != 1 else ""} streak
+  <text x="{width//2}" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" class="text-primary">
+    Day{'s' if current_streak != 1 else ''} streak
   </text>
-  
+
   <!-- Status text -->
-  <text x="{width//2}" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" class="text-secondary">
+  <text x="{width//2}" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" class="text-secondary">
     {status_text}
   </text>
-  
+
   <!-- Longest streak info -->
-  <text x="{width//2}" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" class="text-muted">
-    Best: {longest_streak} day{"s" if longest_streak != 1 else ""}
+  <text x="{width//2}" y="215" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" class="text-muted">
+    Best: {longest_streak} day{'s' if longest_streak != 1 else ''}
   </text>
 </svg>'''
-    
     return svg
 
 def main():
@@ -858,19 +853,19 @@ def main():
     
     # Generate combined difficulty ring chart
     combined_ring_svg = generate_combined_difficulty_ring_svg(counts)
-    with open(assets_dir / "difficulty_progress.svg", "w") as f:
+    with open(assets_dir / "difficulty_progress.svg", "w", encoding="utf-8") as f:
         f.write(combined_ring_svg)
     print("✅ Generated dashboard/assets/difficulty_progress.svg")
     
     # Generate activity heatmap (based on real git commits)
     activity_svg = generate_activity_heatmap_svg()
-    with open(assets_dir / "activity_heatmap.svg", "w") as f:
+    with open(assets_dir / "activity_heatmap.svg", "w", encoding="utf-8") as f:
         f.write(activity_svg)
     print("✅ Generated dashboard/assets/activity_heatmap.svg")
     
     # Generate streak counter SVG
     streak_svg = generate_streak_counter_svg()
-    with open(assets_dir / "streak_counter.svg", "w") as f:
+    with open(assets_dir / "streak_counter.svg", "w", encoding="utf-8") as f:
         f.write(streak_svg)
     print("✅ Generated dashboard/assets/streak_counter.svg")
     

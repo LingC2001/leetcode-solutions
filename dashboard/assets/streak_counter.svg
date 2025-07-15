@@ -1,11 +1,10 @@
-<svg width="180" height="120" viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg">
+<svg width="380" height="240" viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">
   <style>
     .bg-panel { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 1; }
     .text-primary { fill: #1e293b; }
     .text-secondary { fill: #64748b; }
     .text-accent { fill: #10b981; }
     .text-muted { fill: #94a3b8; }
-    
     @media (prefers-color-scheme: dark) {
       .bg-panel { fill: #0f172a; stroke: #334155; }
       .text-primary { fill: #f1f5f9; }
@@ -14,30 +13,30 @@
       .text-muted { fill: #64748b; }
     }
   </style>
-  
+
   <!-- Background -->
-  <rect width="180" height="120" class="bg-panel" rx="8"/>
-  
+  <rect width="380" height="240" class="bg-panel" rx="8"/>
+
   <!-- Streak emoji -->
-  <text x="90" y="25" text-anchor="middle" font-size="20">🚀</text>
-  
+  <text x="190" y="70" text-anchor="middle" font-size="40">🚀</text>
+
   <!-- Current streak number -->
-  <text x="90" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" class="text-accent">
+  <text x="190" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" class="text-accent">
     4
   </text>
-  
+
   <!-- "Day streak" text -->
-  <text x="90" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" class="text-primary">
+  <text x="190" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" class="text-primary">
     Days streak
   </text>
-  
+
   <!-- Status text -->
-  <text x="90" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" class="text-secondary">
+  <text x="190" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" class="text-secondary">
     On fire!
   </text>
-  
+
   <!-- Longest streak info -->
-  <text x="90" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" class="text-muted">
+  <text x="190" y="215" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" class="text-muted">
     Best: 5 days
   </text>
 </svg>
