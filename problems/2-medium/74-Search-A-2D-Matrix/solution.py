@@ -18,6 +18,11 @@ def searchMatrix(matrix: List[List[int]], target: int) -> bool:
             return True
 
         elif target < matrix[row][col]:
+
+
+
+
+            
             right = mid - 1
         else:
             left = mid + 1
