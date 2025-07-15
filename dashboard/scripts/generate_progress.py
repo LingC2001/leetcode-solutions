@@ -294,7 +294,7 @@ def generate_combined_difficulty_ring_svg(counts):
         
         return f"M {x1:.2f} {y1:.2f} A {outer_radius} {outer_radius} 0 {large_arc} 1 {x2:.2f} {y2:.2f} L {x3:.2f} {y3:.2f} A {inner_radius} {inner_radius} 0 {large_arc} 0 {x4:.2f} {y4:.2f} Z"
     
-    svg = '''<svg width="380" height="240" viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">
+    svg = '''<svg width="300" height="180" viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
   <style>
     .bg-ring { stroke: #f3f4f6; }
     .text-primary { fill: #374151; }
@@ -307,42 +307,57 @@ def generate_combined_difficulty_ring_svg(counts):
     }
   </style>
   <!-- Background ring -->
-  <circle cx="100" cy="100" r="80" fill="none" class="bg-ring" stroke-width="30"/>
+  <circle cx="80" cy="90" r="65" fill="none" class="bg-ring" stroke-width="22"/>
 '''
     
     # Generate paths for each difficulty
     current_angle = 0
-    
+    # Adjust arc radii for new size
     for difficulty in ['easy', 'medium', 'hard']:
         count = counts.get(difficulty, 0)
         if count > 0:
             angle = (count / total) * 360
-            path = generate_arc_path(current_angle, current_angle + angle, 50, 80)
+            # Use center (80,90), inner_radius=40, outer_radius=65
+            def arc_path(start, end):
+                import math
+                start_rad = math.radians(start - 90)
+                end_rad = math.radians(end - 90)
+                x1 = 80 + 65 * math.cos(start_rad)
+                y1 = 90 + 65 * math.sin(start_rad)
+                x2 = 80 + 65 * math.cos(end_rad)
+                y2 = 90 + 65 * math.sin(end_rad)
+                x3 = 80 + 40 * math.cos(end_rad)
+                y3 = 90 + 40 * math.sin(end_rad)
+                x4 = 80 + 40 * math.cos(start_rad)
+                y4 = 90 + 40 * math.sin(start_rad)
+                large_arc = "1" if end - start > 180 else "0"
+                return f"M {x1:.2f} {y1:.2f} A 65 65 0 {large_arc} 1 {x2:.2f} {y2:.2f} L {x3:.2f} {y3:.2f} A 40 40 0 {large_arc} 0 {x4:.2f} {y4:.2f} Z"
+            path = arc_path(current_angle, current_angle + angle)
             color = colors[difficulty]
-            svg += f'  <path d="{path}" fill="{color}"/>\n'
+            svg += f'  <path d="{path}" fill="{color}"/>' + "\n"
             current_angle += angle
     
     # Center text
     svg += f'''
   <!-- Center text -->
-  <text x="100" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" class="text-primary">
+  <text x="80" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" class="text-primary">
     {total}
   </text>
-  <text x="100" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" class="text-secondary">
+  <text x="80" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" class="text-secondary">
     Problems Solved
   </text>
   <!-- Legend (to the right) -->
-  <g transform="translate(220, 70)">
-    <circle cx="0" cy="0" r="7" fill="{colors['easy']}"/>
-    <text x="18" y="5" font-family="Arial, sans-serif" font-size="15" class="text-primary">Easy ({counts.get('easy', 0)})</text>
+  <g transform="translate(170, 50)">
+    <circle cx="0" cy="0" r="6" fill="{colors['easy']}"/>
+    <text x="14" y="4" font-family="Arial, sans-serif" font-size="12" class="text-primary">Easy ({counts.get('easy', 0)})</text>
   </g>
-  <g transform="translate(220, 110)">
-    <circle cx="0" cy="0" r="7" fill="{colors['medium']}"/>
-    <text x="18" y="5" font-family="Arial, sans-serif" font-size="15" class="text-primary">Medium ({counts.get('medium', 0)})</text>
+  <g transform="translate(170, 80)">
+    <circle cx="0" cy="0" r="6" fill="{colors['medium']}"/>
+    <text x="14" y="4" font-family="Arial, sans-serif" font-size="12" class="text-primary">Medium ({counts.get('medium', 0)})</text>
   </g>
-  <g transform="translate(220, 150)">
-    <circle cx="0" cy="0" r="7" fill="{colors['hard']}"/>
-    <text x="18" y="5" font-family="Arial, sans-serif" font-size="15" class="text-primary">Hard ({counts.get('hard', 0)})</text>
+  <g transform="translate(170, 110)">
+    <circle cx="0" cy="0" r="6" fill="{colors['hard']}"/>
+    <text x="14" y="4" font-family="Arial, sans-serif" font-size="12" class="text-primary">Hard ({counts.get('hard', 0)})</text>
   </g>
 </svg>'''
     
@@ -766,8 +781,8 @@ def generate_streak_counter_svg():
         streak_color = "#8b5cf6"
         status_text = "Legendary!"
     
-    width = 380  # Match the width of the pie chart for visual alignment
-    height = 240  # Match the height of the pie chart
+    width = 300  # Match the new width of the pie chart for visual alignment
+    height = 180  # Match the new height of the pie chart
     
     svg = f'''<svg width="{width}" height="{height}" viewBox="0 0 {width} {height}" xmlns="http://www.w3.org/2000/svg">
   <style>
@@ -789,25 +804,25 @@ def generate_streak_counter_svg():
   <rect width="{width}" height="{height}" class="bg-panel" rx="8"/>
 
   <!-- Streak emoji -->
-  <text x="{width//2}" y="70" text-anchor="middle" font-size="40">{emoji}</text>
+  <text x="{width//2}" y="50" text-anchor="middle" font-size="28">{emoji}</text>
 
   <!-- Current streak number -->
-  <text x="{width//2}" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" class="text-accent">
+  <text x="{width//2}" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" class="text-accent">
     {current_streak}
   </text>
 
   <!-- "Day streak" text -->
-  <text x="{width//2}" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" class="text-primary">
+  <text x="{width//2}" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" class="text-primary">
     Day{'s' if current_streak != 1 else ''} streak
   </text>
 
   <!-- Status text -->
-  <text x="{width//2}" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" class="text-secondary">
+  <text x="{width//2}" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" class="text-secondary">
     {status_text}
   </text>
 
   <!-- Longest streak info -->
-  <text x="{width//2}" y="215" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" class="text-muted">
+  <text x="{width//2}" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" class="text-muted">
     Best: {longest_streak} day{'s' if longest_streak != 1 else ''}
   </text>
 </svg>'''

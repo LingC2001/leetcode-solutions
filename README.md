@@ -2,7 +2,7 @@
 
 A collection of LeetCode solutions with documentation and analysis, organized by difficulty and problem number. Each solution includes implementations in multiple programming languages.
 
-## 📊 Dashboard Overview
+## Dashboard Overview
 
 <div align="center">
 
@@ -18,12 +18,11 @@ A collection of LeetCode solutions with documentation and analysis, organized by
 </tr>
 </table>
 
-### 🔥 **Git Activity**
+### 🔥 **Activity**
 <img src="dashboard/assets/activity_heatmap.svg" alt="Git Activity Heatmap" />
 
 </div>
 
-**📊 Total Progress: 20 problems solved** • [📚 View detailed breakdown](problems/)
 
 ---
 
