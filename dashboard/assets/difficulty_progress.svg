@@ -1,4 +1,4 @@
-<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<svg width="200" height="240" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
   <style>
     .bg-ring { stroke: #f3f4f6; }
     .text-primary { fill: #374151; }
@@ -17,26 +17,26 @@
   <path d="M 75.28 23.92 A 80 80 0 0 1 100.00 20.00 L 100.00 50.00 A 50 50 0 0 0 84.55 52.45 Z" fill="#ef4444"/>
 
   <!-- Center text -->
-  <text x="100" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" class="text-primary">
+  <text x="100" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" class="text-primary">
     20
   </text>
-  <text x="100" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" class="text-secondary">
+  <text x="100" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" class="text-secondary">
     Problems Solved
   </text>
   
   <!-- Legend -->
-  <g transform="translate(20, 160)">
-    <circle cx="0" cy="0" r="6" fill="#22c55e"/>
-    <text x="12" y="4" font-family="Arial, sans-serif" font-size="12" class="text-primary">Easy (7)</text>
+  <g transform="translate(30, 200)">
+    <circle cx="0" cy="0" r="5" fill="#22c55e"/>
+    <text x="10" y="3" font-family="Arial, sans-serif" font-size="11" class="text-primary">Easy (7)</text>
   </g>
   
-  <g transform="translate(80, 160)">
-    <circle cx="0" cy="0" r="6" fill="#f59e0b"/>
-    <text x="12" y="4" font-family="Arial, sans-serif" font-size="12" class="text-primary">Medium (12)</text>
+  <g transform="translate(90, 200)">
+    <circle cx="0" cy="0" r="5" fill="#f59e0b"/>
+    <text x="10" y="3" font-family="Arial, sans-serif" font-size="11" class="text-primary">Medium (12)</text>
   </g>
   
-  <g transform="translate(20, 180)">
-    <circle cx="0" cy="0" r="6" fill="#ef4444"/>
-    <text x="12" y="4" font-family="Arial, sans-serif" font-size="12" class="text-primary">Hard (1)</text>
+  <g transform="translate(30, 220)">
+    <circle cx="0" cy="0" r="5" fill="#ef4444"/>
+    <text x="10" y="3" font-family="Arial, sans-serif" font-size="11" class="text-primary">Hard (1)</text>
   </g>
 </svg>

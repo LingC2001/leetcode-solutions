@@ -9,10 +9,10 @@ A collection of LeetCode solutions with documentation and analysis, organized by
 ### 🎯 **Progress Summary**
 <table>
 <tr>
-<td align="center">
+<td align="center" valign="top">
 <img src="dashboard/assets/difficulty_progress.svg" alt="Difficulty Progress Ring" />
 </td>
-<td align="center">
+<td align="center" valign="top">
 <img src="dashboard/assets/streak_counter.svg" alt="Streak Counter" />
 </td>
 </tr>

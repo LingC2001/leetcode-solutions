@@ -244,7 +244,7 @@ def generate_combined_difficulty_ring_svg(counts):
     total = sum(counts.values())
     
     if total == 0:
-        svg = '''<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        svg = '''<svg width="200" height="240" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
   <style>
     .bg-ring { stroke: #e5e7eb; }
     .text-primary { fill: #374151; }
@@ -294,7 +294,7 @@ def generate_combined_difficulty_ring_svg(counts):
         
         return f"M {x1:.2f} {y1:.2f} A {outer_radius} {outer_radius} 0 {large_arc} 1 {x2:.2f} {y2:.2f} L {x3:.2f} {y3:.2f} A {inner_radius} {inner_radius} 0 {large_arc} 0 {x4:.2f} {y4:.2f} Z"
     
-    svg = '''<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    svg = '''<svg width="200" height="240" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
   <style>
     .bg-ring { stroke: #f3f4f6; }
     .text-primary { fill: #374151; }
@@ -325,27 +325,27 @@ def generate_combined_difficulty_ring_svg(counts):
     # Center text
     svg += f'''
   <!-- Center text -->
-  <text x="100" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" class="text-primary">
+  <text x="100" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" class="text-primary">
     {total}
   </text>
-  <text x="100" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" class="text-secondary">
+  <text x="100" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" class="text-secondary">
     Problems Solved
   </text>
   
   <!-- Legend -->
-  <g transform="translate(20, 160)">
-    <circle cx="0" cy="0" r="6" fill="{colors['easy']}"/>
-    <text x="12" y="4" font-family="Arial, sans-serif" font-size="12" class="text-primary">Easy ({counts.get('easy', 0)})</text>
+  <g transform="translate(30, 200)">
+    <circle cx="0" cy="0" r="5" fill="{colors['easy']}"/>
+    <text x="10" y="3" font-family="Arial, sans-serif" font-size="11" class="text-primary">Easy ({counts.get('easy', 0)})</text>
   </g>
   
-  <g transform="translate(80, 160)">
-    <circle cx="0" cy="0" r="6" fill="{colors['medium']}"/>
-    <text x="12" y="4" font-family="Arial, sans-serif" font-size="12" class="text-primary">Medium ({counts.get('medium', 0)})</text>
+  <g transform="translate(90, 200)">
+    <circle cx="0" cy="0" r="5" fill="{colors['medium']}"/>
+    <text x="10" y="3" font-family="Arial, sans-serif" font-size="11" class="text-primary">Medium ({counts.get('medium', 0)})</text>
   </g>
   
-  <g transform="translate(20, 180)">
-    <circle cx="0" cy="0" r="6" fill="{colors['hard']}"/>
-    <text x="12" y="4" font-family="Arial, sans-serif" font-size="12" class="text-primary">Hard ({counts.get('hard', 0)})</text>
+  <g transform="translate(30, 220)">
+    <circle cx="0" cy="0" r="5" fill="{colors['hard']}"/>
+    <text x="10" y="3" font-family="Arial, sans-serif" font-size="11" class="text-primary">Hard ({counts.get('hard', 0)})</text>
   </g>
 </svg>'''
     
