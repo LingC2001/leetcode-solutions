@@ -4,10 +4,7 @@ from pathlib import Path
 
 import pytest
 
-solution_path = (
-    Path(__file__).parent.parent.parent
-    / "problems/2-medium/74-Search-A-2D-Matrix/solution.py"
-)
+solution_path = Path(__file__).parent.parent.parent / "problems/2-medium/74-Search-A-2D-Matrix/solution.py"
 spec = importlib.util.spec_from_file_location("search_a_2d_matrix_solution", solution_path)
 mod = importlib.util.module_from_spec(spec)
 sys.modules["search_a_2d_matrix_solution"] = mod
