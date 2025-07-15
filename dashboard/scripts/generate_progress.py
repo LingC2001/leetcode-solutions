@@ -706,6 +706,118 @@ def generate_activity_heatmap_svg():
     svg += '</svg>'
     return svg
 
+def calculate_streak():
+    """Calculate current streak of consecutive days with commits"""
+    from datetime import datetime, timedelta
+    
+    git_activity = get_git_activity()
+    
+    # Start from today and work backwards
+    current_date = datetime.now().date()
+    current_streak = 0
+    longest_streak = 0
+    temp_streak = 0
+    
+    # Check last 365 days for current and longest streak
+    for i in range(365):
+        date_str = current_date.strftime('%Y-%m-%d')
+        commits = git_activity.get(date_str, 0)
+        
+        if commits > 0:
+            temp_streak += 1
+            if i == 0 or temp_streak > 0:  # If today or continuing streak
+                current_streak = temp_streak
+        else:
+            if temp_streak > longest_streak:
+                longest_streak = temp_streak
+            temp_streak = 0
+            if i == 0:  # If no commits today, current streak is 0
+                current_streak = 0
+        
+        current_date -= timedelta(days=1)
+    
+    # Check if temp_streak is the longest (in case streak continues to the end)
+    if temp_streak > longest_streak:
+        longest_streak = temp_streak
+        
+    return current_streak, longest_streak
+
+def generate_streak_counter_svg():
+    """Generate streak counter SVG with dark mode support"""
+    
+    current_streak, longest_streak = calculate_streak()
+    
+    # Determine emoji and color based on streak
+    if current_streak == 0:
+        emoji = "😴"
+        streak_color = "#6b7280"
+        status_text = "No streak"
+    elif current_streak < 3:
+        emoji = "🔥"
+        streak_color = "#f59e0b"
+        status_text = "Getting started!"
+    elif current_streak < 7:
+        emoji = "🚀"
+        streak_color = "#10b981"
+        status_text = "On fire!"
+    elif current_streak < 14:
+        emoji = "⚡"
+        streak_color = "#3b82f6"
+        status_text = "Amazing!"
+    else:
+        emoji = "🏆"
+        streak_color = "#8b5cf6"
+        status_text = "Legendary!"
+    
+    width = 180
+    height = 120
+    
+    svg = f'''<svg width="{width}" height="{height}" viewBox="0 0 {width} {height}" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg-panel {{ fill: #f8fafc; stroke: #e2e8f0; stroke-width: 1; }}
+    .text-primary {{ fill: #1e293b; }}
+    .text-secondary {{ fill: #64748b; }}
+    .text-accent {{ fill: {streak_color}; }}
+    .text-muted {{ fill: #94a3b8; }}
+    
+    @media (prefers-color-scheme: dark) {{
+      .bg-panel {{ fill: #0f172a; stroke: #334155; }}
+      .text-primary {{ fill: #f1f5f9; }}
+      .text-secondary {{ fill: #cbd5e1; }}
+      .text-accent {{ fill: {streak_color}; }}
+      .text-muted {{ fill: #64748b; }}
+    }}
+  </style>
+  
+  <!-- Background -->
+  <rect width="{width}" height="{height}" class="bg-panel" rx="8"/>
+  
+  <!-- Streak emoji -->
+  <text x="{width//2}" y="25" text-anchor="middle" font-size="20">{emoji}</text>
+  
+  <!-- Current streak number -->
+  <text x="{width//2}" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" class="text-accent">
+    {current_streak}
+  </text>
+  
+  <!-- "Day streak" text -->
+  <text x="{width//2}" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" class="text-primary">
+    Day{"s" if current_streak != 1 else ""} streak
+  </text>
+  
+  <!-- Status text -->
+  <text x="{width//2}" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" class="text-secondary">
+    {status_text}
+  </text>
+  
+  <!-- Longest streak info -->
+  <text x="{width//2}" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" class="text-muted">
+    Best: {longest_streak} day{"s" if longest_streak != 1 else ""}
+  </text>
+</svg>'''
+    
+    return svg
+
 def main():
     """Generate all dashboard charts and SVGs"""
     
@@ -755,6 +867,12 @@ def main():
     with open(assets_dir / "activity_heatmap.svg", "w") as f:
         f.write(activity_svg)
     print("✅ Generated dashboard/assets/activity_heatmap.svg")
+    
+    # Generate streak counter SVG
+    streak_svg = generate_streak_counter_svg()
+    with open(assets_dir / "streak_counter.svg", "w") as f:
+        f.write(streak_svg)
+    print("✅ Generated dashboard/assets/streak_counter.svg")
     
     # Generate comprehensive stats file
     stats = {
