@@ -109,33 +109,39 @@ jobs:
       - name: Run tests
         run: uv run pytest
 
-  write-me-readme:
-    runs-on: ubuntu-latest
-    if: >-
-      github.event_name == 'push' &&
-      github.ref == 'refs/heads/main' &&
-      (
-        contains(join(github.event.commits.*.added, '\n'), 'problems/') ||
-        contains(join(github.event.commits.*.modified, '\n'), 'problems/') ||
-        contains(join(github.event.commits.*.removed, '\n'), 'problems/')
-      )
-    steps:
-      - name: Find first problem directory needing README
-        id: find_dir
-        run: |
-          set -e
-          dirs=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^problems/' | awk -F'/' '{print $1"/"$2"/"$3}' | sort | uniq)
-          for d in $dirs; do
-            if [ ! -f "$d/README.md" ]; then
-              echo "dir=$d" >> $GITHUB_OUTPUT
-              exit 0
-            fi
-          done
-      - name: Call Write-Me Readme reusable workflow
-        if: steps.find_dir.outputs.dir != ''
-        uses: zzl0626/repo-goalie/.github/workflows/write-me.yml@main
-        with:
-          problem_id: ${{ steps.find_dir.outputs.dir }}
-        secrets:
-          PAT_GITHUB: ${{ secrets.PAT_LINGC2001 }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+write-me-readme:
+  if: >-
+    github.event_name == 'push' &&
+    github.ref == 'refs/heads/main' &&
+    (
+      contains(join(github.event.commits.*.added, '\n'), 'problems/') ||
+      contains(join(github.event.commits.*.modified, '\n'), 'problems/') ||
+      contains(join(github.event.commits.*.removed, '\n'), 'problems/')
+    )
+  uses: zzl0626/repo-goalie/.github/workflows/write-me.yml@main
+  with:
+    problem_id: ${{
+      fromJson(
+        format(
+          '[{0}]',
+          join(
+            map(
+              filter(
+                map(
+                  filter(
+                    map(github.event.commits, 'modified'), join, '\n'
+                  ), 'startsWith(value, \'problems/\')'),
+                  'split(value, \'/\')'
+                ),
+                'length(value) >= 3'
+              ),
+              'join([value[0], value[1], value[2]], \'/\')'
+            ),
+            ','
+          )
+        )
+      )[0]
+    }}
+  secrets:
+    PAT_GITHUB: ${{ secrets.PAT_LINGC2001 }}
+    OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
