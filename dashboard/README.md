@@ -10,6 +10,7 @@ dashboard/
 │   └── generate_progress.py    # Dashboard generation script
 ├── assets/
 │   ├── difficulty_progress.svg # Combined difficulty progress ring chart
+│   ├── streak_counter.svg      # Current and longest streak counter
 │   ├── activity_heatmap.svg    # Git activity heatmap (based on real commits)
 │   └── dashboard_stats.json    # Comprehensive analytics data
 └── README.md                   # This file
@@ -34,7 +35,13 @@ The dashboard automatically updates when you add new problems via the GitHub Act
 - Each segment represents a difficulty: Green (Easy), Orange (Medium), Red (Hard)
 - Legend shows breakdown by count for each difficulty
 
-### 2. **Git Activity Heatmap** 🔥
+### 2. **Streak Counter** 🔥
+- Shows current consecutive days with commits
+- Dynamic emoji and color based on streak length
+- Displays motivational status messages
+- Tracks personal best streak record
+
+### 3. **Git Activity Heatmap** 🔥
 - GitHub-style contribution graph based on real git commits
 - 52 weeks of actual repository activity
 - Color intensity represents commit frequency

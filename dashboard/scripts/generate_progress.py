@@ -193,37 +193,45 @@ def analyze_status():
     return status_counts
 
 def generate_progress_svg(solved, total, color, label):
-    """Generate SVG for circular progress bar"""
+    """Generate SVG for circular progress bar with dark mode support"""
     
-    if total == 0:
-        percentage = 0
-    else:
-        percentage = (solved / total) * 100
+    percentage = (solved / total) * 100 if total > 0 else 0
     
-    # Calculate stroke-dasharray for progress circle
-    circumference = 2 * 3.14159 * 45  # radius = 45
-    stroke_dasharray = circumference
-    stroke_dashoffset = circumference - (percentage / 100) * circumference
+    # Calculate circumference and stroke dash offset
+    radius = 45
+    circumference = 2 * 3.14159 * radius
+    offset = circumference - (percentage / 100) * circumference
     
     svg = f'''<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg-circle {{ stroke: #e5e7eb; }}
+    .text-primary {{ fill: #374151; }}
+    .text-secondary {{ fill: #6b7280; }}
+    .text-tertiary {{ fill: #9ca3af; }}
+    
+    @media (prefers-color-scheme: dark) {{
+      .bg-circle {{ stroke: #374151; }}
+      .text-primary {{ fill: #f9fafb; }}
+      .text-secondary {{ fill: #9ca3af; }}
+      .text-tertiary {{ fill: #6b7280; }}
+    }}
+  </style>
   <!-- Background circle -->
-  <circle cx="60" cy="60" r="45" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+  <circle cx="60" cy="60" r="45" fill="none" class="bg-circle" stroke-width="8"/>
   
   <!-- Progress circle -->
   <circle cx="60" cy="60" r="45" fill="none" stroke="{color}" stroke-width="8"
-          stroke-dasharray="{stroke_dasharray}" 
-          stroke-dashoffset="{stroke_dashoffset}"
-          stroke-linecap="round"
-          transform="rotate(-90 60 60)"/>
+          stroke-dasharray="{circumference}" stroke-dashoffset="{offset}" 
+          stroke-linecap="round" transform="rotate(-90 60 60)"/>
   
-  <!-- Center text -->
-  <text x="60" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#374151">
-    {solved}/{total}
+  <!-- Text -->
+  <text x="60" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" class="text-primary">
+    {solved}
   </text>
-  <text x="60" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">
+  <text x="60" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" class="text-secondary">
     {label}
   </text>
-  <text x="60" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#9ca3af">
+  <text x="60" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" class="text-tertiary">
     {percentage:.1f}%
   </text>
 </svg>'''
@@ -231,198 +239,243 @@ def generate_progress_svg(solved, total, color, label):
     return svg
 
 def generate_combined_difficulty_ring_svg(counts):
-    """Generate combined difficulty ring chart (donut chart)"""
+    """Generate combined difficulty ring chart SVG with dark mode support"""
     
-    total_solved = sum(counts.values())
+    total = sum(counts.values())
     
-    if total_solved == 0:
-        # Empty state
-        svg = '''<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="100" cy="100" r="80" fill="none" stroke="#e5e7eb" stroke-width="16"/>
-  <text x="100" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#374151">0</text>
-  <text x="100" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#6b7280">Problems</text>
+    if total == 0:
+        svg = '''<svg width="200" height="240" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg-ring { stroke: #e5e7eb; }
+    .text-primary { fill: #374151; }
+    .text-secondary { fill: #6b7280; }
+    
+    @media (prefers-color-scheme: dark) {
+      .bg-ring { stroke: #374151; }
+      .text-primary { fill: #f9fafb; }
+      .text-secondary { fill: #9ca3af; }
+    }
+  </style>
+  <circle cx="100" cy="100" r="80" fill="none" class="bg-ring" stroke-width="16"/>
+  <text x="100" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" class="text-primary">0</text>
+  <text x="100" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" class="text-secondary">Problems</text>
 </svg>'''
         return svg
     
-    # Colors for each difficulty
+    # Calculate angles for each difficulty
+    easy_angle = (counts.get('easy', 0) / total) * 360
+    medium_angle = (counts.get('medium', 0) / total) * 360
+    hard_angle = (counts.get('hard', 0) / total) * 360
+    
+    # Color mapping
     colors = {
-        "easy": "#22c55e",     # Green
-        "medium": "#f59e0b",   # Orange  
-        "hard": "#ef4444"      # Red
+        'easy': '#22c55e',
+        'medium': '#f59e0b', 
+        'hard': '#ef4444'
     }
     
-    # Calculate angles for each segment
-    center_x, center_y = 100, 100
-    outer_radius = 80
-    inner_radius = 50
+    # Helper function to generate SVG path for arc
+    def generate_arc_path(start_angle, end_angle, inner_radius, outer_radius):
+        import math
+        start_rad = math.radians(start_angle - 90)  # -90 to start from top
+        end_rad = math.radians(end_angle - 90)
+        
+        x1 = 100 + outer_radius * math.cos(start_rad)
+        y1 = 100 + outer_radius * math.sin(start_rad)
+        x2 = 100 + outer_radius * math.cos(end_rad)
+        y2 = 100 + outer_radius * math.sin(end_rad)
+        
+        x3 = 100 + inner_radius * math.cos(end_rad)
+        y3 = 100 + inner_radius * math.sin(end_rad)
+        x4 = 100 + inner_radius * math.cos(start_rad)
+        y4 = 100 + inner_radius * math.sin(start_rad)
+        
+        large_arc = "1" if end_angle - start_angle > 180 else "0"
+        
+        return f"M {x1:.2f} {y1:.2f} A {outer_radius} {outer_radius} 0 {large_arc} 1 {x2:.2f} {y2:.2f} L {x3:.2f} {y3:.2f} A {inner_radius} {inner_radius} 0 {large_arc} 0 {x4:.2f} {y4:.2f} Z"
     
-    # Start angle (top of circle)
-    current_angle = -90
+    svg = '''<svg width="200" height="240" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg-ring { stroke: #f3f4f6; }
+    .text-primary { fill: #374151; }
+    .text-secondary { fill: #6b7280; }
     
-    svg = '''<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    @media (prefers-color-scheme: dark) {
+      .bg-ring { stroke: #374151; }
+      .text-primary { fill: #f9fafb; }
+      .text-secondary { fill: #9ca3af; }
+    }
+  </style>
   <!-- Background ring -->
-  <circle cx="100" cy="100" r="80" fill="none" stroke="#f3f4f6" stroke-width="30"/>
+  <circle cx="100" cy="100" r="80" fill="none" class="bg-ring" stroke-width="30"/>
 '''
     
-    # Generate segments for each difficulty
-    import math
+    # Generate paths for each difficulty
+    current_angle = 0
     
-    for difficulty in ["easy", "medium", "hard"]:
+    for difficulty in ['easy', 'medium', 'hard']:
         count = counts.get(difficulty, 0)
-        if count == 0:
-            continue
-            
-        # Calculate angle for this segment
-        segment_angle = (count / total_solved) * 360
-        end_angle = current_angle + segment_angle
-        
-        # Calculate arc coordinates
-        start_rad = math.radians(current_angle)
-        end_rad = math.radians(end_angle)
-        
-        # Outer arc points
-        x1_outer = center_x + outer_radius * math.cos(start_rad)
-        y1_outer = center_y + outer_radius * math.sin(start_rad)
-        x2_outer = center_x + outer_radius * math.cos(end_rad)
-        y2_outer = center_y + outer_radius * math.sin(end_rad)
-        
-        # Inner arc points
-        x1_inner = center_x + inner_radius * math.cos(end_rad)
-        y1_inner = center_y + inner_radius * math.sin(end_rad)
-        x2_inner = center_x + inner_radius * math.cos(start_rad)
-        y2_inner = center_y + inner_radius * math.sin(start_rad)
-        
-        # Large arc flag
-        large_arc = 1 if segment_angle > 180 else 0
-        
-        # Create path for the segment
-        path = f"M {x1_outer:.2f} {y1_outer:.2f} "
-        path += f"A {outer_radius} {outer_radius} 0 {large_arc} 1 {x2_outer:.2f} {y2_outer:.2f} "
-        path += f"L {x1_inner:.2f} {y1_inner:.2f} "
-        path += f"A {inner_radius} {inner_radius} 0 {large_arc} 0 {x2_inner:.2f} {y2_inner:.2f} Z"
-        
-        color = colors[difficulty]
-        svg += f'  <path d="{path}" fill="{color}"/>\n'
-        
-        current_angle = end_angle
+        if count > 0:
+            angle = (count / total) * 360
+            path = generate_arc_path(current_angle, current_angle + angle, 50, 80)
+            color = colors[difficulty]
+            svg += f'  <path d="{path}" fill="{color}"/>\n'
+            current_angle += angle
     
     # Center text
     svg += f'''
   <!-- Center text -->
-  <text x="100" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#374151">
-    {total_solved}
+  <text x="100" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" class="text-primary">
+    {total}
   </text>
-  <text x="100" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#6b7280">
+  <text x="100" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" class="text-secondary">
     Problems Solved
   </text>
   
   <!-- Legend -->
-  <g transform="translate(20, 160)">
-    <circle cx="0" cy="0" r="6" fill="{colors['easy']}"/>
-    <text x="12" y="4" font-family="Arial, sans-serif" font-size="12" fill="#374151">Easy ({counts.get('easy', 0)})</text>
+  <g transform="translate(30, 200)">
+    <circle cx="0" cy="0" r="5" fill="{colors['easy']}"/>
+    <text x="10" y="3" font-family="Arial, sans-serif" font-size="11" class="text-primary">Easy ({counts.get('easy', 0)})</text>
   </g>
   
-  <g transform="translate(80, 160)">
-    <circle cx="0" cy="0" r="6" fill="{colors['medium']}"/>
-    <text x="12" y="4" font-family="Arial, sans-serif" font-size="12" fill="#374151">Medium ({counts.get('medium', 0)})</text>
+  <g transform="translate(90, 200)">
+    <circle cx="0" cy="0" r="5" fill="{colors['medium']}"/>
+    <text x="10" y="3" font-family="Arial, sans-serif" font-size="11" class="text-primary">Medium ({counts.get('medium', 0)})</text>
   </g>
   
-  <g transform="translate(20, 180)">
-    <circle cx="0" cy="0" r="6" fill="{colors['hard']}"/>
-    <text x="12" y="4" font-family="Arial, sans-serif" font-size="12" fill="#374151">Hard ({counts.get('hard', 0)})</text>
+  <g transform="translate(30, 220)">
+    <circle cx="0" cy="0" r="5" fill="{colors['hard']}"/>
+    <text x="10" y="3" font-family="Arial, sans-serif" font-size="11" class="text-primary">Hard ({counts.get('hard', 0)})</text>
   </g>
 </svg>'''
     
     return svg
 
 def generate_topic_mastery_svg(topic_counts, topic_totals):
-    """Generate horizontal bar chart for topic mastery"""
+    """Generate topic mastery chart SVG with dark mode support"""
     
-    # Get top 8 topics by count
-    sorted_topics = sorted(topic_counts.items(), key=lambda x: x[1], reverse=True)[:8]
+    if not topic_counts:
+        return ""
     
-    if not sorted_topics:
-        # Default topics if none found
-        sorted_topics = [("Array", topic_counts.get("Array", 0)), 
-                        ("String", topic_counts.get("String", 0)),
-                        ("Hash Table", topic_counts.get("Hash Table", 0))]
+    # Sort topics by mastery percentage (descending)
+    sorted_topics = sorted(topic_counts.items(), key=lambda x: (x[1] / topic_totals.get(x[0], 1)), reverse=True)
     
-    bar_height = 25
-    bar_spacing = 35
-    chart_height = len(sorted_topics) * bar_spacing + 40
+    # Take top 8 topics
+    top_topics = sorted_topics[:8]
+    
     chart_width = 400
+    chart_height = len(top_topics) * 35 + 60
     
     svg = f'''<svg width="{chart_width}" height="{chart_height}" viewBox="0 0 {chart_width} {chart_height}" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg-panel {{ fill: #f9fafb; }}
+    .text-primary {{ fill: #374151; }}
+    .text-secondary {{ fill: #6b7280; }}
+    .bg-bar {{ fill: #e5e7eb; }}
+    .bar-text {{ fill: white; }}
+    
+    @media (prefers-color-scheme: dark) {{
+      .bg-panel {{ fill: #1f2937; }}
+      .text-primary {{ fill: #f9fafb; }}
+      .text-secondary {{ fill: #9ca3af; }}
+      .bg-bar {{ fill: #374151; }}
+      .bar-text {{ fill: #f9fafb; }}
+    }}
+  </style>
   <!-- Background -->
-  <rect width="{chart_width}" height="{chart_height}" fill="#f9fafb" rx="8"/>
+  <rect width="{chart_width}" height="{chart_height}" class="bg-panel" rx="8"/>
   
   <!-- Title -->
-  <text x="20" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#374151">
+  <text x="20" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" class="text-primary">
     Topic Mastery
   </text>
 '''
     
-    y_offset = 50
-    for i, (topic, count) in enumerate(sorted_topics):
-        total = topic_totals.get(topic, 100)
-        percentage = (count / total * 100) if total > 0 else 0
-        bar_width = min(percentage * 2.5, 250)  # Max bar width 250px
+    # Color mapping for different topics
+    colors = ["#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#ec4899", "#06b6d4", "#84cc16"]
+    
+    for i, (topic, count) in enumerate(top_topics):
+        total = topic_totals.get(topic, count)
+        percentage = (count / total) * 100
         
-        color = "#3b82f6" if percentage > 10 else "#94a3b8"
+        y_offset = 50 + i * 35
+        bar_width = int((percentage / 100) * 250)
+        color = colors[i % len(colors)]
         
         svg += f'''
-  <!-- {topic} -->
-  <text x="20" y="{y_offset + 16}" font-family="Arial, sans-serif" font-size="11" fill="#6b7280">
+  <!-- Topic: {topic} -->
+  <text x="20" y="{y_offset + 16}" font-family="Arial, sans-serif" font-size="11" class="text-secondary">
     {topic}
   </text>
-  <rect x="120" y="{y_offset}" width="250" height="{bar_height}" fill="#e5e7eb" rx="4"/>
-  <rect x="120" y="{y_offset}" width="{bar_width}" height="{bar_height}" fill="{color}" rx="4"/>
-  <text x="130" y="{y_offset + 16}" font-family="Arial, sans-serif" font-size="10" fill="white" font-weight="bold">
+  <rect x="120" y="{y_offset}" width="250" height="{20}" class="bg-bar" rx="4"/>
+  <rect x="120" y="{y_offset}" width="{bar_width}" height="{20}" fill="{color}" rx="4"/>
+  <text x="130" y="{y_offset + 16}" font-family="Arial, sans-serif" font-size="10" class="bar-text" font-weight="bold">
     {count}/{total} ({percentage:.1f}%)
   </text>
 '''
-        y_offset += bar_spacing
     
     svg += '</svg>'
     return svg
 
 def generate_language_coverage_svg(language_counts, total_problems):
-    """Generate language coverage chart"""
+    """Generate language coverage chart SVG with dark mode support"""
     
-    colors = {"Python": "#3776ab", "C++": "#00599c", "Java": "#ed8b00"}
+    if not language_counts:
+        return ""
+    
     chart_width = 300
-    chart_height = 180
+    chart_height = len(language_counts) * 30 + 60
     
     svg = f'''<svg width="{chart_width}" height="{chart_height}" viewBox="0 0 {chart_width} {chart_height}" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg-panel {{ fill: #f9fafb; }}
+    .text-primary {{ fill: #374151; }}
+    .text-secondary {{ fill: #6b7280; }}
+    .bg-bar {{ fill: #e5e7eb; }}
+    
+    @media (prefers-color-scheme: dark) {{
+      .bg-panel {{ fill: #1f2937; }}
+      .text-primary {{ fill: #f9fafb; }}
+      .text-secondary {{ fill: #9ca3af; }}
+      .bg-bar {{ fill: #374151; }}
+    }}
+  </style>
   <!-- Background -->
-  <rect width="{chart_width}" height="{chart_height}" fill="#f9fafb" rx="8"/>
+  <rect width="{chart_width}" height="{chart_height}" class="bg-panel" rx="8"/>
   
   <!-- Title -->
-  <text x="20" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#374151">
+  <text x="20" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" class="text-primary">
     Language Coverage
   </text>
 '''
     
+    # Color mapping for different languages
+    language_colors = {
+        "python": "#3776ab",
+        "javascript": "#f7df1e",
+        "java": "#ed8b00",
+        "cpp": "#00599c",
+        "c": "#a8b9cc",
+        "go": "#00add8",
+        "rust": "#dea584",
+        "typescript": "#3178c6"
+    }
+    
     y_offset = 50
     for lang, count in language_counts.items():
-        if total_problems > 0:
-            percentage = (count / total_problems) * 100
-            bar_width = percentage * 1.8  # Scale factor
-        else:
-            percentage = 0
-            bar_width = 0
-        
-        color = colors.get(lang, "#94a3b8")
+        percentage = (count / total_problems) * 100
+        bar_width = int((percentage / 100) * 180)
+        color = language_colors.get(lang.lower(), "#6b7280")
         
         svg += f'''
-  <!-- {lang} -->
-  <text x="20" y="{y_offset + 16}" font-family="Arial, sans-serif" font-size="12" fill="#374151">
+  <!-- Language: {lang} -->
+  <text x="20" y="{y_offset + 16}" font-family="Arial, sans-serif" font-size="12" class="text-primary">
     {lang}
   </text>
-  <rect x="80" y="{y_offset}" width="180" height="20" fill="#e5e7eb" rx="10"/>
+  <rect x="80" y="{y_offset}" width="180" height="20" class="bg-bar" rx="10"/>
   <rect x="80" y="{y_offset}" width="{bar_width}" height="20" fill="{color}" rx="10"/>
-  <text x="270" y="{y_offset + 14}" font-family="Arial, sans-serif" font-size="10" fill="#6b7280">
-    {count}/{total_problems} ({percentage:.0f}%)
+  <text x="270" y="{y_offset + 14}" font-family="Arial, sans-serif" font-size="10" class="text-secondary">
+    {count} ({percentage:.1f}%)
   </text>
 '''
         y_offset += 30
@@ -431,77 +484,94 @@ def generate_language_coverage_svg(language_counts, total_problems):
     return svg
 
 def generate_status_donut_svg(status_counts):
-    """Generate donut chart for completion status"""
+    """Generate status donut chart SVG with dark mode support"""
     
-    total = sum(status_counts.values())
+    complete = status_counts.get("complete", 0)
+    solutions_only = status_counts.get("solutions_only", 0)
+    total = complete + solutions_only
+    
     if total == 0:
-        total = 1  # Avoid division by zero
+        return ""
     
-    complete = status_counts.get("Complete", 0)
-    solutions_only = status_counts.get("Solutions Only", 0)
-    
-    complete_percentage = (complete / total) * 100
-    solutions_percentage = (solutions_only / total) * 100
-    
-    # Calculate angles for donut segments
-    complete_angle = (complete / total) * 360
-    solutions_angle = (solutions_only / total) * 360
-    
-    chart_size = 160
+    chart_size = 200
     center = chart_size // 2
     outer_radius = 60
     inner_radius = 35
     
-    # Calculate arc paths
-    def create_arc(start_angle, end_angle, outer_r, inner_r):
-        start_outer_x = center + outer_r * __import__('math').cos(__import__('math').radians(start_angle - 90))
-        start_outer_y = center + outer_r * __import__('math').sin(__import__('math').radians(start_angle - 90))
-        end_outer_x = center + outer_r * __import__('math').cos(__import__('math').radians(end_angle - 90))
-        end_outer_y = center + outer_r * __import__('math').sin(__import__('math').radians(end_angle - 90))
-        
-        start_inner_x = center + inner_r * __import__('math').cos(__import__('math').radians(end_angle - 90))
-        start_inner_y = center + inner_r * __import__('math').sin(__import__('math').radians(end_angle - 90))
-        end_inner_x = center + inner_r * __import__('math').cos(__import__('math').radians(start_angle - 90))
-        end_inner_y = center + inner_r * __import__('math').sin(__import__('math').radians(start_angle - 90))
-        
-        large_arc = 1 if (end_angle - start_angle) > 180 else 0
-        
-        return f"M {start_outer_x} {start_outer_y} A {outer_r} {outer_r} 0 {large_arc} 1 {end_outer_x} {end_outer_y} L {start_inner_x} {start_inner_y} A {inner_r} {inner_r} 0 {large_arc} 0 {end_inner_x} {end_inner_y} Z"
-    
     svg = f'''<svg width="{chart_size}" height="{chart_size}" viewBox="0 0 {chart_size} {chart_size}" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg-panel {{ fill: #f9fafb; }}
+    .text-primary {{ fill: #374151; }}
+    .text-secondary {{ fill: #6b7280; }}
+    
+    @media (prefers-color-scheme: dark) {{
+      .bg-panel {{ fill: #1f2937; }}
+      .text-primary {{ fill: #f9fafb; }}
+      .text-secondary {{ fill: #9ca3af; }}
+    }}
+  </style>
   <!-- Background circle -->
-  <circle cx="{center}" cy="{center}" r="{outer_radius + 5}" fill="#f9fafb"/>
-  
+  <circle cx="{center}" cy="{center}" r="{outer_radius + 5}" class="bg-panel"/>
 '''
     
-    current_angle = 0
+    # Generate donut segments
+    import math
     
-    # Complete segment
     if complete > 0:
-        complete_path = create_arc(current_angle, current_angle + complete_angle, outer_radius, inner_radius)
+        complete_angle = (complete / total) * 360
+        complete_rad = math.radians(complete_angle)
+        
+        # Calculate path for complete segment
+        x1 = center + outer_radius * math.cos(-math.pi/2)
+        y1 = center + outer_radius * math.sin(-math.pi/2)
+        x2 = center + outer_radius * math.cos(complete_rad - math.pi/2)
+        y2 = center + outer_radius * math.sin(complete_rad - math.pi/2)
+        
+        x3 = center + inner_radius * math.cos(complete_rad - math.pi/2)
+        y3 = center + inner_radius * math.sin(complete_rad - math.pi/2)
+        x4 = center + inner_radius * math.cos(-math.pi/2)
+        y4 = center + inner_radius * math.sin(-math.pi/2)
+        
+        large_arc = 1 if complete_angle > 180 else 0
+        complete_path = f"M {x1} {y1} A {outer_radius} {outer_radius} 0 {large_arc} 1 {x2} {y2} L {x3} {y3} A {inner_radius} {inner_radius} 0 {large_arc} 0 {x4} {y4} Z"
+        
         svg += f'  <path d="{complete_path}" fill="#22c55e"/>\n'
-        current_angle += complete_angle
     
-    # Solutions only segment  
     if solutions_only > 0:
-        solutions_path = create_arc(current_angle, current_angle + solutions_angle, outer_radius, inner_radius)
+        solutions_angle = (solutions_only / total) * 360
+        solutions_rad = math.radians(solutions_angle)
+        start_angle = complete_angle if complete > 0 else 0
+        
+        # Calculate path for solutions_only segment
+        x1 = center + outer_radius * math.cos(math.radians(start_angle) - math.pi/2)
+        y1 = center + outer_radius * math.sin(math.radians(start_angle) - math.pi/2)
+        x2 = center + outer_radius * math.cos(math.radians(start_angle + solutions_angle) - math.pi/2)
+        y2 = center + outer_radius * math.sin(math.radians(start_angle + solutions_angle) - math.pi/2)
+        
+        x3 = center + inner_radius * math.cos(math.radians(start_angle + solutions_angle) - math.pi/2)
+        y3 = center + inner_radius * math.sin(math.radians(start_angle + solutions_angle) - math.pi/2)
+        x4 = center + inner_radius * math.cos(math.radians(start_angle) - math.pi/2)
+        y4 = center + inner_radius * math.sin(math.radians(start_angle) - math.pi/2)
+        
+        large_arc = 1 if solutions_angle > 180 else 0
+        solutions_path = f"M {x1} {y1} A {outer_radius} {outer_radius} 0 {large_arc} 1 {x2} {y2} L {x3} {y3} A {inner_radius} {inner_radius} 0 {large_arc} 0 {x4} {y4} Z"
+        
         svg += f'  <path d="{solutions_path}" fill="#f59e0b"/>\n'
     
-    # Center text
     svg += f'''
   <!-- Center text -->
-  <text x="{center}" y="{center - 5}" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#374151">
+  <text x="{center}" y="{center - 5}" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" class="text-primary">
     {total}
   </text>
-  <text x="{center}" y="{center + 12}" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6b7280">
+  <text x="{center}" y="{center + 12}" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" class="text-secondary">
     Problems
   </text>
   
   <!-- Legend -->
   <circle cx="20" cy="140" r="4" fill="#22c55e"/>
-  <text x="30" y="144" font-family="Arial, sans-serif" font-size="10" fill="#374151">Complete ({complete})</text>
+  <text x="30" y="144" font-family="Arial, sans-serif" font-size="10" class="text-primary">Complete ({complete})</text>
   <circle cx="20" cy="155" r="4" fill="#f59e0b"/>
-  <text x="30" y="159" font-family="Arial, sans-serif" font-size="10" fill="#374151">Solutions Only ({solutions_only})</text>
+  <text x="30" y="159" font-family="Arial, sans-serif" font-size="10" class="text-primary">Solutions Only ({solutions_only})</text>
 </svg>'''
     
     return svg
@@ -531,7 +601,7 @@ def get_git_activity():
         return defaultdict(int)
 
 def generate_activity_heatmap_svg():
-    """Generate activity heatmap based on actual git commits"""
+    """Generate activity heatmap based on actual git commits with dark mode support"""
     
     weeks = 52
     days_per_week = 7
@@ -545,18 +615,39 @@ def generate_activity_heatmap_svg():
     git_activity = get_git_activity()
     
     svg = f'''<svg width="{chart_width}" height="{chart_height}" viewBox="0 0 {chart_width} {chart_height}" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg-panel {{ fill: #f9fafb; }}
+    .text-primary {{ fill: #374151; }}
+    .text-secondary {{ fill: #6b7280; }}
+    .activity-0 {{ fill: #ebedf0; }}
+    .activity-1 {{ fill: #c6e48b; }}
+    .activity-2 {{ fill: #7bc96f; }}
+    .activity-3 {{ fill: #239a3b; }}
+    .activity-4 {{ fill: #196127; }}
+    
+    @media (prefers-color-scheme: dark) {{
+      .bg-panel {{ fill: #1f2937; }}
+      .text-primary {{ fill: #f9fafb; }}
+      .text-secondary {{ fill: #9ca3af; }}
+      .activity-0 {{ fill: #374151; }}
+      .activity-1 {{ fill: #365314; }}
+      .activity-2 {{ fill: #4d7c0f; }}
+      .activity-3 {{ fill: #65a30d; }}
+      .activity-4 {{ fill: #84cc16; }}
+    }}
+  </style>
   <!-- Background -->
-  <rect width="{chart_width}" height="{chart_height}" fill="#f9fafb" rx="8"/>
+  <rect width="{chart_width}" height="{chart_height}" class="bg-panel" rx="8"/>
   
   <!-- Title -->
-  <text x="20" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#374151">
+  <text x="20" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" class="text-primary">
     Git Activity (Last 52 Weeks)
   </text>
   
   <!-- Day labels -->
-  <text x="15" y="55" font-family="Arial, sans-serif" font-size="9" fill="#6b7280">M</text>
-  <text x="15" y="81" font-family="Arial, sans-serif" font-size="9" fill="#6b7280">W</text>
-  <text x="15" y="107" font-family="Arial, sans-serif" font-size="9" fill="#6b7280">F</text>
+  <text x="15" y="55" font-family="Arial, sans-serif" font-size="9" class="text-secondary">M</text>
+  <text x="15" y="81" font-family="Arial, sans-serif" font-size="9" class="text-secondary">W</text>
+  <text x="15" y="107" font-family="Arial, sans-serif" font-size="9" class="text-secondary">F</text>
 '''
     
     # Calculate date range for the last 52 weeks
@@ -593,10 +684,7 @@ def generate_activity_heatmap_svg():
             else:
                 activity_level = 4
             
-            colors = ["#ebedf0", "#c6e48b", "#7bc96f", "#239a3b", "#196127"]
-            color = colors[activity_level]
-            
-            svg += f'  <rect x="{x}" y="{y}" width="{cell_size}" height="{cell_size}" fill="{color}" rx="2"/>\n'
+            svg += f'  <rect x="{x}" y="{y}" width="{cell_size}" height="{cell_size}" class="activity-{activity_level}" rx="2"/>\n'
             
             current_date += timedelta(days=1)
             
@@ -606,17 +694,128 @@ def generate_activity_heatmap_svg():
     legend_x = chart_width - 120
     svg += f'''
   <!-- Legend -->
-  <text x="{legend_x}" y="25" font-family="Arial, sans-serif" font-size="9" fill="#6b7280">Less</text>
+  <text x="{legend_x}" y="25" font-family="Arial, sans-serif" font-size="9" class="text-secondary">Less</text>
 '''
     
-    colors = ["#ebedf0", "#c6e48b", "#7bc96f", "#239a3b", "#196127"]
-    for i, color in enumerate(colors):
+    for i in range(5):
         x = legend_x + 25 + i * 13
-        svg += f'  <rect x="{x}" y="15" width="10" height="10" fill="{color}" rx="2"/>\n'
+        svg += f'  <rect x="{x}" y="15" width="10" height="10" class="activity-{i}" rx="2"/>\n'
     
-    svg += f'  <text x="{legend_x + 90}" y="25" font-family="Arial, sans-serif" font-size="9" fill="#6b7280">More</text>\n'
+    svg += f'  <text x="{legend_x + 90}" y="25" font-family="Arial, sans-serif" font-size="9" class="text-secondary">More</text>\n'
     
     svg += '</svg>'
+    return svg
+
+def calculate_streak():
+    """Calculate current streak of consecutive days with commits"""
+    from datetime import datetime, timedelta
+    
+    git_activity = get_git_activity()
+    
+    # Start from today and work backwards
+    current_date = datetime.now().date()
+    current_streak = 0
+    longest_streak = 0
+    temp_streak = 0
+    
+    # Check last 365 days for current and longest streak
+    for i in range(365):
+        date_str = current_date.strftime('%Y-%m-%d')
+        commits = git_activity.get(date_str, 0)
+        
+        if commits > 0:
+            temp_streak += 1
+            if i == 0 or temp_streak > 0:  # If today or continuing streak
+                current_streak = temp_streak
+        else:
+            if temp_streak > longest_streak:
+                longest_streak = temp_streak
+            temp_streak = 0
+            if i == 0:  # If no commits today, current streak is 0
+                current_streak = 0
+        
+        current_date -= timedelta(days=1)
+    
+    # Check if temp_streak is the longest (in case streak continues to the end)
+    if temp_streak > longest_streak:
+        longest_streak = temp_streak
+        
+    return current_streak, longest_streak
+
+def generate_streak_counter_svg():
+    """Generate streak counter SVG with dark mode support"""
+    
+    current_streak, longest_streak = calculate_streak()
+    
+    # Determine emoji and color based on streak
+    if current_streak == 0:
+        emoji = "😴"
+        streak_color = "#6b7280"
+        status_text = "No streak"
+    elif current_streak < 3:
+        emoji = "🔥"
+        streak_color = "#f59e0b"
+        status_text = "Getting started!"
+    elif current_streak < 7:
+        emoji = "🚀"
+        streak_color = "#10b981"
+        status_text = "On fire!"
+    elif current_streak < 14:
+        emoji = "⚡"
+        streak_color = "#3b82f6"
+        status_text = "Amazing!"
+    else:
+        emoji = "🏆"
+        streak_color = "#8b5cf6"
+        status_text = "Legendary!"
+    
+    width = 180
+    height = 120
+    
+    svg = f'''<svg width="{width}" height="{height}" viewBox="0 0 {width} {height}" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg-panel {{ fill: #f8fafc; stroke: #e2e8f0; stroke-width: 1; }}
+    .text-primary {{ fill: #1e293b; }}
+    .text-secondary {{ fill: #64748b; }}
+    .text-accent {{ fill: {streak_color}; }}
+    .text-muted {{ fill: #94a3b8; }}
+    
+    @media (prefers-color-scheme: dark) {{
+      .bg-panel {{ fill: #0f172a; stroke: #334155; }}
+      .text-primary {{ fill: #f1f5f9; }}
+      .text-secondary {{ fill: #cbd5e1; }}
+      .text-accent {{ fill: {streak_color}; }}
+      .text-muted {{ fill: #64748b; }}
+    }}
+  </style>
+  
+  <!-- Background -->
+  <rect width="{width}" height="{height}" class="bg-panel" rx="8"/>
+  
+  <!-- Streak emoji -->
+  <text x="{width//2}" y="25" text-anchor="middle" font-size="20">{emoji}</text>
+  
+  <!-- Current streak number -->
+  <text x="{width//2}" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" class="text-accent">
+    {current_streak}
+  </text>
+  
+  <!-- "Day streak" text -->
+  <text x="{width//2}" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" class="text-primary">
+    Day{"s" if current_streak != 1 else ""} streak
+  </text>
+  
+  <!-- Status text -->
+  <text x="{width//2}" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" class="text-secondary">
+    {status_text}
+  </text>
+  
+  <!-- Longest streak info -->
+  <text x="{width//2}" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" class="text-muted">
+    Best: {longest_streak} day{"s" if longest_streak != 1 else ""}
+  </text>
+</svg>'''
+    
     return svg
 
 def main():
@@ -668,6 +867,12 @@ def main():
     with open(assets_dir / "activity_heatmap.svg", "w") as f:
         f.write(activity_svg)
     print("✅ Generated dashboard/assets/activity_heatmap.svg")
+    
+    # Generate streak counter SVG
+    streak_svg = generate_streak_counter_svg()
+    with open(assets_dir / "streak_counter.svg", "w") as f:
+        f.write(streak_svg)
+    print("✅ Generated dashboard/assets/streak_counter.svg")
     
     # Generate comprehensive stats file
     stats = {
