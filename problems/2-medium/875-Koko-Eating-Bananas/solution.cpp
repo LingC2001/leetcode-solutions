@@ -22,9 +22,9 @@ int minEatingSpeed(vector<int>& piles, int h) {
 }
 
 bool eatable(vector<int>* piles, int k, int h) {
-    double hours = 0;
-    for (double pile : (*piles)) {
-        hours += ceil((double)pile/k);
+    long hours = 0;
+    for (long pile : (*piles)) {
+        hours += ceil((long)pile/k);
     }
     return (hours <= h);
 }
