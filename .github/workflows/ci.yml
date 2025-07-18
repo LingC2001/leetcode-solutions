@@ -13,10 +13,6 @@ permissions:
 jobs:
   update-progress:
     runs-on: ubuntu-latest
-    if: >-
-      github.event_name == 'push' &&
-      github.ref == 'refs/heads/main' &&
-      (contains(join(github.event.commits.*.added, '\n'), 'problems/') || contains(join(github.event.commits.*.modified, '\n'), 'problems/') || contains(join(github.event.commits.*.removed, '\n'), 'problems/'))
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
