@@ -1,30 +1,37 @@
 public int minEatingSpeed(int[] piles, int h) {
-    int low = 1;
-    int high = getMax(piles);
     
-    while(high > low) {
-        int mid = low + (high - low)/2;
-        int hours = countHours(piles, mid);
-        if(hours > h) {
-            low  = mid +1;
+    int left = 1;
+    int right = getMax(piles);
+
+    int min_eat = right;
+
+    while (left <= right) {
+        int num_eat = (right + left) / 2;
+        long current_time = koko_kram_k(piles, num_eat);
+        if (current_time <= h && num_eat < min_eat) {
+            min_eat = num_eat;
+            right = num_eat - 1;
         } else {
-            high = mid;
+            left = num_eat + 1;
         }
+            
     }
 
-    return low;
+    return min_eat;
 }
 
-public int countHours(int[] piles, int k) {
-    int count = 0;
-    for(int pile : piles) {
-        count += (pile+k-1)/k;
+private long koko_kram_k(int[] piles, int k) {
+    long time = 0;
+
+    for (int i = 0; i < piles.length; i++) {
+        time += Math.ceilDiv(piles[i], k);
     }
-    return count;
+
+    return time;
 }
 
-private static int getMax(int[] piles) {
-    int max = 0;
+private int getMax(int[] piles) {
+    int max = piles[0];
     for (int pile : piles) {
         if (pile > max) {
             max = pile;
