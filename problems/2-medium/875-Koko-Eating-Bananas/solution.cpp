@@ -2,7 +2,7 @@
 #include <algorithm>
 using namespace std;
 
-double calculateHours(vector<int>* piles, int k);
+bool eatable(vector<int>* piles, int k, int h);
 
 int minEatingSpeed(vector<int>& piles, int h) {
     int l = 1;
@@ -11,23 +11,20 @@ int minEatingSpeed(vector<int>& piles, int h) {
 
     while (l <= r) {
         int k = (l+r)/2;
-        double hours = calculateHours(&piles, k);
-
-        if (hours <= h) {
+        if (eatable(&piles, k, h)) {
             ans = k;
             r = k-1;
         } else {
             l = k+1;
         }
     }
-
     return ans;
 }
 
-double calculateHours(vector<int>* piles, int k) {
+bool eatable(vector<int>* piles, int k, int h) {
     double hours = 0;
     for (double pile : (*piles)) {
         hours += ceil((double)pile/k);
     }
-    return hours;
+    return (hours <= h);
 }
