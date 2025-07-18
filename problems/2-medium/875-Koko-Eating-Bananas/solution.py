@@ -1,5 +1,6 @@
-from typing import List
 from math import ceil
+from typing import List
+
 
 def minEatingSpeed(self, piles: List[int], h: int) -> int:
     left = 1
