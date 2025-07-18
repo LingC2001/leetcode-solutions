@@ -1,7 +1,7 @@
 {
   "counts": {
     "easy": 7,
-    "medium": 13,
+    "medium": 14,
     "hard": 1
   },
   "totals": {
@@ -10,13 +10,13 @@
     "hard": 500
   },
   "topic_counts": {
-    "Array": 17,
+    "Array": 19,
+    "String": 12,
+    "Stack": 4,
     "Hash Table": 4,
-    "String": 10,
-    "Two Pointers": 7,
-    "Binary Search": 3,
+    "Two Pointers": 8,
+    "Binary Search": 4,
     "Sliding Window": 4,
-    "Stack": 2,
     "Dynamic Programming": 1
   },
   "topic_totals": {
@@ -37,14 +37,14 @@
     "Heap": 60
   },
   "language_counts": {
-    "Python": 21,
-    "C++": 21,
+    "Python": 22,
+    "C++": 22,
     "Java": 20
   },
   "status_counts": {
-    "Complete": 17,
-    "Solutions Only": 4
+    "Complete": 20,
+    "Solutions Only": 2
   },
-  "total_problems": 21,
-  "last_updated": "2025-07-15 22:45:46"
+  "total_problems": 22,
+  "last_updated": "2025-07-18 12:40:32"
 }
