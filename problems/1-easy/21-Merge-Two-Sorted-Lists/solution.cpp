@@ -25,6 +25,6 @@ ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
         curr = curr->next;
     }
 
-    list1 != nullptr ? curr->next = list1 : curr->next = list2;
+    curr->next = list1 != nullptr ? list1 : list2;
     return dummy_head_ptr->next;
 }
