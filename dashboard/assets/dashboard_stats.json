@@ -12,9 +12,9 @@
   "topic_counts": {
     "Array": 22,
     "String": 12,
-    "Stack": 4,
+    "Stack": 5,
     "Hash Table": 4,
-    "Two Pointers": 9,
+    "Two Pointers": 10,
     "Binary Search": 6,
     "Sliding Window": 4,
     "Dynamic Programming": 1
@@ -42,9 +42,9 @@
     "Java": 22
   },
   "status_counts": {
-    "Complete": 22,
-    "Solutions Only": 3
+    "Complete": 23,
+    "Solutions Only": 2
   },
   "total_problems": 25,
-  "last_updated": "2025-07-22 12:43:55"
+  "last_updated": "2025-07-22 12:53:48"
 }
