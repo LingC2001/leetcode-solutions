@@ -67,6 +67,7 @@ ignore = [
     "TD002",
     "TD003",
     "FIX002", # too verbose descriptions of todos
+    "A002",
 ]
 # Allow fix for all enabled rules (when `--fix`) is provided
 fixable = ["ALL"]

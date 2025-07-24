@@ -3,10 +3,11 @@ class ListNode:
         self.val = val
         self.next = next
 
+
 from typing import Optional
 
-def reverseList(head: Optional[ListNode]) -> Optional[ListNode]:
 
+def reverseList(head: Optional[ListNode]) -> Optional[ListNode]:
     prev = None
     current = head
 
@@ -17,4 +18,3 @@ def reverseList(head: Optional[ListNode]) -> Optional[ListNode]:
         current = next_node
 
     return prev
-
