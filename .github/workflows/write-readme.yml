@@ -3,8 +3,6 @@ name: Write-Me Readme
 
 on:
   push:
-    paths:
-      - 'problems/**'
   workflow_dispatch:
     inputs:
       problem_id:
@@ -55,8 +53,8 @@ jobs:
           # Function to get changed problem folder from git diff
           get_changed_folder() {
             local diff_range="$1"
-            # Get first matching changed file in problems directory
-            git diff --name-only $diff_range | grep -E '^problems/[1-3]-[^/]+/[0-9]+-[^/]+/' | head -n1 | awk -F'/' '{print $1"/"$2"/"$3}'
+            # Get first matching changed file in problems directory, tolerate git diff errors
+            git diff --name-only $diff_range 2>/dev/null || true | grep -E '^problems/[1-3]-[^/]+/[0-9]+-[^/]+/' | head -n1 | awk -F'/' '{print $1"/"$2"/"$3}'
           }
 
           # Function to extract problem ID from folder path
