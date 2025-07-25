@@ -23,60 +23,100 @@ jobs:
       - uses: actions/checkout@v4
       - id: setid
         run: |
-          echo "[DEBUG] workflow_dispatch problem_id input: '${{ github.event.inputs.problem_id }}'"
-          # If problem_id is provided via workflow_dispatch, use it directly
-          if [ "${{ github.event.inputs.problem_id }}" != "" ]; then
-            echo "[DEBUG] Using provided problem_id: '${{ github.event.inputs.problem_id }}'"
-            # Try to find the folder for the given problem_id
-            folder=$(find problems -type d -regextype posix-extended -regex 'problems/[0-9]-[^/]+/[0-9]+-[^/]+' | grep "/${{ github.event.inputs.problem_id }}-" | head -n1)
-            echo "[DEBUG] Matched folder for problem_id: '$folder'"
-            if [ -z "$folder" ]; then
-              echo "[DEBUG] No folder found for problem_id, skipping."
-              echo "problem_id=${{ github.event.inputs.problem_id }}" >> $GITHUB_OUTPUT
-              echo "problem_dir=" >> $GITHUB_OUTPUT
-              echo "readme_exists=true" >> $GITHUB_OUTPUT
-              exit 0
-            fi
+          # Function to check if README exists for a given folder
+          check_readme_exists() {
+            local folder="$1"
             if [ -f "$folder/README.md" ]; then
               echo "[DEBUG] README.md exists in $folder, skipping generation."
               echo "readme_exists=true" >> $GITHUB_OUTPUT
+              return 0
             else
               echo "[DEBUG] README.md does not exist in $folder, will generate."
               echo "readme_exists=false" >> $GITHUB_OUTPUT
+              return 1
             fi
-            echo "problem_id=${{ github.event.inputs.problem_id }}" >> $GITHUB_OUTPUT
+          }
+
+          # Function to set output variables
+          set_outputs() {
+            local problem_id="$1"
+            local folder="$2"
+            echo "problem_id=$problem_id" >> $GITHUB_OUTPUT
             echo "problem_dir=$folder" >> $GITHUB_OUTPUT
+          }
+
+          # Function to find problem folder by ID
+          find_problem_folder() {
+            local problem_id="$1"
+            # Look in all difficulty folders (1-easy, 2-medium, 3-hard)
+            find problems -type d -path "problems/[1-3]-*/[0-9]*-*" | grep "/${problem_id}-" | head -n1
+          }
+
+          # Function to get changed problem folder from git diff
+          get_changed_folder() {
+            local diff_range="$1"
+            # Get first matching changed file in problems directory
+            git diff --name-only $diff_range | grep -E '^problems/[1-3]-[^/]+/[0-9]+-[^/]+/' | head -n1 | awk -F'/' '{print $1"/"$2"/"$3}'
+          }
+
+          # Function to extract problem ID from folder path
+          extract_problem_id() {
+            local folder="$1"
+            # Extract problem ID from the third part of path (e.g., "431-Easy-Problem-Name" -> "431")
+            echo "$folder" | awk -F'/' '{print $3}' | awk -F'-' '{print $1}'
+          }
+
+          # Main logic starts here
+          echo "[DEBUG] workflow_dispatch problem_id input: '${{ github.event.inputs.problem_id }}'"
+
+          # Handle manual workflow dispatch with problem_id
+          if [ "${{ github.event.inputs.problem_id }}" != "" ]; then
+            echo "[DEBUG] Using provided problem_id: '${{ github.event.inputs.problem_id }}'"
+            folder=$(find_problem_folder "${{ github.event.inputs.problem_id }}")
+            
+            if [ -z "$folder" ]; then
+              echo "[DEBUG] No folder found for problem_id, skipping."
+              set_outputs "${{ github.event.inputs.problem_id }}" ""
+              echo "readme_exists=true" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+            
+            check_readme_exists "$folder"
+            set_outputs "${{ github.event.inputs.problem_id }}" "$folder"
             exit 0
           fi
-          # Otherwise, auto-detect as before
+
+          # Auto-detect from git changes
           echo "[DEBUG] No problem_id provided, auto-detecting from git diff."
-          # Check if github.event.before is set, fallback to HEAD~1 if not
           if [ -n "${{ github.event.before }}" ]; then
             DIFF_RANGE="${{ github.event.before }} ${{ github.sha }}"
           else
             echo "[DEBUG] github.event.before is empty, using HEAD~1 as fallback."
             DIFF_RANGE="HEAD~1 HEAD"
           fi
-          folder=$(git diff --name-only $DIFF_RANGE | grep '^problems/[0-9]-[^/]\+/[0-9]\+-[^/]\+/' | head -n1 | awk -F'/' '{print $1"/"$2"/"$3}')
+
+          folder=$(get_changed_folder "$DIFF_RANGE")
           echo "[DEBUG] Auto-detected folder: '$folder'"
+
           if [ -z "$folder" ]; then
             echo "[DEBUG] No changed problem folder found, skipping."
-            echo "problem_id=" >> $GITHUB_OUTPUT
-            echo "problem_dir=" >> $GITHUB_OUTPUT
+            set_outputs "" ""
             echo "readme_exists=true" >> $GITHUB_OUTPUT
             exit 0
           fi
-          problem_id=$(echo "$folder" | awk -F'/' '{print $3}' | awk -F'-' '{print $1}')
+
+          problem_id=$(extract_problem_id "$folder")
           echo "[DEBUG] Extracted problem_id: '$problem_id' from folder: '$folder'"
-          if [ -f "$folder/README.md" ]; then
-            echo "[DEBUG] README.md exists in $folder, skipping generation."
+
+          if [ -z "$problem_id" ]; then
+            echo "[DEBUG] Extracted problem_id is empty, skipping."
+            set_outputs "" "$folder"
             echo "readme_exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "[DEBUG] README.md does not exist in $folder, will generate."
-            echo "readme_exists=false" >> $GITHUB_OUTPUT
+            exit 0
           fi
-          echo "problem_id=$problem_id" >> $GITHUB_OUTPUT
-          echo "problem_dir=$folder" >> $GITHUB_OUTPUT
+
+          check_readme_exists "$folder"
+          set_outputs "$problem_id" "$folder"
 
   write-me-readme:
     needs: detect-problem
