@@ -3,13 +3,13 @@
     .bg-panel { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 1; }
     .text-primary { fill: #1e293b; }
     .text-secondary { fill: #64748b; }
-    .text-accent { fill: #f59e0b; }
+    .text-accent { fill: #6b7280; }
     .text-muted { fill: #94a3b8; }
     @media (prefers-color-scheme: dark) {
       .bg-panel { fill: #0f172a; stroke: #334155; }
       .text-primary { fill: #f1f5f9; }
       .text-secondary { fill: #cbd5e1; }
-      .text-accent { fill: #f59e0b; }
+      .text-accent { fill: #6b7280; }
       .text-muted { fill: #64748b; }
     }
   </style>
@@ -18,25 +18,25 @@
   <rect width="300" height="180" class="bg-panel" rx="8"/>
 
   <!-- Streak emoji -->
-  <text x="150" y="50" text-anchor="middle" font-size="28">🔥</text>
+  <text x="150" y="50" text-anchor="middle" font-size="28">😴</text>
 
   <!-- Current streak number -->
   <text x="150" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" class="text-accent">
-    1
+    0
   </text>
 
   <!-- "Day streak" text -->
   <text x="150" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" class="text-primary">
-    Day streak
+    Days streak
   </text>
 
   <!-- Status text -->
   <text x="150" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" class="text-secondary">
-    Getting started!
+    No streak
   </text>
 
   <!-- Longest streak info -->
   <text x="150" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" class="text-muted">
-    Best: 1 day
+    Best: 0 days
   </text>
 </svg>
