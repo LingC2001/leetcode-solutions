@@ -1,6 +1,6 @@
 {
   "counts": {
-    "easy": 10,
+    "easy": 11,
     "medium": 18,
     "hard": 1
   },
@@ -38,13 +38,13 @@
   },
   "language_counts": {
     "Python": 25,
-    "C++": 29,
+    "C++": 30,
     "Java": 25
   },
   "status_counts": {
     "Complete": 23,
-    "Solutions Only": 6
+    "Solutions Only": 7
   },
-  "total_problems": 29,
-  "last_updated": "2025-08-01 14:30:53"
+  "total_problems": 30,
+  "last_updated": "2025-08-08 11:21:42"
 }
