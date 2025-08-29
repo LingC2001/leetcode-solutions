@@ -1,6 +1,6 @@
 {
   "counts": {
-    "easy": 11,
+    "easy": 12,
     "medium": 18,
     "hard": 1
   },
@@ -10,12 +10,12 @@
     "hard": 500
   },
   "topic_counts": {
+    "Two Pointers": 10,
+    "Stack": 5,
     "Array": 22,
     "String": 12,
-    "Stack": 5,
-    "Hash Table": 4,
-    "Two Pointers": 10,
     "Binary Search": 6,
+    "Hash Table": 4,
     "Sliding Window": 4,
     "Dynamic Programming": 1
   },
@@ -38,13 +38,13 @@
   },
   "language_counts": {
     "Python": 26,
-    "C++": 30,
+    "C++": 31,
     "Java": 25
   },
   "status_counts": {
     "Complete": 23,
-    "Solutions Only": 7
+    "Solutions Only": 8
   },
-  "total_problems": 30,
-  "last_updated": "2025-08-08 11:55:13"
+  "total_problems": 31,
+  "last_updated": "2025-08-29 12:16:52"
 }
