@@ -19,13 +19,12 @@ int diameterOfBinaryTree(TreeNode* root) {
 
 int dfs(TreeNode* root) {
     if (!root) {
-        return -1;
+        return 0;
     }
     
     int max_left = dfs(root->left);
     int max_right = dfs(root->right);
 
-    max_diameter = max(max_diameter, max_left + max_right + 2);
+    max_diameter = max(max_diameter, max_left + max_right);
     return max(max_left, max_right) + 1;
-
 }
