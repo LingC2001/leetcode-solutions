@@ -1,6 +1,6 @@
 {
   "counts": {
-    "easy": 13,
+    "easy": 14,
     "medium": 18,
     "hard": 1
   },
@@ -37,14 +37,14 @@
     "Heap": 60
   },
   "language_counts": {
-    "Python": 28,
-    "C++": 32,
+    "Python": 29,
+    "C++": 33,
     "Java": 25
   },
   "status_counts": {
     "Complete": 23,
-    "Solutions Only": 9
+    "Solutions Only": 10
   },
-  "total_problems": 32,
-  "last_updated": "2025-09-06 11:19:41"
+  "total_problems": 33,
+  "last_updated": "2025-09-06 12:29:35"
 }
