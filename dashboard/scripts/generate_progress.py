@@ -615,8 +615,120 @@ def get_git_activity():
         return defaultdict(int)
 
 
+def _get_problem_id(problem_path: Path) -> str:
+    """Create a stable problem identifier from its path, e.g., 1-easy/1-Two-Sum"""
+
+    try:
+        relative = problem_path.relative_to(Path("problems"))
+        return str(relative).replace("\\", "/")
+    except ValueError:
+        return str(problem_path.name)
+
+
+def _scan_current_solved_problems() -> set:
+    """Scan repository for solved problems (presence of any solution file)."""
+
+    problems_dir = Path("problems")
+    solved_ids = set()
+
+    for difficulty_dir in ["1-easy", "2-medium", "3-hard"]:
+        diff_path = problems_dir / difficulty_dir
+        if not diff_path.exists():
+            continue
+
+        for problem_dir in diff_path.iterdir():
+            if not problem_dir.is_dir():
+                continue
+
+            has_solution = any(
+                [
+                    (problem_dir / "solution.py").exists(),
+                    (problem_dir / "solution.cpp").exists(),
+                    (problem_dir / "solution.java").exists(),
+                    (problem_dir / "solution.go").exists(),
+                ]
+            )
+
+            if has_solution:
+                solved_ids.add(_get_problem_id(problem_dir))
+
+    return solved_ids
+
+
+def _load_solved_activity(activity_path: Path) -> dict:
+    """Load solved activity JSON; return structure with defaults if missing."""
+
+    if activity_path.exists():
+        try:
+            data = json.loads(activity_path.read_text(encoding="utf-8"))
+            # minimal validation
+            data.setdefault("byDate", {})
+            data.setdefault("allProblems", {})
+            return data
+        except Exception:
+            pass
+
+    return {"byDate": {}, "allProblems": {}}
+
+
+def _save_solved_activity(activity_path: Path, data: dict) -> None:
+    activity_path.parent.mkdir(parents=True, exist_ok=True)
+    activity_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+
+
+def update_solved_activity_store() -> defaultdict:
+    """Persist newly solved problems into a JSON store and return counts by date.
+
+    The store keeps:
+      - allProblems: { problemId: firstSolvedDate }
+      - byDate: { YYYY-MM-DD: { count: n, problems: [ids...] } }
+    """
+
+    activity_path = Path("dashboard/assets/solved_activity.json")
+    data = _load_solved_activity(activity_path)
+
+    known_problems = set(data.get("allProblems", {}).keys())
+    current_solved = _scan_current_solved_problems()
+
+    today = datetime.now().date().strftime("%Y-%m-%d")
+
+    # Add any newly solved problems to today's bucket
+    new_problems = sorted(list(current_solved - known_problems))
+    if new_problems:
+        for pid in new_problems:
+            data["allProblems"][pid] = today
+
+        by_date_entry = data["byDate"].setdefault(today, {"count": 0, "problems": []})
+        # Avoid double-adding if re-run same day
+        for pid in new_problems:
+            if pid not in by_date_entry["problems"]:
+                by_date_entry["problems"].append(pid)
+                by_date_entry["count"] += 1
+
+        _save_solved_activity(activity_path, data)
+
+    # Build counts by date from byDate
+    counts = defaultdict(int)
+    for date_str, entry in data.get("byDate", {}).items():
+        try:
+            counts[date_str] += int(entry.get("count", 0))
+        except Exception:
+            pass
+
+    return counts
+
+
+def get_solved_activity() -> defaultdict:
+    """Get solved-activity counts by date, updating the store first."""
+
+    try:
+        return update_solved_activity_store()
+    except Exception:
+        return defaultdict(int)
+
+
 def generate_activity_heatmap_svg():
-    """Generate activity heatmap based on actual git commits with dark mode support"""
+    """Generate activity heatmap based on solved problems (fallback to git) with dark mode support"""
 
     weeks = 52
     days_per_week = 7
@@ -626,8 +738,10 @@ def generate_activity_heatmap_svg():
     chart_width = weeks * (cell_size + cell_spacing) + 100
     chart_height = days_per_week * (cell_size + cell_spacing) + 60
 
-    # Get actual git activity
-    git_activity = get_git_activity()
+    # Prefer solved-activity; if none, fallback to git commits
+    solved_activity = get_solved_activity()
+    use_git_fallback = len(solved_activity) == 0
+    git_activity = get_git_activity() if use_git_fallback else defaultdict(int)
 
     svg = f'''<svg width="{chart_width}" height="{chart_height}" viewBox="0 0 {chart_width} {chart_height}" xmlns="http://www.w3.org/2000/svg">
   <style>
@@ -656,7 +770,7 @@ def generate_activity_heatmap_svg():
 
   <!-- Title -->
   <text x="20" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" class="text-primary">
-    Git Activity (Last 52 Weeks)
+    Solved Activity (Last 52 Weeks)
   </text>
 
   <!-- Day labels -->
@@ -665,10 +779,10 @@ def generate_activity_heatmap_svg():
   <text x="15" y="107" font-family="Arial, sans-serif" font-size="9" class="text-secondary">F</text>
 '''
 
-    # Calculate date range for the last 52 weeks
+    # Calculate date range for the last 52 weeks, inclusive of today
 
     end_date = datetime.now().date()
-    start_date = end_date - timedelta(weeks=52)
+    start_date = end_date - timedelta(days=weeks * days_per_week - 1)
 
     # Generate heatmap based on actual git activity
     current_date = start_date
@@ -684,9 +798,9 @@ def generate_activity_heatmap_svg():
 
             # Get activity level for this date
             date_str = current_date.strftime("%Y-%m-%d")
-            commits = git_activity.get(date_str, 0)
+            commits = solved_activity.get(date_str, 0) if not use_git_fallback else git_activity.get(date_str, 0)
 
-            # Map commits to activity level (0-4)
+            # Map items to activity level (0-4)
             if commits == 0:
                 activity_level = 0
             elif commits == 1:
@@ -722,9 +836,11 @@ def generate_activity_heatmap_svg():
 
 
 def calculate_streak():
-    """Calculate current streak of consecutive days with commits"""
+    """Calculate current streak of consecutive days with solved problems (fallback to commits)."""
 
-    git_activity = get_git_activity()
+    solved_activity = get_solved_activity()
+    use_git_fallback = len(solved_activity) == 0
+    git_activity = get_git_activity() if use_git_fallback else defaultdict(int)
 
     # Start from today and work backwards
     current_date = datetime.now().date()
@@ -735,7 +851,7 @@ def calculate_streak():
     # Check last 365 days for current and longest streak
     for i in range(365):
         date_str = current_date.strftime("%Y-%m-%d")
-        commits = git_activity.get(date_str, 0)
+        commits = solved_activity.get(date_str, 0) if not use_git_fallback else git_activity.get(date_str, 0)
 
         if commits > 0:
             temp_streak += 1
