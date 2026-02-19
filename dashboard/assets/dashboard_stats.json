@@ -1,6 +1,6 @@
 {
   "counts": {
-    "easy": 15,
+    "easy": 16,
     "medium": 18,
     "hard": 1
   },
@@ -10,12 +10,12 @@
     "hard": 500
   },
   "topic_counts": {
-    "Two Pointers": 10,
-    "Stack": 5,
     "Array": 22,
-    "Binary Search": 6,
-    "Hash Table": 4,
     "String": 12,
+    "Stack": 5,
+    "Hash Table": 4,
+    "Two Pointers": 10,
+    "Binary Search": 6,
     "Sliding Window": 4,
     "Dynamic Programming": 1
   },
@@ -45,6 +45,6 @@
     "Complete": 23,
     "Solutions Only": 10
   },
-  "total_problems": 34,
-  "last_updated": "2025-09-11 12:51:12"
+  "total_problems": 35,
+  "last_updated": "2026-02-19 11:30:34"
 }

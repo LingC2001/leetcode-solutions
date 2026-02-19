@@ -37,6 +37,13 @@
         "2-medium/875-Koko-Eating-Bananas",
         "3-hard/239-Sliding-Window-Maximum"
       ]
+    },
+    "2026-02-19": {
+      "count": 2,
+      "problems": [
+        "1-easy/100-Same-Tree",
+        "1-easy/860-Lemonade-Change"
+      ]
     }
   },
   "allProblems": {
@@ -72,6 +79,8 @@
     "2-medium/74-Search-A-2D-Matrix": "2025-09-08",
     "2-medium/853-Car-Fleet": "2025-09-08",
     "2-medium/875-Koko-Eating-Bananas": "2025-09-08",
-    "3-hard/239-Sliding-Window-Maximum": "2025-09-08"
+    "3-hard/239-Sliding-Window-Maximum": "2025-09-08",
+    "1-easy/100-Same-Tree": "2026-02-19",
+    "1-easy/860-Lemonade-Change": "2026-02-19"
   }
 }
