@@ -1,0 +1,1 @@
+Greedy aspect is always give largest note back because smaller notes are more versatile, we spend the larger note when possible
