@@ -39,10 +39,11 @@
       ]
     },
     "2026-02-19": {
-      "count": 2,
+      "count": 3,
       "problems": [
         "1-easy/100-Same-Tree",
-        "1-easy/860-Lemonade-Change"
+        "1-easy/860-Lemonade-Change",
+        "2-medium/53-Maximum-Subarray"
       ]
     }
   },
@@ -81,6 +82,7 @@
     "2-medium/875-Koko-Eating-Bananas": "2025-09-08",
     "3-hard/239-Sliding-Window-Maximum": "2025-09-08",
     "1-easy/100-Same-Tree": "2026-02-19",
-    "1-easy/860-Lemonade-Change": "2026-02-19"
+    "1-easy/860-Lemonade-Change": "2026-02-19",
+    "2-medium/53-Maximum-Subarray": "2026-02-19"
   }
 }
