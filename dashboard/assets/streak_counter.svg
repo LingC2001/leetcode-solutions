@@ -37,6 +37,6 @@
 
   <!-- Longest streak info -->
   <text x="150" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" class="text-muted">
-    Best: 1 day
+    Best: 2 days
   </text>
 </svg>
