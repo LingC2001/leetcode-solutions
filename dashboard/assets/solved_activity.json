@@ -47,9 +47,10 @@
       ]
     },
     "2026-02-20": {
-      "count": 1,
+      "count": 2,
       "problems": [
-        "1-easy/2379-Minimum-Recolors-K-Black-Blocks"
+        "1-easy/2379-Minimum-Recolors-K-Black-Blocks",
+        "1-easy/3105-Longest-Strictly-Increasing-or-Decreasing-Subarray"
       ]
     }
   },
@@ -90,6 +91,7 @@
     "1-easy/100-Same-Tree": "2026-02-19",
     "1-easy/860-Lemonade-Change": "2026-02-19",
     "2-medium/53-Maximum-Subarray": "2026-02-19",
-    "1-easy/2379-Minimum-Recolors-K-Black-Blocks": "2026-02-20"
+    "1-easy/2379-Minimum-Recolors-K-Black-Blocks": "2026-02-20",
+    "1-easy/3105-Longest-Strictly-Increasing-or-Decreasing-Subarray": "2026-02-20"
   }
 }
