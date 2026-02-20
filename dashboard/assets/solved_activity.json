@@ -47,10 +47,11 @@
       ]
     },
     "2026-02-20": {
-      "count": 2,
+      "count": 3,
       "problems": [
         "1-easy/2379-Minimum-Recolors-K-Black-Blocks",
-        "1-easy/3105-Longest-Strictly-Increasing-or-Decreasing-Subarray"
+        "1-easy/3105-Longest-Strictly-Increasing-or-Decreasing-Subarray",
+        "2-medium/2895-Minimum-Processing-Time"
       ]
     }
   },
@@ -92,6 +93,7 @@
     "1-easy/860-Lemonade-Change": "2026-02-19",
     "2-medium/53-Maximum-Subarray": "2026-02-19",
     "1-easy/2379-Minimum-Recolors-K-Black-Blocks": "2026-02-20",
-    "1-easy/3105-Longest-Strictly-Increasing-or-Decreasing-Subarray": "2026-02-20"
+    "1-easy/3105-Longest-Strictly-Increasing-or-Decreasing-Subarray": "2026-02-20",
+    "2-medium/2895-Minimum-Processing-Time": "2026-02-20"
   }
 }
