@@ -1,6 +1,6 @@
 {
   "counts": {
-    "easy": 19,
+    "easy": 20,
     "medium": 20,
     "hard": 1
   },
@@ -14,7 +14,7 @@
     "Stack": 5,
     "Two Pointers": 10,
     "Sliding Window": 5,
-    "Array": 25,
+    "Array": 26,
     "Binary Search": 6,
     "Hash Table": 4,
     "Dynamic Programming": 1
@@ -45,6 +45,6 @@
     "Complete": 23,
     "Solutions Only": 10
   },
-  "total_problems": 40,
-  "last_updated": "2026-02-21 12:11:00"
+  "total_problems": 41,
+  "last_updated": "2026-02-21 12:11:17"
 }
