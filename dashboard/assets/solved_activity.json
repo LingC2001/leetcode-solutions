@@ -53,6 +53,12 @@
         "1-easy/3105-Longest-Strictly-Increasing-or-Decreasing-Subarray",
         "2-medium/2895-Minimum-Processing-Time"
       ]
+    },
+    "2026-02-21": {
+      "count": 1,
+      "problems": [
+        "1-easy/1662-Check-If-Two-String-Arrays-are-Equivalent"
+      ]
     }
   },
   "allProblems": {
@@ -94,6 +100,7 @@
     "2-medium/53-Maximum-Subarray": "2026-02-19",
     "1-easy/2379-Minimum-Recolors-K-Black-Blocks": "2026-02-20",
     "1-easy/3105-Longest-Strictly-Increasing-or-Decreasing-Subarray": "2026-02-20",
-    "2-medium/2895-Minimum-Processing-Time": "2026-02-20"
+    "2-medium/2895-Minimum-Processing-Time": "2026-02-20",
+    "1-easy/1662-Check-If-Two-String-Arrays-are-Equivalent": "2026-02-21"
   }
 }
