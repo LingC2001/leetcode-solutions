@@ -55,11 +55,12 @@
       ]
     },
     "2026-02-21": {
-      "count": 3,
+      "count": 4,
       "problems": [
         "1-easy/1662-Check-If-Two-String-Arrays-are-Equivalent",
         "1-easy/1929-Concatenation-of-Array",
-        "1-easy/387-First-Unique-Character-in-a-String"
+        "1-easy/387-First-Unique-Character-in-a-String",
+        "2-medium/481-Magical-String"
       ]
     }
   },
@@ -105,6 +106,7 @@
     "2-medium/2895-Minimum-Processing-Time": "2026-02-20",
     "1-easy/1662-Check-If-Two-String-Arrays-are-Equivalent": "2026-02-21",
     "1-easy/1929-Concatenation-of-Array": "2026-02-21",
-    "1-easy/387-First-Unique-Character-in-a-String": "2026-02-21"
+    "1-easy/387-First-Unique-Character-in-a-String": "2026-02-21",
+    "2-medium/481-Magical-String": "2026-02-21"
   }
 }
