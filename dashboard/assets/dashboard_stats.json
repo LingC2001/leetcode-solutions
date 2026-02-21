@@ -1,6 +1,6 @@
 {
   "counts": {
-    "easy": 20,
+    "easy": 21,
     "medium": 20,
     "hard": 1
   },
@@ -10,11 +10,11 @@
     "hard": 500
   },
   "topic_counts": {
-    "String": 13,
+    "String": 14,
     "Stack": 5,
+    "Array": 27,
     "Two Pointers": 10,
     "Sliding Window": 5,
-    "Array": 26,
     "Binary Search": 6,
     "Hash Table": 4,
     "Dynamic Programming": 1
@@ -45,6 +45,6 @@
     "Complete": 23,
     "Solutions Only": 10
   },
-  "total_problems": 41,
-  "last_updated": "2026-02-21 12:11:17"
+  "total_problems": 42,
+  "last_updated": "2026-02-21 12:29:17"
 }
