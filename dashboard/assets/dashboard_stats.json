@@ -1,6 +1,6 @@
 {
   "counts": {
-    "easy": 21,
+    "easy": 22,
     "medium": 21,
     "hard": 1
   },
@@ -45,6 +45,6 @@
     "Complete": 23,
     "Solutions Only": 10
   },
-  "total_problems": 43,
-  "last_updated": "2026-02-23 12:04:26"
+  "total_problems": 44,
+  "last_updated": "2026-02-24 11:05:47"
 }

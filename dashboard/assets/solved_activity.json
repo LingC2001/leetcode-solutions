@@ -62,6 +62,12 @@
         "1-easy/387-First-Unique-Character-in-a-String",
         "2-medium/481-Magical-String"
       ]
+    },
+    "2026-02-24": {
+      "count": 1,
+      "problems": [
+        "1-easy/1046-Last-Stone-Weight"
+      ]
     }
   },
   "allProblems": {
@@ -107,6 +113,7 @@
     "1-easy/1662-Check-If-Two-String-Arrays-are-Equivalent": "2026-02-21",
     "1-easy/1929-Concatenation-of-Array": "2026-02-21",
     "1-easy/387-First-Unique-Character-in-a-String": "2026-02-21",
-    "2-medium/481-Magical-String": "2026-02-21"
+    "2-medium/481-Magical-String": "2026-02-21",
+    "1-easy/1046-Last-Stone-Weight": "2026-02-24"
   }
 }
