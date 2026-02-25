@@ -71,9 +71,10 @@
       ]
     },
     "2026-02-25": {
-      "count": 1,
+      "count": 2,
       "problems": [
-        "2-medium/179-Largest-Number"
+        "2-medium/179-Largest-Number",
+        "1-easy/1356-Sort-Integers-by-The-Number-of-1-Bits"
       ]
     }
   },
@@ -123,6 +124,7 @@
     "2-medium/481-Magical-String": "2026-02-21",
     "1-easy/1046-Last-Stone-Weight": "2026-02-24",
     "1-easy/1022-Sum-Of-Root-To-Leaf-Binary-Numbers": "2026-02-24",
-    "2-medium/179-Largest-Number": "2026-02-25"
+    "2-medium/179-Largest-Number": "2026-02-25",
+    "1-easy/1356-Sort-Integers-by-The-Number-of-1-Bits": "2026-02-25"
   }
 }
