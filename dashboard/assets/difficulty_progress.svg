@@ -12,13 +12,13 @@
   </style>
   <!-- Background ring -->
   <circle cx="80" cy="90" r="65" fill="none" class="bg-ring" stroke-width="22"/>
-  <path d="M 80.00 25.00 A 65 65 0 1 1 75.47 154.84 L 77.21 129.90 A 40 40 0 1 0 80.00 50.00 Z" fill="#22c55e"/>
-  <path d="M 75.47 154.84 A 65 65 0 0 1 70.95 25.63 L 74.43 50.39 A 40 40 0 0 0 77.21 129.90 Z" fill="#f59e0b"/>
-  <path d="M 70.95 25.63 A 65 65 0 0 1 80.00 25.00 L 80.00 50.00 A 40 40 0 0 0 74.43 50.39 Z" fill="#ef4444"/>
+  <path d="M 80.00 25.00 A 65 65 0 0 1 80.00 155.00 L 80.00 130.00 A 40 40 0 0 0 80.00 50.00 Z" fill="#22c55e"/>
+  <path d="M 80.00 155.00 A 65 65 0 0 1 71.15 25.61 L 74.55 50.37 A 40 40 0 0 0 80.00 130.00 Z" fill="#f59e0b"/>
+  <path d="M 71.15 25.61 A 65 65 0 0 1 80.00 25.00 L 80.00 50.00 A 40 40 0 0 0 74.55 50.37 Z" fill="#ef4444"/>
 
   <!-- Center text -->
   <text x="80" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" class="text-primary">
-    45
+    46
   </text>
   <text x="80" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" class="text-secondary">
     Problems Solved
@@ -30,7 +30,7 @@
   </g>
   <g transform="translate(170, 80)">
     <circle cx="0" cy="0" r="6" fill="#f59e0b"/>
-    <text x="14" y="4" font-family="Arial, sans-serif" font-size="12" class="text-primary">Medium (21)</text>
+    <text x="14" y="4" font-family="Arial, sans-serif" font-size="12" class="text-primary">Medium (22)</text>
   </g>
   <g transform="translate(170, 110)">
     <circle cx="0" cy="0" r="6" fill="#ef4444"/>
