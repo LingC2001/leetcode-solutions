@@ -76,6 +76,12 @@
         "2-medium/179-Largest-Number",
         "1-easy/1356-Sort-Integers-by-The-Number-of-1-Bits"
       ]
+    },
+    "2026-02-26": {
+      "count": 1,
+      "problems": [
+        "1-easy/101-Symmetric-Tree"
+      ]
     }
   },
   "allProblems": {
@@ -125,6 +131,7 @@
     "1-easy/1046-Last-Stone-Weight": "2026-02-24",
     "1-easy/1022-Sum-Of-Root-To-Leaf-Binary-Numbers": "2026-02-24",
     "2-medium/179-Largest-Number": "2026-02-25",
-    "1-easy/1356-Sort-Integers-by-The-Number-of-1-Bits": "2026-02-25"
+    "1-easy/1356-Sort-Integers-by-The-Number-of-1-Bits": "2026-02-25",
+    "1-easy/101-Symmetric-Tree": "2026-02-26"
   }
 }
