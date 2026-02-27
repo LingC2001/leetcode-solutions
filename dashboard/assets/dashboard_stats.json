@@ -1,6 +1,6 @@
 {
   "counts": {
-    "easy": 25,
+    "easy": 26,
     "medium": 22,
     "hard": 1
   },
@@ -10,7 +10,7 @@
     "hard": 500
   },
   "topic_counts": {
-    "Array": 28,
+    "Array": 29,
     "String": 17,
     "Stack": 5,
     "Hash Table": 4,
@@ -46,6 +46,6 @@
     "Complete": 23,
     "Solutions Only": 10
   },
-  "total_problems": 48,
-  "last_updated": "2026-02-26 13:59:18"
+  "total_problems": 49,
+  "last_updated": "2026-02-27 09:15:30"
 }
