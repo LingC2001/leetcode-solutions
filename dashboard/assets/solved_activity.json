@@ -84,9 +84,10 @@
       ]
     },
     "2026-02-27": {
-      "count": 1,
+      "count": 2,
       "problems": [
-        "1-easy/404-Sum-Of-Left-Leaves"
+        "1-easy/404-Sum-Of-Left-Leaves",
+        "2-medium/2807-Insert-Greatest-Common-Divisors-In-Linked-List"
       ]
     }
   },
@@ -139,6 +140,7 @@
     "2-medium/179-Largest-Number": "2026-02-25",
     "1-easy/1356-Sort-Integers-by-The-Number-of-1-Bits": "2026-02-25",
     "1-easy/101-Symmetric-Tree": "2026-02-26",
-    "1-easy/404-Sum-Of-Left-Leaves": "2026-02-27"
+    "1-easy/404-Sum-Of-Left-Leaves": "2026-02-27",
+    "2-medium/2807-Insert-Greatest-Common-Divisors-In-Linked-List": "2026-02-27"
   }
 }
