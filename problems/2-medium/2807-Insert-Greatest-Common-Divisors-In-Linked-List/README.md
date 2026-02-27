@@ -1,0 +1,1 @@
+Since golang doesn't have gcd function, implementing it by using Euclidean's Principle, where the gcd of 2 numbers does not change if the bigger number is replaced by the remainder when divided by the smaller number.
