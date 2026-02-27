@@ -1,0 +1,1 @@
+We can calculate the next value by using the previous value. This is because the list of non-decreasing. We know the numbers after the index i each difference will be reduced by the difference with the previous number, whereas number before index i difference will increase
