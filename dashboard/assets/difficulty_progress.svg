@@ -12,13 +12,13 @@
   </style>
   <!-- Background ring -->
   <circle cx="80" cy="90" r="65" fill="none" class="bg-ring" stroke-width="22"/>
-  <path d="M 80.00 25.00 A 65 65 0 1 1 68.06 153.89 L 72.65 129.32 A 40 40 0 1 0 80.00 50.00 Z" fill="#22c55e"/>
-  <path d="M 68.06 153.89 A 65 65 0 0 1 72.01 25.49 L 75.08 50.30 A 40 40 0 0 0 72.65 129.32 Z" fill="#f59e0b"/>
-  <path d="M 72.01 25.49 A 65 65 0 0 1 80.00 25.00 L 80.00 50.00 A 40 40 0 0 0 75.08 50.30 Z" fill="#ef4444"/>
+  <path d="M 80.00 25.00 A 65 65 0 1 1 64.44 153.11 L 70.43 128.84 A 40 40 0 1 0 80.00 50.00 Z" fill="#22c55e"/>
+  <path d="M 64.44 153.11 A 65 65 0 0 1 72.17 25.47 L 75.18 50.29 A 40 40 0 0 0 70.43 128.84 Z" fill="#f59e0b"/>
+  <path d="M 72.17 25.47 A 65 65 0 0 1 80.00 25.00 L 80.00 50.00 A 40 40 0 0 0 75.18 50.29 Z" fill="#ef4444"/>
 
   <!-- Center text -->
   <text x="80" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" class="text-primary">
-    51
+    52
   </text>
   <text x="80" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" class="text-secondary">
     Problems Solved
@@ -26,7 +26,7 @@
   <!-- Legend (to the right) -->
   <g transform="translate(170, 50)">
     <circle cx="0" cy="0" r="6" fill="#22c55e"/>
-    <text x="14" y="4" font-family="Arial, sans-serif" font-size="12" class="text-primary">Easy (27)</text>
+    <text x="14" y="4" font-family="Arial, sans-serif" font-size="12" class="text-primary">Easy (28)</text>
   </g>
   <g transform="translate(170, 80)">
     <circle cx="0" cy="0" r="6" fill="#f59e0b"/>

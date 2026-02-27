@@ -395,7 +395,7 @@
   <rect x="693" y="79" width="11" height="11" class="activity-2" rx="2"/>
   <rect x="693" y="92" width="11" height="11" class="activity-2" rx="2"/>
   <rect x="693" y="105" width="11" height="11" class="activity-1" rx="2"/>
-  <rect x="693" y="118" width="11" height="11" class="activity-2" rx="2"/>
+  <rect x="693" y="118" width="11" height="11" class="activity-3" rx="2"/>
 
   <!-- Legend -->
   <text x="656" y="25" font-family="Arial, sans-serif" font-size="9" class="text-secondary">Less</text>

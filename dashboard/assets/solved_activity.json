@@ -84,11 +84,12 @@
       ]
     },
     "2026-02-27": {
-      "count": 3,
+      "count": 4,
       "problems": [
         "1-easy/404-Sum-Of-Left-Leaves",
         "2-medium/2807-Insert-Greatest-Common-Divisors-In-Linked-List",
-        "1-easy/1748-Sum-Of-Unique-Elements"
+        "1-easy/1748-Sum-Of-Unique-Elements",
+        "1-easy/94-Binary-Tree-Inorder-Traversal"
       ]
     }
   },
@@ -143,6 +144,7 @@
     "1-easy/101-Symmetric-Tree": "2026-02-26",
     "1-easy/404-Sum-Of-Left-Leaves": "2026-02-27",
     "2-medium/2807-Insert-Greatest-Common-Divisors-In-Linked-List": "2026-02-27",
-    "1-easy/1748-Sum-Of-Unique-Elements": "2026-02-27"
+    "1-easy/1748-Sum-Of-Unique-Elements": "2026-02-27",
+    "1-easy/94-Binary-Tree-Inorder-Traversal": "2026-02-27"
   }
 }
