@@ -1,4 +1,5 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import Image from 'next/image';
 
 // fill this with your actual GitHub info, for example:
 export const gitConfig = {
@@ -12,15 +13,21 @@ export function baseOptions(): BaseLayoutProps {
     nav: {
       title: (
         <div className="flex items-center gap-2 font-semibold">
-          <img
+          <Image
             src="/logo-light.png"
             alt="Logo"
-            className="h-6 w-6 dark:hidden"
+            width={24}
+            height={24}
+            className="dark:hidden"
+            unoptimized={true}
           />
-          <img
+          <Image
             src="/logo-dark.png"
             alt="Logo"
-            className="h-6 w-6 hidden dark:block"
+            width={24}
+            height={24}
+            className="hidden dark:block"
+            unoptimized={true}
           />
           LeetCode Solutions
         </div>

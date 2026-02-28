@@ -9,7 +9,6 @@ const inter = Inter({
 export const metadata = {
   icons: {
     icon: '/favicon.ico',
-    apple: '/favicon-32x32.png',
   },
 };
 
