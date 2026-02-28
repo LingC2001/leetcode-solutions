@@ -10,7 +10,21 @@ export const gitConfig = {
 export function baseOptions(): BaseLayoutProps {
   return {
     nav: {
-      title: 'LeetCode Solutions',
+      title: (
+        <div className="flex items-center gap-2 font-semibold">
+          <img
+            src="/logo-light.png"
+            alt="Logo"
+            className="h-6 w-6 dark:hidden"
+          />
+          <img
+            src="/logo-dark.png"
+            alt="Logo"
+            className="h-6 w-6 hidden dark:block"
+          />
+          LeetCode Solutions
+        </div>
+      ),
     },
     links: [
       {
