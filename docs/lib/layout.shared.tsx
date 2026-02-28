@@ -12,6 +12,13 @@ export function baseOptions(): BaseLayoutProps {
     nav: {
       title: 'LeetCode Solutions',
     },
+    links: [
+      {
+        text: 'Problems & Solutions',
+        url: '/docs',
+        on: 'nav',
+      },
+    ],
     githubUrl: `https://github.com/${gitConfig.user}/${gitConfig.repo}`,
   };
 }
