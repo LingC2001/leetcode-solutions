@@ -1,0 +1,99 @@
+---
+title: "1. Two Sum"
+description: "Find two numbers that add up to target using a hash map"
+---
+
+import Code from '@/components/Code';
+
+## Problem Statement
+
+[Link to LeetCode](https://leetcode.com/problems/two-sum/description/)
+
+Given an array of integers `nums` and an integer `target`, return the indices of the two numbers such that they add up to `target`. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.
+
+### Input
+- `nums`: A list of integers
+- `target`: An integer representing the target sum
+
+### Output
+- A list containing two integers representing the indices of the two numbers
+
+### Examples
+
+**Example 1:**
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: nums[0] + nums[1] == 9, return [0, 1]
+```
+
+**Example 2:**
+```
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+Explanation: nums[1] + nums[2] == 6, return [1, 2]
+```
+
+---
+
+## Approach
+
+The solution uses a **hash map** to store values and their indices as we iterate through the list.
+
+**Algorithm:**
+1. Create an empty dictionary to store `value -> index` mappings
+2. Iterate through the array with index `i`
+3. For each element `nums[i]`, calculate the complement: `complement = target - nums[i]`
+4. Check if the complement exists in the dictionary
+   - If yes, return `[i, dict[complement]]`
+   - If no, add `nums[i]: i` to the dictionary and continue
+5. Return empty array if no pair is found (shouldn't happen per problem statement)
+
+**Key Insight:** By storing elements we've seen, we can find the pair in a single pass instead of checking all combinations.
+
+---
+
+## Complexity Analysis
+
+- **Time Complexity:** O(n), where n is the length of `nums`
+  - Single pass through the array
+  - Dictionary lookups are O(1) on average
+  
+- **Space Complexity:** O(n)
+  - Extra space used to store elements in the dictionary
+
+---
+
+## Solutions
+
+### Python
+
+<Code problemNumber={1} difficulty="easy" lang="python" />
+
+### C++
+
+<Code problemNumber={1} difficulty="easy" lang="cpp" />
+
+---
+
+## Key Insights
+
+- **Hash Map Advantage:** Allows constant-time lookup of complements instead of checking all pairs (O(n²))
+- **Single Pass:** We only iterate through the array once, making it efficient
+- **Index Storage:** Store indices, not just values, since we need to return indices
+- **No Duplicates:** We check for the complement before adding the current element, preventing using the same element twice
+
+---
+
+## Walkthrough Example
+
+Let's trace through **Example 1:** `nums = [2,7,11,15]`, `target = 9`
+
+| i | nums[i] | complement | Found in dict? | Action | Dictionary |
+|---|---------|------------|----------------|--------|-----------|
+| 0 | 2       | 7          | No             | Add 2  | `{2: 0}`    |
+| 1 | 7       | 2          | Yes            | Return `[1, 0]` | — |
+
+Result: `[1, 0]` ✓
+
+The complement `2` was found at index `0`, and current element `7` is at index `1`, so they sum to 9.
