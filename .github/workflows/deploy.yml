@@ -19,7 +19,7 @@ jobs:
       
       - uses: pnpm/action-setup@v2
         with:
-          package-json-file: 'docs/package.json'
+          package_json_file: 'docs/package.json'
       
       - uses: actions/setup-node@v4
         with:
