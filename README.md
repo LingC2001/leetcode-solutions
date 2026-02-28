@@ -22,6 +22,11 @@ A collection of LeetCode solutions with documentation and analysis, organized by
   - `3-hard/`
     - `test_<problem_name>.py` — Pytest test file for the corresponding problem
 
+## Naming Convention
+
+- Problem folders: `<number>-<Problem-Name>` (e.g., `217-Contains-Duplicate`)
+- Solution files: `solution.py` and `solution.cpp`
+
 ## Documentation (Next.js + Fumadocs)
 
 The documentation site is built with [Next.js](https://nextjs.org/) and [Fumadocs](https://fumadocs.dev/), deployed to GitHub Pages.
@@ -73,7 +78,7 @@ The docs use [Biome](https://biomejs.dev/) for linting and formatting:
   pnpm format
   ```
 
-## Setup (with uv)
+## Python Setup (with uv)
 
 This project uses [uv](https://github.com/astral-sh/uv) for fast Python environment management and dependency installation.
 
@@ -85,7 +90,7 @@ Use `uv sync` to install all dependencies specified in `pyproject.toml` and `uv.
 uv sync
 ```
 
-## Linting (with ruff)
+### Linting (with ruff)
 
 We use [ruff](https://github.com/astral-sh/ruff) for linting Python code. The configuration is managed in `.ruff.toml`.
 
@@ -98,7 +103,7 @@ We use [ruff](https://github.com/astral-sh/ruff) for linting Python code. The co
   uv run ruff check --fix
   ```
 
-## Tests
+### Tests
 
 All Python solutions are tested using [pytest](https://docs.pytest.org/). Test cases are organized in the `tests/` directory, mirroring the problem folder structure (e.g., `tests/1-easy/test_1_two_sum.py`).
 
@@ -107,12 +112,6 @@ To run all tests:
 ```sh
 uv run pytest
 ```
-
-## Naming Convention
-
-- Problem folders: `<number>-<Problem-Name>` (e.g., `217-Contains-Duplicate`)
-- Solution files: `solution.py` and `solution.cpp`
-
 
 ## Contributors
 
