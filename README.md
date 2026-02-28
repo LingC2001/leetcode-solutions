@@ -2,27 +2,7 @@
 
 A collection of LeetCode solutions with documentation and analysis, organized by difficulty and problem number. Each solution includes implementations in multiple programming languages.
 
-## Dashboard Overview
-
-<div align="center">
-
-### 🎯 **Progress Summary**
-<table>
-<tr>
-<td align="center" valign="top">
-<img src="dashboard/assets/difficulty_progress.svg" alt="Difficulty Progress Ring" />
-</td>
-<td align="center" valign="top">
-<img src="dashboard/assets/streak_counter.svg" alt="Streak Counter" />
-</td>
-</tr>
-</table>
-
-### 🔥 **Activity**
-<img src="dashboard/assets/activity_heatmap.svg" alt="Git Activity Heatmap" />
-
-</div>
-
+**📖 View the full documentation:** https://lingc2001.github.io/leetcode-solutions/
 
 ---
 
@@ -41,44 +21,61 @@ A collection of LeetCode solutions with documentation and analysis, organized by
   - `2-medium/`
   - `3-hard/`
     - `test_<problem_name>.py` — Pytest test file for the corresponding problem
-- `dashboard/` — Visual analytics and progress tracking:
-  - `scripts/generate_progress.py` — Dashboard generation script
-  - `assets/` — Generated SVG charts and analytics data
+
+## Documentation (Next.js + Fumadocs)
+
+The documentation site is built with [Next.js](https://nextjs.org/) and [Fumadocs](https://fumadocs.dev/), deployed to GitHub Pages.
+
+### Setup
+
+Navigate to the `docs/` directory:
+
+```sh
+cd docs
+```
+
+Install dependencies with `pnpm`:
+
+```sh
+pnpm install
+```
+
+### Development
+
+Start the development server:
+
+```sh
+pnpm dev
+```
+
+Visit `http://localhost:3000` to view the docs locally.
+
+### Building
+
+Build the static site for production:
+
+```sh
+pnpm build
+```
+
+The output is generated in the `out/` directory, which is automatically deployed to GitHub Pages on push to `main`.
+
+### Linting & Formatting (Biome)
+
+The docs use [Biome](https://biomejs.dev/) for linting and formatting:
+
+- **Check for issues:**
+  ```sh
+  pnpm lint
+  ```
+- **Auto-format code:**
+  ```sh
+  pnpm format
+  ```
 
 ## Setup (with uv)
 
 This project uses [uv](https://github.com/astral-sh/uv) for fast Python environment management and dependency installation.
-
-### Install uv
-
-#### On Windows
-
-- Run the following command in PowerShell:
-
-  ```powershell
-  powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-  ```
-
-- Alternatively, download and run the latest `.msi` installer from the [uv releases page](https://github.com/astral-sh/uv/releases).
-- Or download the Windows executable (`uv-x86_64-pc-windows-msvc.exe`), rename it to `uv.exe`, and add its location to your system `PATH`.
-
-#### On Mac (and Linux)
-
-- Run the following command in your terminal:
-
-  ```sh
-  curl -Ls https://astral.sh/uv/install.sh | sh
-  ```
-
-- Or, on Mac, you can use Homebrew:
-
-  ```sh
-  brew install astral-sh/uv/uv
-  ```
-
-- Or download a prebuilt binary from the [releases page](https://github.com/astral-sh/uv/releases).
-
-For more details, see the [official uv installation guide](https://docs.astral.sh/uv/guides/install-python/).
 
 ### Install dependencies
 
@@ -116,17 +113,6 @@ uv run pytest
 - Problem folders: `<number>-<Problem-Name>` (e.g., `217-Contains-Duplicate`)
 - Solution files: `solution.py` and `solution.cpp`
 
-## Contributing
-
-1. Fork the repository
-2. Create a new branch for your feature or fix
-3. Add your solution in the appropriate folder
-4. Run lint checks before submitting a PR
-5. Submit a pull request with a clear description
-
-## License
-
-This project is licensed under the MIT License.
 
 ## Contributors
 
