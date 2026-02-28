@@ -2,13 +2,15 @@ import { Inter } from "next/font/google";
 import { Provider } from "@/components/provider";
 import "./global.css";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const inter = Inter({
   subsets: ["latin"],
 });
 
 export const metadata = {
   icons: {
-    icon: "/favicon.ico",
+    icon: `${basePath}/favicon.ico`,
   },
 };
 
