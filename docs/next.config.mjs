@@ -5,11 +5,13 @@ const basePath = process.env.GITHUB_PAGES ? '/leetcode-solutions' : '';
 
 /** @type {import('next').NextConfig} */
 const config = {
-  serverExternalPackages: ['@takumi-rs/image-response'],
-  
   output: 'export',
   reactStrictMode: true,
-  basePath: basePath,
+
+  basePath,
+  assetPrefix: basePath + '/',
+
+  serverExternalPackages: ['@takumi-rs/image-response'],
 };
 
 export default withMDX(config);
