@@ -3,7 +3,7 @@ import path from 'path';
 import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
 import { codeToHtml } from 'shiki';
 
-type Language = 'python' | 'cpp' | 'java' | 'golang';
+type Language = 'python' | 'cpp' | 'java' | 'go';
 
 interface CodeProps {
   problemNumber: number;
@@ -16,14 +16,14 @@ const languageExtensionMap: Record<Language, string> = {
   python: 'py',
   cpp: 'cpp',
   java: 'java',
-  golang: 'go',
+  go: 'go',
 };
 
 const languageLabelMap: Record<Language, string> = {
   python: 'Python',
   cpp: 'C++',
   java: 'Java',
-  golang: 'Go',
+  go: 'Go',
 };
 
 export default async function Code({
