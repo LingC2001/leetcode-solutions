@@ -29,13 +29,10 @@ jobs:
           cache-dependency-path: 'docs/pnpm-lock.yaml'
       
       - name: Install dependencies
-        run: cd docs && pnpm install
+        run: cd docs && pnpm install --frozen-lockfile
       
       - name: Generate Fumadocs
-        run: cd docs && pnpm fumadocs-mdx
-      
-      - name: Build
-        run: cd docs && pnpm build
+        run: cd docs && pnpm fumadocs-mdx && pnpm next build
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
