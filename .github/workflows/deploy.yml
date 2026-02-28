@@ -32,6 +32,8 @@ jobs:
         run: cd docs && pnpm install
       
       - name: Build
+        env:
+          GITHUB_PAGES: true
         run: cd docs && pnpm build
       
       - name: Upload artifact

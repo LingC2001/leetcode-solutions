@@ -1,7 +1,7 @@
 import { createMDX } from 'fumadocs-mdx/next';
 
 const withMDX = createMDX();
-const basePath = process.env.GITHUB_PAGES ? '/leetcode-docs' : '';
+const basePath = process.env.GITHUB_PAGES ? '/leetcode-solutions' : '';
 
 /** @type {import('next').NextConfig} */
 const config = {
