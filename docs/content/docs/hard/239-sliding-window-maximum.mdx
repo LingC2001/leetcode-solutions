@@ -1,0 +1,54 @@
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given the following problem, find the optimal solution.
+
+Given an array `nums` and an integer `k`, return the maximum value in every contiguous subarray of size `k`.
+
+---
+
+## Approach
+
+Uses a **double ended queue (deque)** to track potential maximums in each window:
+
+* Maintain a deque (`max_deque`) where elements are in decreasing order.
+* For each new element:
+  * Remove smaller elements from the back.
+  * Append the new element.
+* The front of the deque is always the current window's maximum.
+* If the outgoing element equals the deque front, pop it.
+
+This ensures we get O(1) access to the max for each window while keeping all operations efficient.
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** 
+
+**Space Complexity:** 
+
+---
+
+## Solutions
+
+### Python
+
+<Code problemNumber={239} difficulty="hard" lang="python" />
+
+### C++
+
+<Code problemNumber={239} difficulty="hard" lang="cpp" />
+
+### Java
+
+<Code problemNumber={239} difficulty="hard" lang="java" />
+
+---
+
+## Key Insights
+
+- Review the problem's constraints and examples carefully
+- Consider edge cases in your solution
+- Analyze the trade-offs between time and space complexity

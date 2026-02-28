@@ -1,0 +1,59 @@
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given the following problem, find the optimal solution.
+
+Given an array of integers `nums` which is sorted in ascending order, and an integer `target`, return the index of `target` if it is in the array.
+If it is not present, return `-1`.
+
+You must write an algorithm with `O(log n)` runtime complexity.
+
+---
+
+## Approach
+
+This problem is a classic application of the **Binary Search** algorithm, which is ideal for searching in a sorted list.
+
+* The key idea is to repeatedly divide the search space in half.
+* Begin with two pointers representing the bounds of the current search window.
+* At each step:
+
+  * Calculate the middle index.
+  * If the middle element is the target, return its index.
+  * If the middle element is greater than the target, move the right boundary to the left of mid.
+  * If it is smaller, move the left boundary to the right of mid.
+* If the search window is exhausted without finding the target, return `-1`.
+
+### Why this works:
+
+* Binary search exploits the ordering property of the array to eliminate half of the remaining elements with each comparison.
+* It ensures logarithmic time performance and is highly efficient for large, sorted datasets.
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** ** O(log n), since the search space is halved on each iteration.
+
+**Space Complexity:** ** O(1), as the search is done in-place using constant memory.
+
+---
+
+## Solutions
+
+### Python
+
+<Code problemNumber={704} difficulty="easy" lang="python" />
+
+### C++
+
+<Code problemNumber={704} difficulty="easy" lang="cpp" />
+
+---
+
+## Key Insights
+
+- Review the problem's constraints and examples carefully
+- Consider edge cases in your solution
+- Analyze the trade-offs between time and space complexity

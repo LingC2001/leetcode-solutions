@@ -1,0 +1,57 @@
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given the following problem, find the optimal solution.
+
+Given two strings `s1` and `s2`, return `true` if `s2` contains a **permutation** of `s1`, otherwise return `false`.
+
+---
+
+## Approach
+
+Uses a **fixed-size sliding window** and character frequency dictionaries:
+
+* If `len(s1) > len(s2)`, return `False`.
+* Create frequency maps for `s1` and the first window in `s2`.
+* Slide the window across `s2`, updating the map:
+  * Add the new character, remove the old one.
+  * Clean up 0-count entries to match dictionary structure.
+  * Compare maps — if equal, return `True`.
+* Return `False` if no match found.
+
+### 💡 Why direct dict comparison works:
+
+A permutation has the same character counts. Zero-count entries are removed to avoid mismatches from extra keys.
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** 
+
+**Space Complexity:** 
+
+---
+
+## Solutions
+
+### Python
+
+<Code problemNumber={567} difficulty="medium" lang="python" />
+
+### C++
+
+<Code problemNumber={567} difficulty="medium" lang="cpp" />
+
+### Java
+
+<Code problemNumber={567} difficulty="medium" lang="java" />
+
+---
+
+## Key Insights
+
+- Review the problem's constraints and examples carefully
+- Consider edge cases in your solution
+- Analyze the trade-offs between time and space complexity

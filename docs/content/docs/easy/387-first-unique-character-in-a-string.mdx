@@ -1,0 +1,40 @@
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given a string s, find the first non-repeating character in it and return its index. If the string does not contain a unique character, return -1.
+
+---
+
+## Approach
+
+Use a two-pass approach:
+
+1. **First Pass**: Iterate through the string and count the frequency of each character using a hash map.
+2. **Second Pass**: Iterate through the string again and return the index of the first character with a frequency of 1.
+
+This approach is optimal because it processes the string in linear time while keeping track of character frequencies.
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** O(n) - where n is the length of the string. We iterate through the string twice.
+
+**Space Complexity:** O(1) - We use a fixed-size hash map with at most 26 entries (for lowercase English letters), which is considered constant space.
+
+---
+
+## Solutions
+
+### Go
+
+<Code problemNumber={387} difficulty="easy" lang="golang" />
+
+---
+
+## Key Insights
+
+- Review the problem's constraints and examples carefully
+- Consider edge cases in your solution
+- Analyze the trade-offs between time and space complexity
