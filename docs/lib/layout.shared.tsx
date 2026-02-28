@@ -1,20 +1,22 @@
-import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
-import Image from 'next/image';
+import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
+import Image from "next/image";
 
 // fill this with your actual GitHub info, for example:
 export const gitConfig = {
-  user: 'lingc2001',
-  repo: 'leetcode-solutions',
-  branch: 'main',
+  user: "lingc2001",
+  repo: "leetcode-solutions",
+  branch: "main",
 };
 
 export function baseOptions(): BaseLayoutProps {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
   return {
     nav: {
       title: (
         <div className="flex items-center gap-2 font-semibold">
           <Image
-            src="/logo-light.png"
+            src={`${basePath}/logo-light.png`}
             alt="Logo"
             width={24}
             height={24}
@@ -22,7 +24,7 @@ export function baseOptions(): BaseLayoutProps {
             unoptimized={true}
           />
           <Image
-            src="/logo-dark.png"
+            src={`${basePath}/logo-dark.png`}
             alt="Logo"
             width={24}
             height={24}
@@ -35,9 +37,9 @@ export function baseOptions(): BaseLayoutProps {
     },
     links: [
       {
-        text: 'Problems & Solutions',
-        url: '/docs',
-        on: 'nav',
+        text: "Problems & Solutions",
+        url: "/docs",
+        on: "nav",
       },
     ],
     githubUrl: `https://github.com/${gitConfig.user}/${gitConfig.repo}`,

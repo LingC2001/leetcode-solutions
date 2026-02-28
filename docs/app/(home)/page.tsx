@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function HomePage() {
   return (
@@ -19,7 +19,8 @@ export default function HomePage() {
 
         {/* Description */}
         <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-          A curated collection of LeetCode problem solutions with detailed explanations, optimal approaches, and time/space complexity analysis.
+          A curated collection of LeetCode problem solutions with detailed
+          explanations, optimal approaches, and time/space complexity analysis.
         </p>
 
         {/* CTA Buttons */}

@@ -1,29 +1,22 @@
-import fs from 'fs';
-import path from 'path';
-import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
-import { codeToHtml } from 'shiki';
+import fs from "node:fs";
+import path from "node:path";
+import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
+import { codeToHtml } from "shiki";
 
-type Language = 'python' | 'cpp' | 'java' | 'go';
+type Language = "python" | "cpp" | "java" | "go";
 
 interface CodeProps {
   problemNumber: number;
-  difficulty: 'easy' | 'medium' | 'hard';
+  difficulty: "easy" | "medium" | "hard";
   lang: Language;
   filename?: string;
 }
 
 const languageExtensionMap: Record<Language, string> = {
-  python: 'py',
-  cpp: 'cpp',
-  java: 'java',
-  go: 'go',
-};
-
-const languageLabelMap: Record<Language, string> = {
-  python: 'Python',
-  cpp: 'C++',
-  java: 'Java',
-  go: 'Go',
+  python: "py",
+  cpp: "cpp",
+  java: "java",
+  go: "go",
 };
 
 export default async function Code({
@@ -33,9 +26,9 @@ export default async function Code({
   filename,
 }: CodeProps) {
   const difficultyMap = {
-    easy: '1-easy',
-    medium: '2-medium',
-    hard: '3-hard',
+    easy: "1-easy",
+    medium: "2-medium",
+    hard: "3-hard",
   };
 
   const difficultyFolder = difficultyMap[difficulty];
@@ -43,14 +36,14 @@ export default async function Code({
 
   const problemsDir = path.join(
     process.cwd(),
-    '..',
-    'problems',
-    difficultyFolder
+    "..",
+    "problems",
+    difficultyFolder,
   );
 
   const folders = fs.readdirSync(problemsDir);
   const problemFolder = folders.find((folder) =>
-    folder.startsWith(`${problemNumber}-`)
+    folder.startsWith(`${problemNumber}-`),
   );
 
   if (!problemFolder) {
@@ -65,17 +58,15 @@ export default async function Code({
 
   if (!fs.existsSync(codePath)) {
     return (
-      <div className="text-red-500">
-        Code file not found: {codeFileName}
-      </div>
+      <div className="text-red-500">Code file not found: {codeFileName}</div>
     );
   }
 
-  const code = fs.readFileSync(codePath, 'utf-8').trim();
+  const code = fs.readFileSync(codePath, "utf-8").trim();
 
   const html = await codeToHtml(code, {
     lang,
-    theme: 'github-dark',
+    theme: "github-dark",
   });
 
   return (

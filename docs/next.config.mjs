@@ -1,18 +1,21 @@
-import { createMDX } from 'fumadocs-mdx/next';
+import { createMDX } from "fumadocs-mdx/next";
 
 const withMDX = createMDX();
-const isProd = process.env.NODE_ENV === 'production';
-const basePath = isProd ? '/leetcode-solutions' : '';
+const basePath = process.env.GITHUB_PAGES ? "/leetcode-solutions" : "";
 
 /** @type {import('next').NextConfig} */
 const config = {
-  output: 'export',
+  output: "export",
   reactStrictMode: true,
 
   basePath: basePath,
-  assetPrefix: basePath + '/',
+  assetPrefix: `${basePath}/`,
 
-  serverExternalPackages: ['@takumi-rs/image-response'],
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
+
+  serverExternalPackages: ["@takumi-rs/image-response"],
 };
 
 export default withMDX(config);
