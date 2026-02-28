@@ -1,0 +1,61 @@
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given the following problem, find the optimal solution.
+
+Given an integer array `nums`, return all the triplets `[nums[i], nums[j], nums[k]]` such that `i != j`, `i != k`, and `j != k`, and `nums[i] + nums[j] + nums[k] == 0`.
+
+The solution set must not contain duplicate triplets.
+
+---
+
+## Approach
+
+This solution uses a **Two-Pointer Technique** on a sorted array to efficiently find all unique triplets that sum to zero.
+
+### General Steps:
+- **Sort the input array.** This allows the use of the two-pointer method and simplifies duplicate handling.
+- **Iterate through each number in the array.** For each number, treat it as the first number of the triplet and search for the remaining two numbers using two pointers (`lo` and `hi`).
+- **Skip duplicates.** If the current number is the same as the previous number, continue to the next iteration to avoid duplicate triplets.
+- **Adjust pointers.**
+    - If the current sum equals the target, record the triplet and move both pointers, skipping any duplicates.
+    - If the current sum is less than the target, move the lower pointer up.
+    - If the current sum is greater than the target, move the higher pointer down.
+- **Return all unique triplets.**
+
+### Why this is optimal:
+- This approach avoids the brute-force O(n³) solution by using sorting and the two-pointer technique to achieve O(n²) time complexity.
+- Proper duplicate handling ensures the solution meets the unique triplet requirement efficiently.
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** ** O(n²)  
+
+**Space Complexity:** ** O(1) (excluding the output list)  
+
+---
+
+## Solutions
+
+### Python
+
+<Code problemNumber={15} difficulty="medium" lang="python" />
+
+### C++
+
+<Code problemNumber={15} difficulty="medium" lang="cpp" />
+
+### Java
+
+<Code problemNumber={15} difficulty="medium" lang="java" />
+
+---
+
+## Key Insights
+
+- Review the problem's constraints and examples carefully
+- Consider edge cases in your solution
+- Analyze the trade-offs between time and space complexity

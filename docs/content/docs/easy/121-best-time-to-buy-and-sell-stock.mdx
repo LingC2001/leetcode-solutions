@@ -1,0 +1,56 @@
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given the following problem, find the optimal solution.
+
+You are given an array `prices` where `prices[i]` is the price of a given stock on the i-th day.
+
+You want to maximize your profit by choosing a **single day to buy** one stock and choosing a **different day in the future to sell** that stock.
+
+Return the maximum profit you can achieve from this transaction. If no profit is possible, return 0.
+
+---
+
+## Approach
+
+The solution uses a **Single-Pass Greedy Strategy** to efficiently track the minimum price seen so far and the maximum profit achievable at each step.
+
+* Iterate through the price list while maintaining the lowest price encountered so far.
+* At each step, calculate the profit if you were to sell at the current day's price.
+* Continuously update the maximum profit found so far.
+* Continuously update the minimum price if a lower price is encountered.
+
+This approach guarantees that each day is processed only once, and ensures the "buy before sell" constraint is satisfied.
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** ** O(n), where n is the number of days. Each price is processed once.
+
+**Space Complexity:** ** O(1), using constant extra space for tracking variables.
+
+---
+
+## Solutions
+
+### Python
+
+<Code problemNumber={121} difficulty="easy" lang="python" />
+
+### C++
+
+<Code problemNumber={121} difficulty="easy" lang="cpp" />
+
+### Java
+
+<Code problemNumber={121} difficulty="easy" lang="java" />
+
+---
+
+## Key Insights
+
+- Review the problem's constraints and examples carefully
+- Consider edge cases in your solution
+- Analyze the trade-offs between time and space complexity

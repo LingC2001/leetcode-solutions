@@ -1,0 +1,51 @@
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given the following problem, find the optimal solution.
+
+Given a string `s`, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+---
+
+## Approach
+
+The approach first preprocesses the input string by converting it to lowercase and filtering out all non-alphanumeric characters, creating a sanitized string `stripped_str`. Then, two pointers `forward_index` and `backward_index` are used to compare characters from the start and end of the string moving inward.
+
+- If characters at both pointers match, pointers move closer to the center.
+- If a mismatch is found, return `False` immediately.
+- If pointers cross without mismatches, return `True`.
+
+This method efficiently checks palindrome property by ignoring case and non-alphanumeric characters.
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** ** O(n), where n is the length of the input string `s`. The string is processed twice (filtering and checking), both linear operations.
+
+**Space Complexity:** ** O(n), due to the creation of the filtered string.
+
+---
+
+## Solutions
+
+### Python
+
+<Code problemNumber={125} difficulty="easy" lang="python" />
+
+### C++
+
+<Code problemNumber={125} difficulty="easy" lang="cpp" />
+
+### Java
+
+<Code problemNumber={125} difficulty="easy" lang="java" />
+
+---
+
+## Key Insights
+
+- Review the problem's constraints and examples carefully
+- Consider edge cases in your solution
+- Analyze the trade-offs between time and space complexity

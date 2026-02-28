@@ -1,0 +1,57 @@
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given the following problem, find the optimal solution.
+
+You are given a string `s` and an integer `k`. You can choose any character of the string and change it to any other uppercase English character. You can perform this operation at most `k` times.
+
+Return the length of the longest substring containing the same letter you can get after performing the above operation.
+
+---
+
+## Approach
+
+The solution uses a **Sliding Window Strategy**:
+
+* Use a window defined by `left` and `right` pointers to scan the string.
+* Maintain a frequency map of characters within the current window.
+* Track the count of the most frequent character in the window.
+* If the number of characters to replace (window size - max frequency) exceeds `k`, shrink the window from the left.
+    *   The max frequency determines the length of the window.
+    *    We do not update max frequency if the new max is lower because we dont need to check windows that are smaller than the max length we have currently found.
+* The maximum window size seen during this process is the result.
+
+This approach ensures the substring always requires at most `k` replacements to be uniform.
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** ** O(n), where n is the length of the string. Each character is processed at most twice.
+
+**Space Complexity:** ** O(1), since the character set is limited to 26 uppercase English letters.
+
+---
+
+## Solutions
+
+### Python
+
+<Code problemNumber={424} difficulty="medium" lang="python" />
+
+### C++
+
+<Code problemNumber={424} difficulty="medium" lang="cpp" />
+
+### Java
+
+<Code problemNumber={424} difficulty="medium" lang="java" />
+
+---
+
+## Key Insights
+
+- Review the problem's constraints and examples carefully
+- Consider edge cases in your solution
+- Analyze the trade-offs between time and space complexity
