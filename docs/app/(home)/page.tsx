@@ -40,22 +40,6 @@ export default function HomePage() {
             Browse GitHub
           </a>
         </div>
-
-        {/* Stats */}
-        <div className="pt-8 grid grid-cols-3 gap-8 border-t border-foreground/10">
-          <div>
-            <div className="text-3xl font-bold text-foreground">200+</div>
-            <p className="text-sm text-muted-foreground mt-1">Problems Solved</p>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-foreground">3</div>
-            <p className="text-sm text-muted-foreground mt-1">Difficulty Levels</p>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-foreground">1k+</div>
-            <p className="text-sm text-muted-foreground mt-1">Code Examples</p>
-          </div>
-        </div>
       </div>
     </div>
   );
