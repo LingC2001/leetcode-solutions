@@ -36,7 +36,7 @@ export default function HomePage() {
             href="https://github.com/LingC2001/leetcode-solutions"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-3 rounded-lg border border-foreground/20 text-foreground font-medium hover:bg-foreground/5 transition-colors duration-200"
+            className="px-8 py-3 rounded-lg border border-foreground/20 text-foreground font-medium hover:bg-foreground/5 transition-colors duration-200 inline-flex items-center justify-center"
           >
             Browse GitHub
           </a>
