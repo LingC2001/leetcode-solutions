@@ -1,0 +1,77 @@
+---
+title: 412. Fizz Buzz
+difficulty: easy
+tags: [strings, math, simulation]
+---
+
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given an integer `n`, return a string array `answer` (1-indexed) where:
+
+- `answer[i] == "FizzBuzz"` if `i` is divisible by 3 and 5.
+- `answer[i] == "Fizz"` if `i` is divisible by 3.
+- `answer[i] == "Buzz"` if `i` is divisible by 5.
+- `answer[i] == i` (as a string) if none of the above conditions are true.
+
+[View on LeetCode →](https://leetcode.com/problems/fizz-buzz/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: n = 3
+Output: ["1","2","Fizz"]
+```
+
+### Example 2
+
+```
+Input: n = 5
+Output: ["1","2","Fizz","4","Buzz"]
+```
+
+### Example 3
+
+```
+Input: n = 15
+Output: ["1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14","FizzBuzz"]
+```
+
+---
+
+## Approach
+
+Simple iteration with modulus checks:
+
+1. Iterate from 1 to `n`.
+2. For each number, check divisibility by both 3 and 5 first (order matters), then by 3, then by 5.
+3. If none of the conditions match, convert the number to a string.
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** O(n), single pass from 1 to n.
+
+**Space Complexity:** O(1) extra space (excluding the output array).
+
+---
+
+## Solutions
+
+### Go
+
+<Code problemNumber={412} difficulty="easy" lang="go" />
+
+---
+
+## Key Insights
+
+- Check divisibility by both 3 and 5 **before** checking individually, otherwise the combined case is never reached.
+- No data structures needed — pure conditional logic.
+- The problem is a classic interview warm-up that tests attention to edge cases in conditional ordering.
