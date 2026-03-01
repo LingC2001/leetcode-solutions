@@ -8,28 +8,46 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the root of a binary tree, return the sum of all left leaves in the tree.
+Given the root of a binary tree, return the sum of all **left leaves**. A leaf is a node with no children. A left leaf is a leaf that is the left child of its parent.
 
-A leaf is a node with no children. A left leaf is a leaf node that is the left child of its parent.
+[View on LeetCode →](https://leetcode.com/problems/sum-of-left-leaves/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: root = [3, 9, 20, null, null, 15, 7]
+Output: 24
+Explanation: Left leaves are 9 and 15 → 9 + 15 = 24.
+```
+
+### Example 2
+
+```
+Input: root = [1]
+Output: 0
+```
 
 ---
 
 ## Approach
 
-Use DFS (Depth-First Search) with a flag to track whether the current node is a left child:
+DFS with a `leftChild` boolean flag:
 
-1. Pass a `leftChild` boolean flag from parent to child to indicate if the current node is a left child.
-2. During traversal, recursively process left and right subtrees.
-3. When we find a leaf node (no left or right child) that is also a left child (flag is true), add its value to the sum.
-4. Return the accumulated sum.
+1. Pass `isLeft bool` down the recursion to indicate whether the current node is a left child.
+2. If the current node is a leaf **and** `isLeft == true`, add its value to the sum.
+3. Recurse left with `isLeft = true` and right with `isLeft = false`.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** O(n) - where n is the number of nodes. We visit each node once during the DFS traversal.
+**Time Complexity:** O(n), where n is the number of nodes. Each node is visited once.
 
-**Space Complexity:** O(h) - where h is the height of the tree. This is for the recursive call stack in the worst case (skewed tree).
+**Space Complexity:** O(h), where h is the height of the tree, for the recursion stack.
 
 ---
 
@@ -43,6 +61,6 @@ Use DFS (Depth-First Search) with a flag to track whether the current node is a 
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- The "left" designation must come from the parent — a leaf node alone cannot determine if it's a left child.
+- Pass the `isLeft` flag as a parameter rather than checking parent pointers (which linked structures don't usually have).
+- This pattern generalizes to any problem where node identity depends on position relative to its parent.

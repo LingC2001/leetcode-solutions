@@ -8,7 +8,36 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given a string s, find the first non-repeating character in it and return its index. If the string does not contain a unique character, return -1.
+Given a string `s`, find the first non-repeating character in it and return its index. If it does not exist, return `-1`.
+
+[View on LeetCode →](https://leetcode.com/problems/first-unique-character-in-a-string/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: s = "leetcode"
+Output: 0
+Explanation: The character 'l' at index 0 appears only once.
+```
+
+### Example 2
+
+```
+Input: s = "loveleetcode"
+Output: 2
+Explanation: The character 'v' at index 2 appears only once.
+```
+
+### Example 3
+
+```
+Input: s = "aabb"
+Output: -1
+```
 
 ---
 
@@ -19,15 +48,13 @@ Use a two-pass approach:
 1. **First Pass**: Iterate through the string and count the frequency of each character using a hash map.
 2. **Second Pass**: Iterate through the string again and return the index of the first character with a frequency of 1.
 
-This approach is optimal because it processes the string in linear time while keeping track of character frequencies.
-
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** O(n) - where n is the length of the string. We iterate through the string twice.
+**Time Complexity:** O(n), where n is the length of the string. We iterate twice.
 
-**Space Complexity:** O(1) - We use a fixed-size hash map with at most 26 entries (for lowercase English letters), which is considered constant space.
+**Space Complexity:** O(1), since at most 26 lowercase English letters are tracked.
 
 ---
 
@@ -41,6 +68,6 @@ This approach is optimal because it processes the string in linear time while ke
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- Two passes are required: one to count frequencies, one to find the first unique character in original order.
+- A single-pass approach is possible using a list of `(char, index)` ordered by first occurrence, but the two-pass approach is simpler.
+- Since the alphabet is fixed (26 letters), space is effectively constant.

@@ -8,36 +8,54 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given a set of distinct integers, `nums`, return all possible subsets (the power set).
+Given an integer array `nums` of **unique** elements, return all possible subsets (the power set). The solution set must not contain duplicate subsets. You may return the answer in any order.
 
-The solution set must not contain duplicate subsets. You may return the solution in any order.
+[View on LeetCode →](https://leetcode.com/problems/subsets/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: nums = [1, 2, 3]
+Output: [[], [1], [2], [1,2], [3], [1,3], [2,3], [1,2,3]]
+```
+
+### Example 2
+
+```
+Input: nums = [0]
+Output: [[], [0]]
+```
 
 ---
 
 ## Approach
 
-To generate all subsets we can use backtracking (depth‑first search) to explore decisions of including or
-excluding each element. Starting with an empty path, at each index we either take the current number
-or skip it, recursing until the end of the array. Every path visited represents a valid subset, and we
-add a copy of it to the result.
+**Backtracking (DFS):**
 
-- Begin with an empty result list containing the empty subset.
-- Iterate through elements, and for each position perform a recursive call that either includes the
-current element or moves on.
-- Use a temporary `path` slice/list to build the current subset; copy it when adding to the
-`res` to avoid mutations.
-- The time complexity is O(2ⁿ) since each element has two choices, and space complexity is also
-O(2ⁿ) for the output.
+Starting from an empty path, at each index make two decisions: include the current element, or skip it. Recurse until the end of the array. Every visited path is a valid subset.
 
-This backtracking framework can be easily implemented in most languages.
+```
+dfs(index, path):
+    result.append(copy of path)
+    for i in index..n-1:
+        path.append(nums[i])
+        dfs(i + 1, path)
+        path.pop()
+```
+
+Since all elements are distinct, no duplicate-skipping logic is needed.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** **O(2ⁿ · n)** – each subset takes O(n) to copy and there are 2ⁿ subsets.
+**Time Complexity:** O(2ⁿ · n) — there are 2ⁿ subsets, each taking O(n) to copy.
 
-**Space Complexity:** **O(2ⁿ · n)** – the output list contains all subsets, each of average length n/2.
+**Space Complexity:** O(2ⁿ · n) — the output contains all subsets.
 
 ---
 
@@ -51,8 +69,6 @@ This backtracking framework can be easily implemented in most languages.
 
 ## Key Insights
 
-- Recognize that subsets correspond to the power set; the number of subsets grows exponentially.
-- Backtracking with a simple include/exclude decision suffices and naturally avoids duplicates
-because input has distinct elements.
-- Always copy the current path when appending to results to avoid later modifications.
-- Recursive and iterative (bitmask) approaches are both valid; backtracking is usually clearer.
+- Every node in the recursion tree (not just leaves) represents a valid subset — append at entry, not just at leaves.
+- Always copy the current path before appending to results to avoid later mutations affecting stored subsets.
+- An iterative bitmask approach is equally valid: for each integer `mask` from `0` to `2ⁿ - 1`, include `nums[i]` if bit `i` of `mask` is set.

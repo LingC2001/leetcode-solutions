@@ -8,53 +8,57 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+In a linked list of even length `n`, the **twin** of node `i` is node `n - 1 - i`. The **twin sum** is the sum of a node and its twin. Given the head of a linked list with even length, return the **maximum twin sum**.
 
-In a linked list of even length, the **twin** of the node at index `i` (0-indexed) is the node at index `n - 1 - i`, where `n` is the length of the linked list.
+[View on LeetCode →](https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/)
 
-The **twin sum** is defined as the sum of a node and its twin.
+---
 
-Given the `head` of a linked list with even length, return the **maximum twin sum** of the linked list.
+## Examples
+
+### Example 1
+
+```
+Input: head = [5, 4, 2, 1]
+Output: 6
+Explanation: Nodes 0 and 3 are twins (5+1=6), nodes 1 and 2 are twins (4+2=6). Max twin sum = 6.
+```
+
+### Example 2
+
+```
+Input: head = [4, 2, 2, 3]
+Output: 7
+Explanation: Twins: (4,3)=7, (2,2)=4. Max = 7.
+```
+
+### Example 3
+
+```
+Input: head = [1, 100000]
+Output: 100001
+```
 
 ---
 
 ## Approach
 
-To efficiently compute the maximum twin sum, we need to pair:
+**Fast & Slow Pointer + Reverse Second Half:**
 
-- First node with last node  
-- Second node with second-last node  
-- And so on...
+1. Find the middle using fast/slow pointers (`slow` moves 1 step, `fast` moves 2 steps).
+2. Reverse the second half of the list in-place starting from `slow`.
+3. Traverse both halves simultaneously, computing `twin_sum = first.val + second.val` at each step.
+4. Return the maximum twin sum.
 
-### Optimal Strategy (Fast & Slow Pointer + Reverse Second Half)
-
-1. **Find the middle of the linked list** using the fast and slow pointer technique.
-   - `fast` moves two steps at a time.
-   - `slow` moves one step at a time.
-   - When `fast` reaches the end, `slow` is at the midpoint.
-
-2. **Reverse the second half** of the linked list starting from `slow`.
-
-3. **Traverse both halves simultaneously**, computing:
-```
-twin_sum = first_half_node.val + second_half_node.val
-```
-
-Keep track of the maximum twin sum during traversal.
-
-4. Return the maximum twin sum found.
+This avoids allocating extra arrays and works in O(1) space.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** O(n), where `n` is the number of nodes in the list.  
-- Finding the middle → O(n)  
-- Reversing half → O(n)  
-- Calculating twin sums → O(n)
+**Time Complexity:** O(n) — finding middle + reversing half + scanning both halves.
 
-**Space Complexity:** O(1)  
-- We reverse the list in-place without using extra space.
+**Space Complexity:** O(1) — in-place reversal.
 
 ---
 
@@ -68,7 +72,6 @@ Keep track of the maximum twin sum during traversal.
 
 ## Key Insights
 
-- Linked list problems often benefit from the fast & slow pointer technique.
-- Reversing part of a linked list is a powerful tool for pairing symmetrical nodes.
-- Always check whether in-place modification is allowed to optimize space.
-- Since the list length is guaranteed to be even, no extra edge-case handling is required for unmatched nodes.
+- The fast/slow pointer trick finds the midpoint in one pass without knowing list length upfront.
+- Reversing the second half turns the symmetric pairing problem into a simple two-pointer scan.
+- Always check whether in-place modification is allowed — an alternative O(n) space approach uses a stack or array.

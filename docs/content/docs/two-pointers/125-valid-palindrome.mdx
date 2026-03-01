@@ -8,29 +8,56 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+A phrase is a palindrome if, after converting all uppercase letters to lowercase and removing all non-alphanumeric characters, it reads the same forward and backward. Given a string `s`, return `true` if it is a palindrome, or `false` otherwise.
 
-Given a string `s`, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+[View on LeetCode →](https://leetcode.com/problems/valid-palindrome/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: s = "A man, a plan, a canal: Panama"
+Output: true
+Explanation: "amanaplanacanalpanama" is a palindrome.
+```
+
+### Example 2
+
+```
+Input: s = "race a car"
+Output: false
+Explanation: "raceacar" is not a palindrome.
+```
+
+### Example 3
+
+```
+Input: s = " "
+Output: true
+Explanation: After removing non-alphanumeric characters, it's an empty string, which is a palindrome.
+```
 
 ---
 
 ## Approach
 
-The approach first preprocesses the input string by converting it to lowercase and filtering out all non-alphanumeric characters, creating a sanitized string `stripped_str`. Then, two pointers `forward_index` and `backward_index` are used to compare characters from the start and end of the string moving inward.
-
-- If characters at both pointers match, pointers move closer to the center.
-- If a mismatch is found, return `False` immediately.
-- If pointers cross without mismatches, return `True`.
-
-This method efficiently checks palindrome property by ignoring case and non-alphanumeric characters.
+1. Preprocess: convert `s` to lowercase and filter to alphanumeric characters only → `stripped`.
+2. Use two pointers `left = 0`, `right = len(stripped) - 1`.
+3. While `left < right`:
+   - If `stripped[left] != stripped[right]`, return `false`.
+   - Advance both pointers inward.
+4. Return `true`.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** ** O(n), where n is the length of the input string `s`. The string is processed twice (filtering and checking), both linear operations.
+**Time Complexity:** O(n), where n is the length of `s`. Filtering and checking are both linear.
 
-**Space Complexity:** ** O(n), due to the creation of the filtered string.
+**Space Complexity:** O(n) for the filtered string. An in-place two-pointer variant using `isalnum` skips filtering to achieve O(1) space.
 
 ---
 
@@ -52,6 +79,6 @@ This method efficiently checks palindrome property by ignoring case and non-alph
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- Preprocessing simplifies the comparison logic — handle case and non-alphanumeric filtering once upfront.
+- O(1) space variant: skip non-alphanumeric characters directly in the two-pointer loop without building a filtered string.
+- An empty or single-character string (after filtering) is trivially a palindrome.

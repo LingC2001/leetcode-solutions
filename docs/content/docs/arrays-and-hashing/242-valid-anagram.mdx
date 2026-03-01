@@ -1,27 +1,44 @@
 ---
 title: 242. Valid Anagram
 difficulty: easy
-tags: [arrays, hashing, sorting]
+tags: [arrays, hashing]
 ---
 
 import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+Given two strings `s` and `t`, return `true` if `t` is an anagram of `s`, and `false` otherwise. An anagram is a word formed by rearranging the letters of another, using all the original letters exactly once.
 
-Given two strings `s` and `t`, determine if `t` is an anagram of `s`. An anagram means both strings contain the same characters with the same frequencies, but possibly in a different order.
+[View on LeetCode →](https://leetcode.com/problems/valid-anagram/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: s = "anagram", t = "nagaram"
+Output: true
+```
+
+### Example 2
+
+```
+Input: s = "rat", t = "car"
+Output: false
+```
 
 ---
 
 ## Approach
 
 The solution uses a hash map (implemented as a `defaultdict(int)`) to count character frequencies in `s`. Then, it decrements counts based on characters in `t`. If after processing both strings any character count is not zero, the strings are not anagrams.
-
 - Count frequencies of each character in `s`.
 - Subtract frequencies based on characters in `t`.
-- If any count is non-zero, return `False`.
-- Otherwise, return `True`.
+- If any count is non-zero, return `false`.
+- Otherwise, return `true`.
 
 This approach efficiently compares the two strings using character counts without sorting.
 
@@ -29,9 +46,9 @@ This approach efficiently compares the two strings using character counts withou
 
 ## Complexity Analysis
 
-**Time Complexity:** ** O(n), where n is the length of the strings (both are assumed to be the same length for an anagram).
+**Time Complexity:** O(n), where n is the length of the strings (both are assumed to be the same length for an anagram).
 
-**Space Complexity:** ** O(1), since the character set is fixed (e.g., ASCII alphabets), or O(k) where k is number of unique characters.
+**Space Complexity:** O(1), since the character set is fixed (e.g., 26 lowercase ASCII letters), or O(k) where k is the number of unique characters.
 
 ---
 
@@ -53,6 +70,6 @@ This approach efficiently compares the two strings using character counts withou
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- Anagrams have identical character frequency maps — hash maps or sorted strings both work.
+- Sorting both strings and comparing (O(n log n)) is simpler but slower than O(n) hashing.
+- Edge case: strings of different lengths can never be anagrams — short-circuit early.

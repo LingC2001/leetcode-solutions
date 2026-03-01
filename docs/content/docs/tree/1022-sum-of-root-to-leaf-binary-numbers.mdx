@@ -8,23 +8,51 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+You are given a binary tree where each node has value `0` or `1`. Each root-to-leaf path represents a binary number. Return the sum of all root-to-leaf binary numbers.
 
+[View on LeetCode →](https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/)
 
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: root = [1, 0, 1, 0, 1, 0, 1]
+Output: 22
+Explanation: Paths: 100(=4), 101(=5), 110(=6), 111(=7) → 4+5+6+7 = 22
+```
+
+### Example 2
+
+```
+Input: root = [0]
+Output: 0
+```
 
 ---
 
 ## Approach
 
+**DFS with path accumulation:**
 
+1. Maintain a list (`binaryNum`) representing the current root-to-node path.
+2. On entering a node, append its value.
+3. On reaching a leaf (no children), convert `binaryNum` to an integer and add to `sum`.
+4. On backtracking, pop the last value.
+
+**Binary-to-integer conversion:** For a path of length `n`, the value is `sum(binaryNum[i] * 2^(n-1-i))`.
+
+In Go, slices are reference types, so pass a pointer `*[]int` when the slice size changes (append/pop), to propagate the modification back to the caller.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** 
+**Time Complexity:** O(n), where n is the number of nodes. Each node is visited once.
 
-**Space Complexity:** 
+**Space Complexity:** O(h), where h is the height of the tree, for the recursion stack and path array.
 
 ---
 
@@ -38,6 +66,6 @@ Given the following problem, find the optimal solution.
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- DFS naturally tracks the current root-to-node path using the call stack; an explicit stack or list mirrors this.
+- Adding a node's value at entry and removing it at exit is the classic backtracking pattern.
+- In Go, pass `*[]int` (pointer to slice) when you need append/pop changes to persist outside the recursive call.

@@ -8,38 +8,57 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
-
 Given the head of a singly linked list, reverse the list and return the reversed list.
+
+[View on LeetCode →](https://leetcode.com/problems/reverse-linked-list/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: head = [1, 2, 3, 4, 5]
+Output: [5, 4, 3, 2, 1]
+```
+
+### Example 2
+
+```
+Input: head = [1, 2]
+Output: [2, 1]
+```
+
+### Example 3
+
+```
+Input: head = []
+Output: []
+```
 
 ---
 
 ## Approach
 
-We use an **in-place iterative reversal** with the Two Pointers pattern:
+In-place iterative reversal with two pointers:
 
-1. Initialize two pointers:
-   - `prev = None`
-   - `current = head`
-2. Iterate until `current` becomes `None`:
-   - Save `next_node = current.next`
-   - Reverse the link: `current.next = prev`
-   - Move `prev` forward: `prev = current`
-   - Move `current` forward: `current = next_node`
-3. At the end, `prev` points to the new head of the reversed list. Return `prev`.
+1. Initialize `prev = None`, `current = head`.
+2. While `current != None`:
+   - Save `next_node = current.next`.
+   - Reverse the link: `current.next = prev`.
+   - Advance: `prev = current`, `current = next_node`.
+3. Return `prev` — the new head.
 
-Key points:
-- We only change the `next` pointers; no new nodes are created.
-- This uses constant extra space.
-- Alternative approach: recursive reversal, but it uses O(n) call stack.
+Only `next` pointers are modified; no new nodes are created.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** ** O(n), where n is the number of nodes. Each node is visited exactly once.
+**Time Complexity:** O(n), where n is the number of nodes.
 
-**Space Complexity:** ** O(1), since we only use a fixed number of pointers.
+**Space Complexity:** O(1) for the iterative approach. Recursive approach is O(n) call stack.
 
 ---
 
@@ -61,6 +80,6 @@ Key points:
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- Three variables (`prev`, `current`, `next_node`) are all that is needed — no extra data structure.
+- Always save `current.next` before overwriting it, otherwise the rest of the list is lost.
+- Recursive reversal is elegant but uses O(n) stack space; prefer iterative for large inputs.

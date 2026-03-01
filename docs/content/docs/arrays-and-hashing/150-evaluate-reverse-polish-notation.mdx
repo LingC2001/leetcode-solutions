@@ -8,9 +8,36 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
-
 You are given an array of strings `tokens` that represents an arithmetic expression in Reverse Polish Notation (RPN). Evaluate the expression and return its value. Valid operators are `+`, `-`, `*`, and `/`. Each operand may be an integer or another expression. Division between two integers should truncate toward zero.
+
+[View on LeetCode →](https://leetcode.com/problems/evaluate-reverse-polish-notation/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: tokens = ["2", "1", "+", "3", "*"]
+Output: 9
+Explanation: ((2 + 1) * 3) = 9
+```
+
+### Example 2
+
+```
+Input: tokens = ["4", "13", "5", "/", "+"]
+Output: 6
+Explanation: (4 + (13 / 5)) = 6
+```
+
+### Example 3
+
+```
+Input: tokens = ["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"]
+Output: 22
+```
 
 ---
 
@@ -20,25 +47,20 @@ We use a stack to evaluate the RPN expression in one pass:
 
 1. Initialize an empty stack.
 2. Iterate through each token in `tokens`:
-   - If the token is a number (not one of `+ - * /`), convert it to `int` and push it onto the stack.
+   - If the token is a number, convert it to `int` and push it onto the stack.
    - Otherwise, it is an operator:
-     a. Pop the top two numbers from the stack (`b` first, then `a`).
-     b. Apply the operator to `a` and `b`:
-        - `+`: push `a + b`
-        - `-`: push `a - b`
-        - `*`: push `a * b`
-        - `/`: push `int(a / b)` to truncate toward zero
+     - Pop the top two numbers from the stack (`b` first, then `a`).
+     - Apply the operator to `a` and `b` and push the result.
+     - For `/`, use `int(a / b)` to truncate toward zero.
 3. After processing all tokens, the stack contains a single element: the result.
-
-This is optimal for RPN because each token is processed exactly once, and each operation is O(1).
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** ** O(n), where n is the number of tokens.  
+**Time Complexity:** O(n), where n is the number of tokens. Each token is processed once.
 
-**Space Complexity:** ** O(n), for the stack in the worst case (all tokens are numbers).
+**Space Complexity:** O(n), for the stack in the worst case (all tokens are numbers).
 
 ---
 
@@ -60,6 +82,6 @@ This is optimal for RPN because each token is processed exactly once, and each o
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- RPN eliminates the need for parentheses and operator precedence rules — a stack naturally handles evaluation order.
+- Pop operands in reverse: pop `b` then `a` so that `a OP b` is computed correctly.
+- For integer division truncating toward zero, use `int(a / b)` in Python (not `a // b` which rounds toward negative infinity).

@@ -8,41 +8,51 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+Given an array of integers `nums` which is sorted in ascending order, and an integer `target`, return the index of `target` if it is in the array. If it is not present, return `-1`. You must write an algorithm with `O(log n)` runtime complexity.
 
-Given an array of integers `nums` which is sorted in ascending order, and an integer `target`, return the index of `target` if it is in the array.
-If it is not present, return `-1`.
+[View on LeetCode →](https://leetcode.com/problems/binary-search/)
 
-You must write an algorithm with `O(log n)` runtime complexity.
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: nums = [-1, 0, 3, 5, 9, 12], target = 9
+Output: 4
+Explanation: 9 exists in nums at index 4.
+```
+
+### Example 2
+
+```
+Input: nums = [-1, 0, 3, 5, 9, 12], target = 2
+Output: -1
+Explanation: 2 does not exist in nums so return -1.
+```
 
 ---
 
 ## Approach
 
-This problem is a classic application of the **Binary Search** algorithm, which is ideal for searching in a sorted list.
+This problem is a classic application of the **Binary Search** algorithm.
+* Begin with two pointers: `left = 0`, `right = len(nums) - 1`.
+* At each step, calculate `mid = (left + right) // 2`.
+* If `nums[mid] == target`, return `mid`.
+* If `nums[mid] > target`, move `right = mid - 1`.
+* If `nums[mid] < target`, move `left = mid + 1`.
+* If the window collapses without finding target, return `-1`.
 
-* The key idea is to repeatedly divide the search space in half.
-* Begin with two pointers representing the bounds of the current search window.
-* At each step:
-
-  * Calculate the middle index.
-  * If the middle element is the target, return its index.
-  * If the middle element is greater than the target, move the right boundary to the left of mid.
-  * If it is smaller, move the left boundary to the right of mid.
-* If the search window is exhausted without finding the target, return `-1`.
-
-### Why this works:
-
-* Binary search exploits the ordering property of the array to eliminate half of the remaining elements with each comparison.
-* It ensures logarithmic time performance and is highly efficient for large, sorted datasets.
+Binary search exploits the sorted ordering to eliminate half the remaining elements with each comparison.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** ** O(log n), since the search space is halved on each iteration.
+**Time Complexity:** O(log n), since the search space is halved on each iteration.
 
-**Space Complexity:** ** O(1), as the search is done in-place using constant memory.
+**Space Complexity:** O(1), constant memory.
 
 ---
 
@@ -60,6 +70,6 @@ This problem is a classic application of the **Binary Search** algorithm, which 
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- The sorted property is the prerequisite — binary search cannot be applied to unsorted arrays.
+- Use `mid = left + (right - left) // 2` to avoid integer overflow in languages like C++/Java.
+- Every iteration must strictly shrink the window to avoid infinite loops.

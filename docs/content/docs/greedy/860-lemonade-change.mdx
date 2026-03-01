@@ -8,23 +8,49 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+At a lemonade stand, each lemonade costs `$5`. Customers pay with `$5`, `$10`, or `$20` bills. You start with no change. Return `true` if you can provide correct change to every customer, otherwise return `false`.
 
+[View on LeetCode →](https://leetcode.com/problems/lemonade-change/)
 
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: bills = [5, 5, 5, 10, 20]
+Output: true
+Explanation: From the first 3 customers collect $5 bills. Then give a $5 bill for the $10 customer. Finally give a $10 and $5 for the $20 customer.
+```
+
+### Example 2
+
+```
+Input: bills = [5, 5, 10, 10, 20]
+Output: false
+Explanation: For the last $20 bill, we need $15 change but only have two $10 bills.
+```
 
 ---
 
 ## Approach
 
+Greedy: Always give back the **largest denomination first** when making change for a $20 bill, because $5 bills are the most versatile (needed for both $10 and $20 change).
 
+- Track counts of `$5` and `$10` bills held.
+- For a `$5` bill: gain one `$5`.
+- For a `$10` bill: give one `$5`, gain one `$10`.
+- For a `$20` bill: prefer to give one `$10` + one `$5`; if no `$10` available, give three `$5`s.
+- If at any point a required denomination is unavailable, return `false`.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** 
+**Time Complexity:** O(n), where n is the number of customers.
 
-**Space Complexity:** 
+**Space Complexity:** O(1).
 
 ---
 
@@ -38,6 +64,6 @@ Given the following problem, find the optimal solution.
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- The greedy choice is to use a `$10` bill when giving change for `$20` — `$5` bills are more versatile and should be conserved.
+- Only `$5` and `$10` bills need to be tracked; `$20` bills can never be given as change.
+- Early return on the first failure avoids unnecessary iterations.

@@ -8,16 +8,41 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
-
 Given an array of integers `nums` and an integer `target`, return the indices of the two numbers such that they add up to `target`. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.
+
+[View on LeetCode →](https://leetcode.com/problems/two-sum/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: nums = [2, 7, 11, 15], target = 9
+Output: [0, 1]
+Explanation: nums[0] + nums[1] = 2 + 7 = 9
+```
+
+### Example 2
+
+```
+Input: nums = [3, 2, 4], target = 6
+Output: [1, 2]
+```
+
+### Example 3
+
+```
+Input: nums = [3, 3], target = 6
+Output: [0, 1]
+```
 
 ---
 
 ## Approach
 
 The solution uses a hash map (dictionary) to store the values and their indices as we iterate through the list. For each element `nums[i]`, it checks whether `target - nums[i]` has already been seen. If so, the pair of indices that add up to `target` is returned immediately. Otherwise, the current number and its index are stored in the dictionary for future reference.
-
 - We iterate through the list once.
 - Use a dictionary to look up complements in O(1) time.
 - Return indices as soon as the pair is found.
@@ -27,9 +52,9 @@ The solution uses a hash map (dictionary) to store the values and their indices 
 
 ## Complexity Analysis
 
-**Time Complexity:** ** O(n), where n is the length of `nums`. Each element is visited once, and dictionary lookups are O(1).
+**Time Complexity:** O(n), where n is the length of `nums`. Each element is visited once, and dictionary lookups are O(1).
 
-**Space Complexity:** ** O(n), as extra space is used to store elements in the dictionary.
+**Space Complexity:** O(n), as extra space is used to store elements in the dictionary.
 
 ---
 
@@ -55,6 +80,6 @@ The solution uses a hash map (dictionary) to store the values and their indices 
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- Use a hash map to trade space for time — store each element's complement as you iterate.
+- The complement check `target - nums[i]` captures any valid pair in a single pass.
+- This is the canonical example of reducing O(n²) brute force to O(n) with hashing.

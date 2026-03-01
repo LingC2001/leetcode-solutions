@@ -8,33 +8,54 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+Given an array of strings `strs`, group the anagrams together. You can return the answer in any order. An anagram is a word formed by rearranging the letters of a different word, using all the original letters exactly once.
 
-Given an array of strings `strs`, group the anagrams together. Anagrams are strings that contain the same characters in any order.
+[View on LeetCode →](https://leetcode.com/problems/group-anagrams/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+Output: [["bat"], ["nat", "tan"], ["ate", "eat", "tea"]]
+```
+
+### Example 2
+
+```
+Input: strs = [""]
+Output: [[""]]
+```
+
+### Example 3
+
+```
+Input: strs = ["a"]
+Output: [["a"]]
+```
 
 ---
 
 ## Approach
 
-To group anagrams efficiently, the algorithm relies on the fact that anagrams share the same frequency of each character.
+To group anagrams efficiently, leverage the fact that anagrams share the same character frequency signature.
 
-Instead of sorting each string (which can be costly), this solution creates a fixed-size character count signature for each string, representing how many times each letter appears.
-
-- For each string, build an array representing counts of each alphabet letter.
-- Convert this count array into a tuple (hashable) to serve as a unique key.
-- Use a dictionary to map each unique signature to a list of strings matching that pattern.
-- Append each string to the correct group based on its signature.
-- Finally, return all grouped anagram lists.
-
-This approach avoids the overhead of sorting strings and leverages constant-time dictionary lookups for grouping, resulting in an efficient solution.
+Instead of sorting each string (which takes O(k log k) per string), build a fixed-size character count array of length 26, then use it as a dictionary key:
+- For each string, compute a count array of alphabet letter frequencies.
+- Use this count array (converted to a tuple) as the hash map key.
+- Group strings with the same signature together.
+- Return all grouped lists.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** ** O(n * k), where n is the number of strings and k is the maximum string length. Counting characters is O(k) per string.
+**Time Complexity:** O(n · k), where n is the number of strings and k is the maximum string length. Counting characters is O(k) per string.
 
-**Space Complexity:** ** O(n * k), to store the grouped anagrams and the frequency signatures.
+**Space Complexity:** O(n · k), to store grouped anagrams and their frequency signatures.
 
 ---
 
@@ -56,6 +77,6 @@ This approach avoids the overhead of sorting strings and leverages constant-time
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- The character-count key avoids O(k log k) per string sorting, reducing to O(k) per string.
+- A tuple of 26 counts is a hashable, canonical representation of any anagram group.
+- `defaultdict(list)` or equivalent simplifies appending to groups without checking for key existence.

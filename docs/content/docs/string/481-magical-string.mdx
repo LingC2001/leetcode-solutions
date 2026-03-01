@@ -8,23 +8,48 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+A magical string `s` consists only of `'1'`s and `'2'`s and obeys the following rules: the string is self-describing — the string itself encodes the lengths of consecutive groups of the same character. The first few elements are `1 2 2 1 1 2 1 2 2 1 2 2 1 1 ...`. Given an integer `n`, return the number of `1`s in the first `n` elements of `s`.
 
+[View on LeetCode →](https://leetcode.com/problems/magical-string/)
 
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: n = 6
+Output: 3
+Explanation: The magical string is "122112", which contains three 1s.
+```
+
+### Example 2
+
+```
+Input: n = 1
+Output: 1
+```
 
 ---
 
 ## Approach
 
+**Simulation using a pointer into the string itself:**
 
+1. Start with `s = [1, 2, 2]` and a pointer `ptr = 2` (pointing at the third element, which says "the next group has size 2").
+2. The last value in `s` determines what number the **next group** contains. Since values alternate between 1 and 2, the next value is always `3 - s[-1]`.
+3. Repeat `s[ptr]` times: append the next value (either 1 or 2) to `s`, counting 1s.
+4. Advance `ptr`. Stop when `len(s) >= n`.
+5. Adjust if the final group went beyond `n`.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** 
+**Time Complexity:** O(n), since we generate at most `n` elements.
 
-**Space Complexity:** 
+**Space Complexity:** O(n) to store the generated string.
 
 ---
 
@@ -38,6 +63,6 @@ Given the following problem, find the optimal solution.
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- The string encodes itself: use a pointer into the string to know how many of the next character to emit.
+- The alternating trick `3 - prev` (where prev is 1 or 2) avoids an explicit conditional: `3 - 1 = 2`, `3 - 2 = 1`.
+- Handle the boundary carefully — generation may overshoot `n` by at most one element.

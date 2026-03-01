@@ -8,23 +8,58 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+You are given an array of integers `stones` where `stones[i]` is the weight of the `i`-th stone. Each turn, pick the two heaviest stones and smash them together:
+- If they are equal, both are destroyed.
+- If not equal, the smaller one is destroyed and the larger one gets weight `y - x`.
 
+Return the weight of the last remaining stone, or `0` if none remain.
 
+[View on LeetCode →](https://leetcode.com/problems/last-stone-weight/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: stones = [2, 7, 4, 1, 8, 1]
+Output: 1
+Explanation:
+  Smash 8 and 7 → 1. Stones: [2, 4, 1, 1, 1]
+  Smash 4 and 2 → 2. Stones: [2, 1, 1, 1]
+  Smash 2 and 1 → 1. Stones: [1, 1, 1]
+  Smash 1 and 1 → 0. Stones: [1]
+```
+
+### Example 2
+
+```
+Input: stones = [1]
+Output: 1
+```
 
 ---
 
 ## Approach
 
+Use a **max-heap** to always retrieve the two largest stones in O(log n):
 
+1. Build a max-heap from `stones` (`heapify` is O(n)).
+2. While the heap has more than one element:
+   - Pop `y` (largest) and `x` (second largest).
+   - If `y != x`, push `y - x` back into the heap.
+3. Return the remaining element, or `0` if the heap is empty.
+
+In Go (and Java), the standard library provides a min-heap, so negate values to simulate a max-heap.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** 
+**Time Complexity:** O(n log n) — each of the n smash operations does O(log n) heap operations.
 
-**Space Complexity:** 
+**Space Complexity:** O(n) for the heap.
 
 ---
 
@@ -38,6 +73,6 @@ Given the following problem, find the optimal solution.
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- A max-heap gives O(log n) access to the maximum element — ideal when you repeatedly need the largest.
+- Go's `container/heap` is a min-heap by default; negate values or flip the `Less` function to get max-heap behavior.
+- `heapify` (building the heap from an existing array) is O(n), not O(n log n).

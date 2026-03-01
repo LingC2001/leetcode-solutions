@@ -8,35 +8,50 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+Given two strings `s1` and `s2`, return `true` if `s2` contains a **permutation** of `s1`, otherwise return `false`. In other words, check if one of `s1`'s permutations is a substring of `s2`.
 
-Given two strings `s1` and `s2`, return `true` if `s2` contains a **permutation** of `s1`, otherwise return `false`.
+[View on LeetCode →](https://leetcode.com/problems/permutation-in-string/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: s1 = "ab", s2 = "eidbaooo"
+Output: true
+Explanation: s2 contains "ba" which is a permutation of s1.
+```
+
+### Example 2
+
+```
+Input: s1 = "ab", s2 = "eidboaoo"
+Output: false
+```
 
 ---
 
 ## Approach
 
-Uses a **fixed-size sliding window** and character frequency dictionaries:
+**Fixed-size sliding window** of length `len(s1)`:
 
-* If `len(s1) > len(s2)`, return `False`.
-* Create frequency maps for `s1` and the first window in `s2`.
-* Slide the window across `s2`, updating the map:
-  * Add the new character, remove the old one.
-  * Clean up 0-count entries to match dictionary structure.
-  * Compare maps — if equal, return `True`.
-* Return `False` if no match found.
-
-### 💡 Why direct dict comparison works:
-
-A permutation has the same character counts. Zero-count entries are removed to avoid mismatches from extra keys.
+* If `len(s1) > len(s2)`, return `false`.
+* Build frequency maps for `s1` and the first window `s2[0:len(s1)]`.
+* Slide the window across `s2`:
+  * Add the new character's count, remove the outgoing character's count.
+  * Clean up zero-count entries so direct dictionary comparison works.
+  * If the two maps are equal, return `true`.
+* Return `false` if no match found.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** 
+**Time Complexity:** O(n), where n is the length of `s2`. Each character is processed once.
 
-**Space Complexity:** 
+**Space Complexity:** O(1), since the character set is at most 26 lowercase letters.
 
 ---
 
@@ -58,6 +73,6 @@ A permutation has the same character counts. Zero-count entries are removed to a
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- A permutation has identical character frequencies — comparing frequency maps is the correct check.
+- Remove zero-count entries from the map to ensure equality comparisons work correctly.
+- Alternatively, maintain a `matches` counter to avoid full map comparison on every step (O(1) check per slide).

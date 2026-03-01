@@ -8,31 +8,53 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+Given an integer array `nums`, determine if any value appears at least twice in the array. Return `true` if any duplicates exist, otherwise return `false`.
 
-Given an integer array `nums`, determine if any value appears at least twice in the array. Return `True` if any duplicates exist, otherwise return `False`.
+[View on LeetCode →](https://leetcode.com/problems/contains-duplicate/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: nums = [1, 2, 3, 1]
+Output: true
+```
+
+### Example 2
+
+```
+Input: nums = [1, 2, 3, 4]
+Output: false
+```
+
+### Example 3
+
+```
+Input: nums = [1, 1, 1, 3, 3, 4, 3, 2, 4, 2]
+Output: true
+```
 
 ---
 
 ## Approach
 
 The solution uses a set to track unique elements encountered while iterating through the list. For each element:
-
 - Check if it already exists in the set.
-- If yes, return `True` immediately (duplicate found).
+- If yes, return `true` immediately (duplicate found).
 - Otherwise, add the element to the set and continue.
 
-If the loop completes without finding duplicates, return `False`.
-
-**Note:** Your current code has a logic error where `return False` is inside the loop, causing premature termination after the first element. It should be placed outside the loop to ensure the entire list is checked.
+If the loop completes without finding duplicates, return `false`.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** ** O(n), where n is the length of `nums`. Each element is processed once.
+**Time Complexity:** O(n), where n is the length of `nums`. Each element is processed once.
 
-**Space Complexity:** ** O(n), as a set is used to store unique elements.
+**Space Complexity:** O(n), as a set is used to store unique elements.
 
 ---
 
@@ -54,6 +76,6 @@ If the loop completes without finding duplicates, return `False`.
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- A set provides O(1) average lookup, making it ideal for duplicate detection.
+- Early return on the first duplicate avoids unnecessary iterations.
+- Alternatively, sorting the array (O(n log n)) and checking adjacent elements uses O(1) space.

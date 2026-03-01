@@ -8,34 +8,48 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+You are given an array `prices` where `prices[i]` is the price of a given stock on the `i`-th day. You want to maximize your profit by choosing a **single day to buy** one stock and a **different day in the future to sell** it. Return the maximum profit you can achieve. If no profit is possible, return `0`.
 
-You are given an array `prices` where `prices[i]` is the price of a given stock on the i-th day.
+[View on LeetCode →](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 
-You want to maximize your profit by choosing a **single day to buy** one stock and choosing a **different day in the future to sell** that stock.
+---
 
-Return the maximum profit you can achieve from this transaction. If no profit is possible, return 0.
+## Examples
+
+### Example 1
+
+```
+Input: prices = [7, 1, 5, 3, 6, 4]
+Output: 5
+Explanation: Buy on day 2 (price=1), sell on day 5 (price=6), profit = 5.
+```
+
+### Example 2
+
+```
+Input: prices = [7, 6, 4, 3, 1]
+Output: 0
+Explanation: Prices only decrease — no profitable transaction possible.
+```
 
 ---
 
 ## Approach
 
-The solution uses a **Single-Pass Greedy Strategy** to efficiently track the minimum price seen so far and the maximum profit achievable at each step.
+Single-pass greedy:
+* Track the lowest price seen so far (`min_price`).
+* At each day, compute `profit = price - min_price` and update `max_profit`.
+* Update `min_price` if the current price is lower.
 
-* Iterate through the price list while maintaining the lowest price encountered so far.
-* At each step, calculate the profit if you were to sell at the current day's price.
-* Continuously update the maximum profit found so far.
-* Continuously update the minimum price if a lower price is encountered.
-
-This approach guarantees that each day is processed only once, and ensures the "buy before sell" constraint is satisfied.
+This guarantees that the "buy before sell" constraint is always satisfied.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** ** O(n), where n is the number of days. Each price is processed once.
+**Time Complexity:** O(n), where n is the number of days.
 
-**Space Complexity:** ** O(1), using constant extra space for tracking variables.
+**Space Complexity:** O(1).
 
 ---
 
@@ -57,6 +71,6 @@ This approach guarantees that each day is processed only once, and ensures the "
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- Tracking the running minimum implicitly handles the "buy before sell" ordering constraint.
+- If all prices are decreasing, `max_profit` stays 0 — the base value handles this edge case naturally.
+- This is equivalent to Kadane's algorithm applied to the difference array of prices.

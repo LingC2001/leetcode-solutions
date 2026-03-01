@@ -1,5 +1,5 @@
 ---
-title: 2379. Minimum Recolors K Black Blocks
+title: 2379. Minimum Recolors to Get K Consecutive Black Blocks
 difficulty: easy
 tags: [sliding-window, strings]
 ---
@@ -8,23 +8,48 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+You are given a 0-indexed string `blocks` of length `n` where `blocks[i]` is either `'W'` (white) or `'B'` (black), and an integer `k`. In one operation, you can recolor a white block black. Return the **minimum** number of operations needed to get at least one occurrence of `k` consecutive black blocks.
 
+[View on LeetCode →](https://leetcode.com/problems/minimum-recolors-to-get-k-consecutive-black-blocks/)
 
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: blocks = "WBBWWBBWBW", k = 7
+Output: 3
+Explanation: One optimal window of length 7 has 4 'B's, so we need 7 - 4 = 3 recolors.
+```
+
+### Example 2
+
+```
+Input: blocks = "WBWBBBW", k = 2
+Output: 0
+Explanation: "BB" already exists at positions 4 and 5.
+```
 
 ---
 
 ## Approach
 
+**Fixed-size sliding window** of length `k`:
 
+1. Count black blocks in the first window of size `k`.
+2. Track `max_black` (the window with the most blacks requires the fewest recolors).
+3. Slide the window: add the incoming character, remove the outgoing character, update `max_black`.
+4. Return `k - max_black`.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** 
+**Time Complexity:** O(n), where n is the length of `blocks`.
 
-**Space Complexity:** 
+**Space Complexity:** O(1).
 
 ---
 
@@ -38,6 +63,6 @@ Given the following problem, find the optimal solution.
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- Maximizing black blocks in the window is equivalent to minimizing recolors — a neat inversion of the objective.
+- Initialize the window with one loop, then slide with a second loop adding and removing one character at a time.
+- The answer is always `k - max_black_in_any_window`.

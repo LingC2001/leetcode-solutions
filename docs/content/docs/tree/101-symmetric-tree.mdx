@@ -10,23 +10,45 @@ import Code from '@/components/Code';
 
 Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
 
+[View on LeetCode →](https://leetcode.com/problems/symmetric-tree/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: root = [1, 2, 2, 3, 4, 4, 3]
+Output: true
+```
+
+### Example 2
+
+```
+Input: root = [1, 2, 2, null, 3, null, 3]
+Output: false
+```
+
 ---
 
 ## Approach
 
-Two main approaches can be used:
+Two approaches work:
 
-1. **DFS (Depth-First Search)**: Traverse the left subtree by visiting the left child first and simultaneously traverse the right subtree by visiting the right child first. Compare the values at each step to ensure the tree is symmetric.
+1. **DFS (Depth-First Search):** Recursively compare the left subtree (traversing left-then-right) against the right subtree (traversing right-then-left). At each step, both nodes must have equal values and mirror-symmetric children.
 
-2. **BFS (Breadth-First Search)**: Process nodes level by level, comparing mirror positions to verify if the tree is symmetric at each level.
+2. **BFS (Breadth-First Search):** Process nodes level by level, enqueueing mirror pairs `(left.left, right.right)` and `(left.right, right.left)`. Verify equality at each dequeue step.
+
+The DFS approach is typically simpler to implement: `isMirror(left, right)` checks `left.val == right.val` and recurses on `(left.left, right.right)` and `(left.right, right.left)`.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** O(n) - where n is the number of nodes. We need to visit each node once to determine if the tree is symmetric.
+**Time Complexity:** O(n), where n is the number of nodes. Every node is visited once.
 
-**Space Complexity:** O(h) for DFS or O(w) for BFS - where h is the height and w is the maximum width of the tree (recursive call stack or queue space)
+**Space Complexity:** O(h) for DFS (recursion stack) or O(w) for BFS (queue), where h is the height and w is the maximum width.
 
 ---
 
@@ -40,6 +62,6 @@ Two main approaches can be used:
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- Symmetry is checked by comparing mirror-image positions, not siblings.
+- Base cases: two `null` nodes are symmetric; one `null` and one non-null are not.
+- The key recursive call pairs `(node.left.left, node.right.right)` and `(node.left.right, node.right.left)`.

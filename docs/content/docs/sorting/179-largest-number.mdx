@@ -8,23 +8,46 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+Given a list of non-negative integers `nums`, arrange them such that they form the largest number and return it as a string. Since the result may be very large, return it as a string instead of an integer.
 
+[View on LeetCode →](https://leetcode.com/problems/largest-number/)
 
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: nums = [10, 2]
+Output: "210"
+```
+
+### Example 2
+
+```
+Input: nums = [3, 30, 34, 5, 9]
+Output: "9534330"
+```
 
 ---
 
 ## Approach
 
+The key insight: to decide which number should come first, compare the two multi-digit concatenations `a+b` vs `b+a` (as strings).
 
+1. Convert all integers to strings.
+2. Sort using the custom comparator: prefer `a` before `b` if `b+a > a+b` (descending order).
+3. Join the sorted strings.
+4. Edge case: if the largest element is `"0"`, return `"0"` (handles `[0, 0]`).
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** 
+**Time Complexity:** O(n · k · log n), where k is the average string length. The comparator is O(k) and runs O(n log n) times.
 
-**Space Complexity:** 
+**Space Complexity:** O(n · k) for the string representations.
 
 ---
 
@@ -38,6 +61,6 @@ Given the following problem, find the optimal solution.
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- The concatenation comparator `b+a > a+b` defines a valid total order, enabling standard sort algorithms.
+- This is a greedy approach: locally choosing the better-positioned pair globally maximizes the number.
+- The all-zeros edge case (`[0, 0, 0]`) must be handled — after sorting the first element is `"0"`, so return `"0"`.

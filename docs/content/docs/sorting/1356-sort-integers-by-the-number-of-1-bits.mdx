@@ -8,23 +8,52 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+You are given an integer array `arr`. Sort the integers in the array in ascending order by the number of `1`s in their binary representation, breaking ties by their decimal value. Return the sorted array.
 
+[View on LeetCode →](https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/)
 
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: arr = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+Output: [0, 1, 2, 4, 8, 3, 5, 6, 7]
+Explanation:
+  0 → 0 ones
+  1,2,4,8 → 1 one each (sorted by value)
+  3,5,6 → 2 ones each (sorted by value)
+  7 → 3 ones
+```
+
+### Example 2
+
+```
+Input: arr = [1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1]
+Output: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
+```
 
 ---
 
 ## Approach
 
+Use a custom comparator sort:
+- Primary key: number of set bits (`popcount` / `bits.OnesCount`).
+- Secondary key: numeric value (for ties).
 
+`bits.OnesCount(uint(n))` in Go is much faster than converting to a binary string and counting characters, as it uses CPU popcount instructions.
+
+For a stable sort (preserving original order among equal elements), use `slices.SortStableFunc`.
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** 
+**Time Complexity:** O(n log n), dominated by the sort.
 
-**Space Complexity:** 
+**Space Complexity:** O(log n) for the sort's call stack.
 
 ---
 
@@ -38,6 +67,6 @@ Given the following problem, find the optimal solution.
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- Use the built-in `bits.OnesCount` — it maps to a single CPU instruction on most architectures.
+- The secondary sort key (numeric value) is necessary to break ties deterministically.
+- Use `SortStableFunc` if the original relative order of equal elements must be preserved.

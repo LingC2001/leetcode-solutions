@@ -8,42 +8,55 @@ import Code from '@/components/Code';
 
 ## Problem Statement
 
-Given the following problem, find the optimal solution.
+Given an array of integers `temperatures` representing daily temperatures, return an array `answer` such that `answer[i]` is the number of days after day `i` until a warmer temperature. If there is no future warmer day, `answer[i] = 0`.
 
-Given a list of daily temperatures, return a list such that, for each day in the input, tells you how many days you would have to wait until a warmer temperature.
-If there is no future day for which this is possible, put `0` instead.
+[View on LeetCode →](https://leetcode.com/problems/daily-temperatures/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: temperatures = [73, 74, 75, 71, 69, 72, 76, 73]
+Output: [1, 1, 4, 2, 1, 1, 0, 0]
+```
+
+### Example 2
+
+```
+Input: temperatures = [30, 40, 50, 60]
+Output: [1, 1, 1, 0]
+```
+
+### Example 3
+
+```
+Input: temperatures = [30, 60, 90]
+Output: [1, 1, 0]
+```
 
 ---
 
 ## Approach
 
-This problem is a variation of the "next greater element" pattern, where we need to determine how far ahead in the list a warmer temperature occurs for each day. A **monotonic decreasing stack** is well-suited for this type of problem.
+**Monotonic decreasing stack** (stores indices of unresolved days):
 
-* Iterate through the list of temperatures from left to right.
-* Use a stack to store indices of unresolved days in decreasing order of their temperatures.
-* For each day:
-
-  * While the current temperature is greater than the temperature at the top of the stack:
-
-    * Pop the index from the stack.
-    * Calculate the number of days waited as the difference between current and popped indices.
-    * Store the result at the popped index.
-* Push the current index onto the stack.
-* After processing, the remaining indices in the stack do not have a warmer future day, so their result remains `0`.
-
-### Why this works:
-
-* The stack tracks days waiting for a warmer temperature in an efficient, non-redundant way.
-* Each day’s index is pushed and popped at most once, ensuring linear time complexity.
-* This approach avoids brute-force nested comparisons and is scalable for large inputs.
+* Iterate left to right. For each day `i`:
+  * While the stack is non-empty and `temperatures[i] > temperatures[stack[-1]]`:
+    * Pop index `j` from the stack.
+    * Set `answer[j] = i - j`.
+  * Push `i` onto the stack.
+* Any indices remaining in the stack have no warmer future day → `answer[j] = 0` (default).
 
 ---
 
 ## Complexity Analysis
 
-**Time Complexity:** ** O(n), where n is the number of elements in the input list. Each index is pushed and popped at most once.
+**Time Complexity:** O(n) — each index is pushed and popped at most once.
 
-**Space Complexity:** ** O(n), for the result list and the stack used to store unresolved indices.
+**Space Complexity:** O(n) for the stack and result array.
 
 ---
 
@@ -65,6 +78,6 @@ This problem is a variation of the "next greater element" pattern, where we need
 
 ## Key Insights
 
-- Review the problem's constraints and examples carefully
-- Consider edge cases in your solution
-- Analyze the trade-offs between time and space complexity
+- This is the classic **"next greater element"** pattern — a monotonic stack solves it in O(n).
+- Store indices in the stack (not values) to compute the day difference directly.
+- The stack maintains a decreasing order of temperatures; whenever a day is warmer, resolve all pending smaller days.
