@@ -1,0 +1,59 @@
+---
+title: 217. Contains Duplicate
+difficulty: easy
+tags: [arrays, hashing]
+---
+
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given the following problem, find the optimal solution.
+
+Given an integer array `nums`, determine if any value appears at least twice in the array. Return `True` if any duplicates exist, otherwise return `False`.
+
+---
+
+## Approach
+
+The solution uses a set to track unique elements encountered while iterating through the list. For each element:
+
+- Check if it already exists in the set.
+- If yes, return `True` immediately (duplicate found).
+- Otherwise, add the element to the set and continue.
+
+If the loop completes without finding duplicates, return `False`.
+
+**Note:** Your current code has a logic error where `return False` is inside the loop, causing premature termination after the first element. It should be placed outside the loop to ensure the entire list is checked.
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** ** O(n), where n is the length of `nums`. Each element is processed once.
+
+**Space Complexity:** ** O(n), as a set is used to store unique elements.
+
+---
+
+## Solutions
+
+### Python
+
+<Code problemNumber={217} difficulty="easy" lang="python" />
+
+### C++
+
+<Code problemNumber={217} difficulty="easy" lang="cpp" />
+
+### Java
+
+<Code problemNumber={217} difficulty="easy" lang="java" />
+
+---
+
+## Key Insights
+
+- Review the problem's constraints and examples carefully
+- Consider edge cases in your solution
+- Analyze the trade-offs between time and space complexity

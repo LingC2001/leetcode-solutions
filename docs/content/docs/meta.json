@@ -1,3 +1,21 @@
 {
-  "pages": ["index", "easy", "medium", "hard"]
+  "pages": [
+    "index", 
+    "arrays-and-hashing",
+    "string",
+    "sorting",
+    "two-pointers",
+    "binary-search",
+    "sliding-window",
+    "stack",
+    "linked-list",
+    "tree",
+    "heap",
+    "backtracking",
+    "graph",
+    "greedy",
+    "dynamic-programming",
+    "interval",
+    "other"
+  ]
 }

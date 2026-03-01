@@ -27,7 +27,7 @@ export default function HomePage() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
           <Link
             href="/docs"
-            className="px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors duration-200 shadow-lg hover:shadow-xl inline-flex items-center gap-2"
+            className="px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors duration-200 shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-2"
           >
             Explore Solutions
             <span>→</span>
