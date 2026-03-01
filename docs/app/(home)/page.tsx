@@ -14,20 +14,21 @@ export default function HomePage() {
 
         {/* Main Heading */}
         <h1 className="text-5xl sm:text-6xl font-bold text-foreground leading-tight">
-          Master Coding Interviews
+          Learn Algorithms<br></br>and Data Structures
         </h1>
 
         {/* Description */}
-        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-          A curated collection of LeetCode problem solutions with detailed
-          explanations, optimal approaches, and time/space complexity analysis.
+        <p className="text-base sm:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+          A curated collection of LeetCode problem and solutions<br></br>
+          with detailed explanations, optimal approaches<br></br>
+          and time/space complexity analysis.
         </p>
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
           <Link
             href="/docs"
-            className="px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors duration-200 shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-2"
+            className="px-6 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors duration-200 shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-2"
           >
             Explore Solutions
             <span>→</span>
@@ -36,7 +37,7 @@ export default function HomePage() {
             href="https://github.com/LingC2001/leetcode-solutions"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-3 rounded-lg border border-foreground/20 text-foreground font-medium hover:bg-foreground/5 transition-colors duration-200 inline-flex items-center justify-center"
+            className="px-6 py-2 rounded-lg border border-blue-600/30 text-blue-600 font-medium hover:bg-blue-600/10 transition-colors duration-200 inline-flex items-center justify-center"
           >
             Browse GitHub
           </a>
