@@ -20,8 +20,8 @@ export default function HomePage() {
         {/* Description */}
         <p className="text-base sm:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
           A curated collection of LeetCode problem and solutions<br></br>
-          with detailed explanations, optimal approaches<br></br>
-          and time/space complexity analysis.
+          with detailed explanations, optimal approaches and<br></br>
+          time/space complexity analysis.
         </p>
 
         {/* CTA Buttons */}
