@@ -41,6 +41,11 @@ export function baseOptions(): BaseLayoutProps {
         url: "/docs",
         on: "nav",
       },
+      {
+        text: "Dashboard",
+        url: "/dashboard",
+        on: "nav",
+      },
     ],
     githubUrl: `https://github.com/${gitConfig.user}/${gitConfig.repo}`,
   };
