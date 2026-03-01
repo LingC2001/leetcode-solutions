@@ -1,0 +1,48 @@
+---
+title: 404. Sum of Left Leaves
+difficulty: easy
+tags: [binary-tree, dfs]
+---
+
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given the root of a binary tree, return the sum of all left leaves in the tree.
+
+A leaf is a node with no children. A left leaf is a leaf node that is the left child of its parent.
+
+---
+
+## Approach
+
+Use DFS (Depth-First Search) with a flag to track whether the current node is a left child:
+
+1. Pass a `leftChild` boolean flag from parent to child to indicate if the current node is a left child.
+2. During traversal, recursively process left and right subtrees.
+3. When we find a leaf node (no left or right child) that is also a left child (flag is true), add its value to the sum.
+4. Return the accumulated sum.
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** O(n) - where n is the number of nodes. We visit each node once during the DFS traversal.
+
+**Space Complexity:** O(h) - where h is the height of the tree. This is for the recursive call stack in the worst case (skewed tree).
+
+---
+
+## Solutions
+
+### Go
+
+<Code problemNumber={404} difficulty="easy" lang="go" />
+
+---
+
+## Key Insights
+
+- Review the problem's constraints and examples carefully
+- Consider edge cases in your solution
+- Analyze the trade-offs between time and space complexity

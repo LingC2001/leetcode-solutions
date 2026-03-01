@@ -1,0 +1,65 @@
+---
+title: 150. Evaluate Reverse Polish Notation
+difficulty: medium
+tags: [stack, math]
+---
+
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given the following problem, find the optimal solution.
+
+You are given an array of strings `tokens` that represents an arithmetic expression in Reverse Polish Notation (RPN). Evaluate the expression and return its value. Valid operators are `+`, `-`, `*`, and `/`. Each operand may be an integer or another expression. Division between two integers should truncate toward zero.
+
+---
+
+## Approach
+
+We use a stack to evaluate the RPN expression in one pass:
+
+1. Initialize an empty stack.
+2. Iterate through each token in `tokens`:
+   - If the token is a number (not one of `+ - * /`), convert it to `int` and push it onto the stack.
+   - Otherwise, it is an operator:
+     a. Pop the top two numbers from the stack (`b` first, then `a`).
+     b. Apply the operator to `a` and `b`:
+        - `+`: push `a + b`
+        - `-`: push `a - b`
+        - `*`: push `a * b`
+        - `/`: push `int(a / b)` to truncate toward zero
+3. After processing all tokens, the stack contains a single element: the result.
+
+This is optimal for RPN because each token is processed exactly once, and each operation is O(1).
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** ** O(n), where n is the number of tokens.  
+
+**Space Complexity:** ** O(n), for the stack in the worst case (all tokens are numbers).
+
+---
+
+## Solutions
+
+### Python
+
+<Code problemNumber={150} difficulty="medium" lang="python" />
+
+### C++
+
+<Code problemNumber={150} difficulty="medium" lang="cpp" />
+
+### Java
+
+<Code problemNumber={150} difficulty="medium" lang="java" />
+
+---
+
+## Key Insights
+
+- Review the problem's constraints and examples carefully
+- Consider edge cases in your solution
+- Analyze the trade-offs between time and space complexity

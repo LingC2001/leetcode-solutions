@@ -1,0 +1,45 @@
+---
+title: 101. Symmetric Tree
+difficulty: easy
+tags: [binary-tree, dfs, bfs]
+---
+
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+
+---
+
+## Approach
+
+Two main approaches can be used:
+
+1. **DFS (Depth-First Search)**: Traverse the left subtree by visiting the left child first and simultaneously traverse the right subtree by visiting the right child first. Compare the values at each step to ensure the tree is symmetric.
+
+2. **BFS (Breadth-First Search)**: Process nodes level by level, comparing mirror positions to verify if the tree is symmetric at each level.
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** O(n) - where n is the number of nodes. We need to visit each node once to determine if the tree is symmetric.
+
+**Space Complexity:** O(h) for DFS or O(w) for BFS - where h is the height and w is the maximum width of the tree (recursive call stack or queue space)
+
+---
+
+## Solutions
+
+### Go
+
+<Code problemNumber={101} difficulty="easy" lang="go" />
+
+---
+
+## Key Insights
+
+- Review the problem's constraints and examples carefully
+- Consider edge cases in your solution
+- Analyze the trade-offs between time and space complexity

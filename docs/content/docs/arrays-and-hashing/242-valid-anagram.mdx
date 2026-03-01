@@ -1,0 +1,58 @@
+---
+title: 242. Valid Anagram
+difficulty: easy
+tags: [arrays, hashing, sorting]
+---
+
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given the following problem, find the optimal solution.
+
+Given two strings `s` and `t`, determine if `t` is an anagram of `s`. An anagram means both strings contain the same characters with the same frequencies, but possibly in a different order.
+
+---
+
+## Approach
+
+The solution uses a hash map (implemented as a `defaultdict(int)`) to count character frequencies in `s`. Then, it decrements counts based on characters in `t`. If after processing both strings any character count is not zero, the strings are not anagrams.
+
+- Count frequencies of each character in `s`.
+- Subtract frequencies based on characters in `t`.
+- If any count is non-zero, return `False`.
+- Otherwise, return `True`.
+
+This approach efficiently compares the two strings using character counts without sorting.
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** ** O(n), where n is the length of the strings (both are assumed to be the same length for an anagram).
+
+**Space Complexity:** ** O(1), since the character set is fixed (e.g., ASCII alphabets), or O(k) where k is number of unique characters.
+
+---
+
+## Solutions
+
+### Python
+
+<Code problemNumber={242} difficulty="easy" lang="python" />
+
+### C++
+
+<Code problemNumber={242} difficulty="easy" lang="cpp" />
+
+### Java
+
+<Code problemNumber={242} difficulty="easy" lang="java" />
+
+---
+
+## Key Insights
+
+- Review the problem's constraints and examples carefully
+- Consider edge cases in your solution
+- Analyze the trade-offs between time and space complexity
