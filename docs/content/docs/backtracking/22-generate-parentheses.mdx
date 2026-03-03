@@ -101,7 +101,7 @@ Result: `["(())", "()()"]`
 
 ## Complexity Analysis
 
-**Time Complexity:** O(4ⁿ / √n) — the number of valid combinations is the n-th Catalan number $C_n = \frac{1}{n+1}\binom{2n}{n}$, which grows as $\frac{4^n}{n^{3/2}\sqrt{\pi}}$.
+**Time Complexity:** O(4ⁿ / √n) — the number of valid combinations is the n-th Catalan number C(n) = C(2n, n) / (n+1), which grows as 4ⁿ / (n^(3/2) · √π).
 
 **Space Complexity:** O(n) — the recursion depth and path length are each at most `2*n`.
 
@@ -120,4 +120,4 @@ Result: `["(())", "()()"]`
 - The two branching conditions act as a built-in pruner — no string built by this recursion is ever invalid, so no post-filtering is required.
 - `right < left` (not `right < n`) is the correct close-bracket guard; it ties the number of close brackets to the number of open brackets already placed, not to `n`.
 - Using two independent `if` statements (rather than `if/else`) is intentional: when both `left < n` and `right < left` are true, both branches must be explored.
-- The result count equals the Catalan number $C_n$, which grows much slower than the $2^{2n}$ strings a brute-force approach would sift through.
+- The result count equals the Catalan number C(n), which grows much slower than the 4ⁿ strings a brute-force approach would sift through.
