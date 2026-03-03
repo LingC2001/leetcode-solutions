@@ -1,0 +1,123 @@
+---
+title: 90. Subsets II
+difficulty: medium
+tags: [backtracking, arrays]
+solveDate: "2026-03-03"
+---
+
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given an integer array `nums` that **may contain duplicates**, return all possible subsets (the power set). The solution set must **not** contain duplicate subsets. You may return the answer in any order.
+
+[View on LeetCode →](https://leetcode.com/problems/subsets-ii/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: nums = [1,2,2]
+Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
+```
+
+### Example 2
+
+```
+Input: nums = [0]
+Output: [[],[0]]
+```
+
+---
+
+## Approach
+
+**Backtracking with duplicate skipping:**
+
+The structure is identical to [78. Subsets](/docs/backtracking/78-subsets): recurse forward from a `first` index, recording the path at every node. The only addition needed to handle duplicates is:
+
+1. **Sort `nums` first** — this groups equal values together so duplicates are always adjacent.
+2. **Skip a value if it equals its left neighbor and is not the first choice at this level** — the `continue` check detailed below.
+
+```
+sort(nums)
+backtrack(first, path):
+    result.append(copy of path)
+    for i in first..n-1:
+        if i > first && nums[i] == nums[i-1]:
+            continue                          // skip duplicate branch
+        path.append(nums[i])
+        backtrack(i + 1, path)
+        path.pop()
+```
+
+---
+
+## How the `continue` Check Eliminates Duplicates
+
+Consider `nums = [1, 2, 2]` (already sorted). Label the two `2`s as `2a` and `2b`.
+
+At the top level (`first = 0`), the loop offers three starting choices:
+
+| `i` | choice | subset started |
+|-----|--------|----------------|
+| 0   | `1`    | `[1, ...]`     |
+| 1   | `2a`   | `[2a, ...]`    |
+| 2   | `2b`   | `[2b, ...]`    |
+
+Branching from `2a` and branching from `2b` would produce identical subsets — `[2]`, `[2,2]` — twice. The check cuts the `2b` branch entirely.
+
+**The condition has two parts that must both be true to skip:**
+
+- `i > first` — only skip when `i` is **not** the first element the current call can pick. If `i == first`, this is the leftmost choice available at this recursion level; skipping it would lose the subset altogether instead of just a duplicate.
+- `nums[i] == nums[i-1]` — only skip when the value genuinely repeats the previous one.
+
+The combination means: *"I am not the first pick at this level, and the value to my left is identical — so my entire subtree is a duplicate of what the left sibling already explored."*
+
+To make this concrete, walk through `[1, 2, 2]`:
+
+```
+backtrack(first=0, path=[])        → record []
+  i=0 pick 1
+    backtrack(first=1, path=[1])   → record [1]
+      i=1 pick 2a
+        backtrack(first=2, path=[1,2])   → record [1,2]
+          i=2 pick 2b
+            backtrack(first=3, path=[1,2,2]) → record [1,2,2]
+      i=2: i>first(1) && nums[2]==nums[1] → SKIP 2b  (would duplicate [1,2] and [1,2,2])
+  i=1 pick 2a
+    backtrack(first=2, path=[2])   → record [2]
+      i=2 pick 2b
+        backtrack(first=3, path=[2,2])   → record [2,2]
+  i=2: i>first(0) && nums[2]==nums[1] → SKIP 2b  (would duplicate [2] and [2,2])
+```
+
+Final result: `[], [1], [1,2], [1,2,2], [2], [2,2]` — no duplicates.
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** O(2ⁿ · n) — at most 2ⁿ subsets, each taking O(n) to copy; duplicate pruning only reduces the constant factor.
+
+**Space Complexity:** O(n) — recursion depth and path length are both bounded by n (excluding output).
+
+---
+
+## Solutions
+
+### Go
+
+<Code problemNumber={90} difficulty="medium" lang="go" />
+
+---
+
+## Key Insights
+
+- Sorting is a prerequisite — the duplicate skip only works correctly when equal values are adjacent.
+- The guard `i > first` is critical: it allows the *first* occurrence of a value at each recursion level to be explored while blocking any subsequent identical value at that same level.
+- This is the standard pattern for eliminating duplicate branches in backtracking whenever the input may contain duplicates (also used in [40. Combination Sum II](/docs/backtracking/40-combination-sum-ii)).
+- Compare with [78. Subsets](/docs/backtracking/78-subsets): the only structural difference is sorting the input and adding the two-part skip condition inside the loop.
