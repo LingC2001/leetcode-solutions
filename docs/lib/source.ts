@@ -1,6 +1,6 @@
 import { docs } from "fumadocs-mdx:collections/server";
-import { type InferPageType, loader } from "fumadocs-core/source";
 import type { Folder, Node } from "fumadocs-core/page-tree";
+import { type InferPageType, loader } from "fumadocs-core/source";
 
 /**
  * Extract the leading number from a page tree node's URL.
@@ -17,7 +17,9 @@ function extractProblemNumber(node: Node): number {
 }
 
 function sortFolderNumerically(folder: Folder): Folder {
-  folder.children.sort((a, b) => extractProblemNumber(a) - extractProblemNumber(b));
+  folder.children.sort(
+    (a, b) => extractProblemNumber(a) - extractProblemNumber(b),
+  );
   return folder;
 }
 
@@ -27,13 +29,15 @@ export const source = loader({
   source: docs.toFumadocsSource(),
   plugins: [],
   pageTree: {
-    transformers: [{
-      folder(node, _folderPath, metaPath) {
-        // Only auto-sort folders without explicit meta.json ordering
-        if (metaPath) return node;
-        return sortFolderNumerically(node);
+    transformers: [
+      {
+        folder(node, _folderPath, metaPath) {
+          // Only auto-sort folders without explicit meta.json ordering
+          if (metaPath) return node;
+          return sortFolderNumerically(node);
+        },
       },
-    }],
+    ],
   },
 });
 

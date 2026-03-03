@@ -1,9 +1,10 @@
-import { getDashboardData } from "@/lib/dashboard-data";
 import { DashboardClient } from "@/components/DashboardClient";
+import { getDashboardData } from "@/lib/dashboard-data";
 
 export const metadata = {
   title: "Dashboard – LeetCode Solutions",
-  description: "Visual overview of solved LeetCode problems by difficulty, category, and tags.",
+  description:
+    "Visual overview of solved LeetCode problems by difficulty, category, and tags.",
 };
 
 export default function DashboardPage() {

@@ -71,6 +71,7 @@ export default async function Code({
 
   return (
     <CodeBlock>
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki outputs pre-sanitized HTML for syntax highlighting */}
       <Pre lang={lang} dangerouslySetInnerHTML={{ __html: html }} />
     </CodeBlock>
   );

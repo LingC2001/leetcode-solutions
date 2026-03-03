@@ -19,8 +19,8 @@ export default function HomePage() {
 
         {/* Description */}
         <p className="text-base sm:text-lg text-gray-500 dark:text-gray-400 max-w-lg mx-auto">
-          A curated collection of LeetCode problem and solutions with 
-          detailed explanations, optimal approaches and time/space complexity analysis.
+          A curated collection of LeetCode problem and solutions with detailed
+          explanations, optimal approaches and time/space complexity analysis.
         </p>
 
         {/* CTA Buttons */}

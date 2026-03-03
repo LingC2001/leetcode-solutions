@@ -12,6 +12,7 @@ export const docs = defineDocs({
     schema: pageSchema.extend({
       difficulty: str.optional(),
       tags: str.array().default([]),
+      solveDate: str.optional(),
     }),
     postprocess: {
       includeProcessedMarkdown: true,

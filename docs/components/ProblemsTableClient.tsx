@@ -12,7 +12,17 @@ export interface Problem {
   category: string;
   categorySlug: string;
   url: string;
+  solveDate: string;
 }
+
+type SortField = "number" | "difficulty" | "solveDate";
+type SortDir = "asc" | "desc";
+
+const DIFFICULTY_ORDER: Record<string, number> = {
+  easy: 0,
+  medium: 1,
+  hard: 2,
+};
 
 const difficultyConfig = {
   easy: {
@@ -37,14 +47,26 @@ const difficultyConfig = {
 
 type Difficulty = keyof typeof difficultyConfig;
 
-export function ProblemsTableClient({
-  problems,
-}: {
-  problems: Problem[];
-}) {
+export function ProblemsTableClient({ problems }: { problems: Problem[] }) {
   const [search, setSearch] = useState("");
   const [difficulty, setDifficulty] = useState<string>("all");
   const [category, setCategory] = useState<string>("all");
+  const [sortField, setSortField] = useState<SortField>("number");
+  const [sortDir, setSortDir] = useState<SortDir>("asc");
+
+  function toggleSort(field: SortField) {
+    if (sortField === field) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortField(field);
+      setSortDir(field === "solveDate" ? "desc" : "asc");
+    }
+  }
+
+  function sortIndicator(field: SortField) {
+    if (sortField !== field) return "  ";
+    return sortDir === "asc" ? " ↑" : " ↓";
+  }
 
   const categories = useMemo(() => {
     const cats = new Map<string, string>();
@@ -55,7 +77,7 @@ export function ProblemsTableClient({
   }, [problems]);
 
   const filtered = useMemo(() => {
-    return problems.filter((p) => {
+    const result = problems.filter((p) => {
       if (difficulty !== "all" && p.difficulty !== difficulty) return false;
       if (category !== "all" && p.categorySlug !== category) return false;
       if (search) {
@@ -67,7 +89,29 @@ export function ProblemsTableClient({
       }
       return true;
     });
-  }, [problems, search, difficulty, category]);
+
+    result.sort((a, b) => {
+      let cmp = 0;
+      switch (sortField) {
+        case "number":
+          cmp = a.number - b.number;
+          break;
+        case "difficulty":
+          cmp =
+            (DIFFICULTY_ORDER[a.difficulty] ?? 99) -
+            (DIFFICULTY_ORDER[b.difficulty] ?? 99);
+          if (cmp === 0) cmp = a.number - b.number;
+          break;
+        case "solveDate":
+          cmp = a.solveDate.localeCompare(b.solveDate);
+          if (cmp === 0) cmp = a.number - b.number;
+          break;
+      }
+      return sortDir === "asc" ? cmp : -cmp;
+    });
+
+    return result;
+  }, [problems, search, difficulty, category, sortField, sortDir]);
 
   return (
     <div className="not-prose space-y-4">
@@ -101,9 +145,7 @@ export function ProblemsTableClient({
             <button
               type="button"
               key={d}
-              onClick={() =>
-                setDifficulty(difficulty === d ? "all" : d)
-              }
+              onClick={() => setDifficulty(difficulty === d ? "all" : d)}
               className={`rounded-md px-3 py-1 text-xs font-medium transition-all ${
                 difficulty === d
                   ? difficultyConfig[d].active
@@ -138,17 +180,29 @@ export function ProblemsTableClient({
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-fd-border bg-fd-muted/40">
-              <th className="whitespace-nowrap px-4 py-2.5 text-left text-xs font-medium text-fd-muted-foreground w-14">
-                #
+              <th
+                className="whitespace-nowrap px-4 py-2.5 text-left text-xs font-medium text-fd-muted-foreground w-14 cursor-pointer select-none hover:text-fd-foreground transition-colors"
+                onClick={() => toggleSort("number")}
+              >
+                #{sortIndicator("number")}
               </th>
               <th className="px-4 py-2.5 text-left text-xs font-medium text-fd-muted-foreground">
                 Problem
               </th>
-              <th className="whitespace-nowrap px-4 py-2.5 text-left text-xs font-medium text-fd-muted-foreground w-24">
-                Difficulty
+              <th
+                className="whitespace-nowrap px-4 py-2.5 text-left text-xs font-medium text-fd-muted-foreground w-24 cursor-pointer select-none hover:text-fd-foreground transition-colors"
+                onClick={() => toggleSort("difficulty")}
+              >
+                Difficulty{sortIndicator("difficulty")}
               </th>
               <th className="whitespace-nowrap px-4 py-2.5 text-left text-xs font-medium text-fd-muted-foreground hidden sm:table-cell">
                 Category
+              </th>
+              <th
+                className="whitespace-nowrap px-4 py-2.5 text-left text-xs font-medium text-fd-muted-foreground w-28 cursor-pointer select-none hover:text-fd-foreground transition-colors hidden md:table-cell"
+                onClick={() => toggleSort("solveDate")}
+              >
+                Solved{sortIndicator("solveDate")}
               </th>
             </tr>
           </thead>
@@ -183,12 +237,15 @@ export function ProblemsTableClient({
                 <td className="px-4 py-2.5 text-xs text-fd-muted-foreground hidden sm:table-cell">
                   {p.category}
                 </td>
+                <td className="px-4 py-2.5 text-xs text-fd-muted-foreground tabular-nums hidden md:table-cell">
+                  {p.solveDate || "—"}
+                </td>
               </tr>
             ))}
             {filtered.length === 0 && (
               <tr>
                 <td
-                  colSpan={4}
+                  colSpan={5}
                   className="px-4 py-12 text-center text-fd-muted-foreground"
                 >
                   No problems found matching your filters.

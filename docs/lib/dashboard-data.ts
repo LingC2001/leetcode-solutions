@@ -13,6 +13,8 @@ export interface DashboardData {
     total: number;
   }[];
   tagFrequency: { tag: string; count: number }[];
+  /** ISO date strings (YYYY-MM-DD) for each solved problem */
+  solveDates: string[];
   categoriesCovered: number;
   totalCategories: number;
 }
@@ -52,7 +54,9 @@ const ALL_CATEGORIES = [
 ];
 
 export function getDashboardData(): DashboardData {
-  const pages = source.getPages().filter((page: { slugs: string[] }) => page.slugs.length > 1);
+  const pages = source
+    .getPages()
+    .filter((page: { slugs: string[] }) => page.slugs.length > 1);
 
   // Difficulty breakdown
   const diffMap: Record<string, number> = { easy: 0, medium: 0, hard: 0 };
@@ -63,6 +67,8 @@ export function getDashboardData(): DashboardData {
   const catFirstUrl: Record<string, { num: number; url: string }> = {};
   // Tag frequency
   const tagMap: Record<string, number> = {};
+  // Solve dates for activity heatmap
+  const solveDates: string[] = [];
 
   for (const page of pages) {
     const diff = (page.data.difficulty ?? "").toLowerCase();
@@ -80,10 +86,21 @@ export function getDashboardData(): DashboardData {
 
     // Track first (lowest-numbered) problem URL per category
     const titleMatch = page.data.title.match(/^(\d+)/);
-    const problemNum = titleMatch ? Number(titleMatch[1]) : Number.MAX_SAFE_INTEGER;
+    const problemNum = titleMatch
+      ? Number(titleMatch[1])
+      : Number.MAX_SAFE_INTEGER;
     const pageUrl = page.url;
-    if (!catFirstUrl[categorySlug] || problemNum < catFirstUrl[categorySlug].num) {
+    if (
+      !catFirstUrl[categorySlug] ||
+      problemNum < catFirstUrl[categorySlug].num
+    ) {
       catFirstUrl[categorySlug] = { num: problemNum, url: pageUrl };
+    }
+
+    // Collect solve date
+    const solveDate = (page.data as { solveDate?: string }).solveDate;
+    if (solveDate) {
+      solveDates.push(solveDate);
     }
 
     const tags = (page.data as { tags?: string[] }).tags ?? [];
@@ -121,6 +138,7 @@ export function getDashboardData(): DashboardData {
     difficultyBreakdown,
     categoryBreakdown,
     tagFrequency,
+    solveDates,
     categoriesCovered,
     totalCategories: ALL_CATEGORIES.length,
   };

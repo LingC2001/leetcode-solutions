@@ -1,16 +1,11 @@
 import { source } from "@/lib/source";
-import {
-  ProblemsTableClient,
-  type Problem,
-} from "./ProblemsTableClient";
+import { type Problem, ProblemsTableClient } from "./ProblemsTableClient";
 
 function formatCategory(slug: string): string {
   return slug
     .split("-")
     .map((word) =>
-      word === "and"
-        ? "&"
-        : word.charAt(0).toUpperCase() + word.slice(1),
+      word === "and" ? "&" : word.charAt(0).toUpperCase() + word.slice(1),
     )
     .join(" ");
 }
@@ -35,6 +30,7 @@ export function ProblemsTable() {
         category: formatCategory(categorySlug),
         categorySlug,
         url: page.url,
+        solveDate: (page.data as { solveDate?: string }).solveDate ?? "",
       };
     })
     .sort((a, b) => a.number - b.number);
