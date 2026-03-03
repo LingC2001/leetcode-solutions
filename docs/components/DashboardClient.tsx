@@ -156,12 +156,14 @@ function CategoryBarChart({
             dataKey="category"
             type="category"
             width={140}
-            tick={
-              CategoryTick as React.ComponentType<{
-                x: number;
-                y: number;
-                payload: { value: string };
-              }>
+            tick={(props: Record<string, unknown>) =>
+              CategoryTick(
+                props as {
+                  x: number;
+                  y: number;
+                  payload: { value: string };
+                },
+              )
             }
           />
           <Tooltip
