@@ -1,0 +1,123 @@
+---
+title: 22. Generate Parentheses
+difficulty: medium
+tags: [backtracking, string]
+solveDate: "2026-03-04"
+---
+
+import Code from '@/components/Code';
+
+## Problem Statement
+
+Given `n` pairs of parentheses, write a function to generate all combinations of **well-formed** parentheses.
+
+[View on LeetCode →](https://leetcode.com/problems/generate-parentheses/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: n = 3
+Output: ["((()))","(()())","(())()","()(())","()()()"]
+```
+
+### Example 2
+
+```
+Input: n = 1
+Output: ["()"]
+```
+
+---
+
+## Approach
+
+**Backtracking with open/close counters:**
+
+Instead of generating every possible string of `(` and `)` and filtering out invalid ones, we only ever place a character when it is guaranteed to keep the string valid. Two counters track how many open and close brackets have been placed so far:
+
+- **Place `(`** when `left < n` — we still have open brackets left to use.
+- **Place `)`** when `right < left` — there is an unmatched open bracket that can be closed.
+
+Both conditions together ensure the string is always a valid prefix of a well-formed sequence. No explicit validity check is needed.
+
+```
+backtrack(left, right, path):
+    if len(path) == 2*n:
+        result.append(join(path))
+        return
+
+    if left < n:
+        path.append("(")
+        backtrack(left + 1, right, path)
+        path.pop()
+
+    if right < left:
+        path.append(")")
+        backtrack(left, right + 1, path)
+        path.pop()
+```
+
+Because the two `if` statements are independent (not `else if`), both branches can be explored from the same state when both conditions hold.
+
+---
+
+## Why the Two Conditions Work
+
+**`left < n` — open bracket rule:**  
+We may add `(` as long as we haven't exhausted all `n` open brackets. Placing more than `n` would make a valid completion impossible.
+
+**`right < left` — close bracket rule:**  
+We may add `)` only when there is at least one open bracket that has not yet been closed (`left > right`). Placing `)` when `right == left` would immediately create an invalid string (more close than open brackets seen so far).
+
+Together, these two rules are both **necessary and sufficient** to guarantee that every completed path (length `2*n`) is well-formed, and every incomplete path is a valid prefix. There is nothing else to prune.
+
+**Concrete trace for `n = 2`:**
+
+```
+backtrack(left=0, right=0, path=[])
+  → place "("  (left < 2)
+  backtrack(left=1, right=0, path=["("])
+    → place "("  (left < 2)
+    backtrack(left=2, right=0, path=["(","("])
+      → place ")"  (right < left)
+      backtrack(left=2, right=1, path=["(","(",")"])
+        → place ")"  (right < left)
+        backtrack(left=2, right=2, path=["(","(",")",")"]) → record "(())"
+    → place ")"  (right < left)
+    backtrack(left=1, right=1, path=["(",")"])
+      → place "("  (left < 2)
+      backtrack(left=2, right=1, path=["(",")",  "("])
+        → place ")"  (right < left)
+        backtrack(left=2, right=2, path=["(",")",  "(",")"]) → record "()()"
+```
+
+Result: `["(())", "()()"]`
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** O(4ⁿ / √n) — the number of valid combinations is the n-th Catalan number $C_n = \frac{1}{n+1}\binom{2n}{n}$, which grows as $\frac{4^n}{n^{3/2}\sqrt{\pi}}$.
+
+**Space Complexity:** O(n) — the recursion depth and path length are each at most `2*n`.
+
+---
+
+## Solutions
+
+### Go
+
+<Code problemNumber={22} difficulty="medium" lang="go" />
+
+---
+
+## Key Insights
+
+- The two branching conditions act as a built-in pruner — no string built by this recursion is ever invalid, so no post-filtering is required.
+- `right < left` (not `right < n`) is the correct close-bracket guard; it ties the number of close brackets to the number of open brackets already placed, not to `n`.
+- Using two independent `if` statements (rather than `if/else`) is intentional: when both `left < n` and `right < left` are true, both branches must be explored.
+- The result count equals the Catalan number $C_n$, which grows much slower than the $2^{2n}$ strings a brute-force approach would sift through.
