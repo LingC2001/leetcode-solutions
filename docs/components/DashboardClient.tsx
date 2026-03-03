@@ -31,16 +31,16 @@ function DifficultyDonut({
       <h2 className="text-lg font-semibold text-fd-foreground mb-4">
         Difficulty Distribution
       </h2>
-      <div className="flex items-center justify-center gap-8 flex-1">
-        <div className="relative" style={{ width: 200, height: 200 }}>
-          <ResponsiveContainer width={200} height={200}>
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-6 flex-1">
+        <div className="relative w-[160px] h-[160px] sm:w-[200px] sm:h-[200px] shrink-0">
+          <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
                 data={data}
                 cx="50%"
                 cy="50%"
-                innerRadius={55}
-                outerRadius={85}
+                innerRadius="60%"
+                outerRadius="100%"
                 paddingAngle={3}
                 dataKey="value"
                 stroke="none"
