@@ -15,6 +15,7 @@ import {
   YAxis,
 } from "recharts";
 import { ActivityHeatmap } from "@/components/ActivityHeatmap";
+import { LeetCodeProfile } from "@/components/LeetCodeProfile";
 import type { DashboardData } from "@/lib/dashboard-data";
 
 /* ── Difficulty Donut ───────────────────────────────────────── */
@@ -263,12 +264,15 @@ export function DashboardClient({ data }: { data: DashboardData }) {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8">
-      {/* Hero heading */}
-      <div>
-        <h1 className="text-3xl font-bold text-fd-foreground">Dashboard</h1>
-        <p className="text-fd-muted-foreground mt-1">
-          Overview of solved LeetCode problems
-        </p>
+      {/* Hero heading + profile */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-fd-foreground">Dashboard</h1>
+          <p className="text-fd-muted-foreground mt-1">
+            Overview of solved LeetCode problems
+          </p>
+        </div>
+        <LeetCodeProfile />
       </div>
 
       {/* Activity Heatmap */}

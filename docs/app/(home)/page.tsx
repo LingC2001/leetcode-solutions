@@ -32,14 +32,12 @@ export default function HomePage() {
             Explore Solutions
             <span>→</span>
           </Link>
-          <a
-            href="https://github.com/LingC2001/leetcode-solutions"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/dashboard"
             className="px-6 py-2 rounded-lg border border-blue-600/30 text-blue-600 font-medium hover:bg-blue-600/10 transition-colors duration-200 inline-flex items-center justify-center"
           >
-            Browse GitHub
-          </a>
+            View Dashboard
+          </Link>
         </div>
       </div>
     </div>
