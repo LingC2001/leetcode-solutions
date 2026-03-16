@@ -1,6 +1,6 @@
 <img src="docs/public/logo-dark.png" width="25%">
 
-# LeetCode Solutions
+# LeetCode Docs
 
 A collection of LeetCode solutions with documentation and analysis, organized by difficulty and problem number. Each solution includes implementations in multiple programming languages.
 
