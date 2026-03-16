@@ -4,7 +4,7 @@ import Image from "next/image";
 // fill this with your actual GitHub info, for example:
 export const gitConfig = {
   user: "lingc2001",
-  repo: "leetcode-solutions",
+  repo: "leetcode-docs",
   branch: "main",
 };
 

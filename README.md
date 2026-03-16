@@ -4,7 +4,7 @@
 
 A collection of LeetCode solutions with documentation and analysis, organized by difficulty and problem number. Each solution includes implementations in multiple programming languages.
 
-**📖 View the full documentation:** https://lingc2001.github.io/leetcode-solutions/
+**📖 View the full documentation:** https://lingc2001.github.io/leetcode-docs/
 
 ---
 
