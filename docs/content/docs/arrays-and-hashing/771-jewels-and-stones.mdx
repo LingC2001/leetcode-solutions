@@ -1,0 +1,74 @@
+---
+title: 771. Jewels and Stones
+difficulty: easy
+tags: [hashing, string]
+solveDate: "2026-03-21"
+---
+
+import Code from '@/components/Code';
+
+## Problem Statement
+
+You're given strings `jewels` representing the types of stones that are jewels, and `stones` representing the stones you have. Each character in `stones` is a type of stone you have. You want to know how many of the stones you have are also jewels.
+
+Letters are case sensitive, so `"a"` is considered a different type of stone from `"A"`.
+
+[View on LeetCode →](https://leetcode.com/problems/jewels-and-stones/)
+
+---
+
+## Examples
+
+### Example 1
+
+```
+Input: jewels = "aA", stones = "aAAbbbb"
+Output: 3
+```
+
+### Example 2
+
+```
+Input: jewels = "z", stones = "ZZ"
+Output: 0
+```
+
+---
+
+## Constraints
+
+- `1 <= jewels.length, stones.length <= 50`
+- `jewels` and `stones` consist of only English letters.
+- All the characters of `jewels` are unique.
+
+---
+
+## Approach
+
+The solution uses a set to store all jewel characters for O(1) lookups, then iterates through each stone and checks membership.
+
+Go does not have a built-in set type, so the common workaround is to use a `map[T]struct{}`. The empty struct `struct{}{}` is used as the value because it occupies zero bytes of memory — it's the idiomatic way to implement a set in Go. You insert with `m[key] = struct{}{}` and check membership with the comma-ok idiom: `if _, ok := m[key]; ok`.
+
+---
+
+## Complexity Analysis
+
+**Time Complexity:** O(j + s), where j is the length of `jewels` and s is the length of `stones`. Building the set is O(j), and checking each stone is O(s).
+
+**Space Complexity:** O(j), for storing the jewel characters in the set.
+
+---
+
+## Solutions
+
+### Go
+
+<Code problemNumber={771} difficulty="easy" lang="go" />
+
+---
+
+## Key Insights
+
+- Go lacks a native set type. The idiomatic workaround is `map[T]struct{}`, which uses zero-byte values to minimize memory overhead compared to `map[T]bool`.
+- The comma-ok pattern (`_, ok := m[key]`) is Go's standard way to test map membership without risking a zero-value false positive.
+- Since all jewel characters are unique, a set is the natural data structure — each jewel is inserted exactly once.
